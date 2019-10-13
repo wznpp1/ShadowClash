@@ -1,5 +1,5 @@
 QT       += core gui network webenginewidgets
-ICON      = icon.icns
+ICON      = resources/icons/icon.icns
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,45 +19,45 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 win32 {
     SOURCES += \
-        framelesswindow.cpp
+        src/framelesswindow.cpp
 }
 
-macx{
+macx {
     OBJECTIVE_SOURCES += \
-        framelesswindow.mm \
-        notificationcenter.mm
+        src/framelesswindow.mm \
+        src/notificationcenter.mm
     LIBS += -framework Cocoa
 }
 
 SOURCES += \
-    aboutwindow.cpp \
-    apirequest.cpp \
-    configmanager.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    paths.cpp \
-    proxyconfighelpermanager.cpp \
-    systemtray.cpp
+    src/aboutwindow.cpp \
+    src/apirequest.cpp \
+    src/configmanager.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/paths.cpp \
+    src/proxyconfighelpermanager.cpp \
+    src/systemtray.cpp
 
 HEADERS += \
-    framelesswindow.h \
-    aboutwindow.h \
-    apirequest.h \
-    configmanager.h \
-    mainwindow.h \
-    notificationcenter.h \
-    paths.h \
-    proxyconfighelpermanager.h \
-    systemtray.h
+    src/framelesswindow.h \
+    src/aboutwindow.h \
+    src/apirequest.h \
+    src/configmanager.h \
+    src/mainwindow.h \
+    src/notificationcenter.h \
+    src/paths.h \
+    src/proxyconfighelpermanager.h \
+    src/systemtray.h
 
 FORMS += \
-    mainwindow.ui \
-    aboutwindow.ui
+    ui/mainwindow.ui \
+    ui/aboutwindow.ui
 
 TRANSLATIONS += \
     translations/shadowcoel_en.ts
 
-!include("fervor/Fervor.pri") {
+!include("src/fervor/Fervor.pri") {
     error("Unable to include Fervor autoupdater.")
 }
 
@@ -67,4 +67,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    shadowcoel.qrc
+    resources/shadowcoel.qrc

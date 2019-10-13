@@ -134,6 +134,7 @@ void SystemTray::speedTest()
     isSpeedTesting = true;
 
     notificationCenter->postSpeedTestFinishNotice();
+    isSpeedTesting = false;
 }
 
 void SystemTray::showWindow()
