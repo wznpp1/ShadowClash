@@ -1,4 +1,4 @@
-module github.com/TheWanderingCoel/shadowcoel-clash-ui
+module github.com/TheWanderingCoel/shadowclash
 
 require (
 	github.com/Dreamacro/clash v0.15.1-0.20191011121118-4cd8b6f24fb3

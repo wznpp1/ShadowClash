@@ -2,7 +2,10 @@
 #define SYSTEMTRAY_H
 
 #include "aboutwindow.h"
+#include "apirequest.h"
 #include "notificationcenter.h"
+#include "mainwindow.h"
+#include "launchatlogin.h"
 
 #include <QSystemTrayIcon>
 #include <QLabel>
@@ -18,16 +21,20 @@ public:
     void copyExportCommand();
     void speedTest();
     void showWindow();
+    void AllowFromLan();
     void openConfigFolder();
     void pushAboutWindow();
     bool isSpeedTesting;
     NotificationCenter *notificationCenter;
+    ApiRequest *apirequest;
+    LaunchAtLogin *launchAtLogin;
     QSystemTrayIcon *trayIcon;
 
 private:
     QAction *proxyModeAction;
     QAction *setAsSystemProxyAction;
     QAction *copyExportCommandAction;
+    // Separator
     QAction *startAtLoginAction;
     QAction *showNetworkIndicatorAction;
     QAction *allowLanConnectionAction;

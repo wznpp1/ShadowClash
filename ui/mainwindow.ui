@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ShadowCoel</string>
+   <string>ShadowClash</string>
   </property>
   <widget class="QWidget" name="centralwidget"/>
  </widget>

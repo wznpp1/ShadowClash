@@ -4,17 +4,15 @@
 #include "systemtray.h"
 #include "apirequest.h"
 #include "proxyconfighelpermanager.h"
+#include "jsbridgeutil.h"
+
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : CFramelessWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    SystemTray *systemtray = new SystemTray;
-    systemtray->createActions();
-    systemtray->createShortCuts();
-    systemtray->createTrayIcon();
-    systemtray->trayIcon->show();
 
 // Mac Os Only
 #if defined(Q_OS_MACOS) || defined(Q_OS_MAC)

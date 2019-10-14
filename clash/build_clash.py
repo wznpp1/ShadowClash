@@ -6,7 +6,7 @@ import os
 def get_version():
     with open('./go.mod') as file:
         for line in file.readlines():
-            if "clash" in line and "ClashX" not in line:
+            if "clash" in line and "shadowclash" not in line:
                 return line.split(" ")[-1].strip()
     return "unknown"
 
@@ -20,7 +20,12 @@ go build -ldflags '-X "github.com/Dreamacro/clash/constant.Version={version}" \
 -X "github.com/Dreamacro/clash/constant.BuildTime={build_time}"' \
 -buildmode=c-archive """
     subprocess.check_output(command, shell=True)
-
+    try:
+        os.system("mv shadowclash.h ../src")
+        os.mkdir("../framework")
+        os.system("mv shadowclash.a ../framework")
+    except Exception as e:
+        print(e)
 
 def write_to_info(version):
     path = "info.plist"

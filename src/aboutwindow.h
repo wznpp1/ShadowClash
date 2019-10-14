@@ -20,7 +20,7 @@ private:
     AboutWindow *view;
     void setupIcon();
     void setupVersion();
-    void setupCompileDate();
+    void setupBuildDate();
     void setupHyperLink();
 };
 

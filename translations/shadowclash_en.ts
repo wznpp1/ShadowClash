@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="aboutwindow.ui" line="39"/>
-        <source>ShadowCoel</source>
+        <source>ShadowClash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -148,7 +148,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="14"/>
-        <source>ShadowCoel</source>
+        <source>ShadowClash</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

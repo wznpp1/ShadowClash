@@ -9,7 +9,7 @@ public:
     ProxyConfigHelperManager();
     void checkMMDB();
     void setUpSystemProxy(int port, int socksPort);
-    void showInstallHelperAlert();
+    bool showInstallHelperAlert();
     void showCreateConfigDirFailAlert();
 };
 

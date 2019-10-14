@@ -16,7 +16,6 @@ class MainWindow : public CFramelessWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void setupButton();
     ~MainWindow();
 
 private:

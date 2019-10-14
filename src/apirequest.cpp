@@ -12,7 +12,7 @@ ApiRequest::ApiRequest()
 }
 
 QNetworkReply* ApiRequest::req(QString url, QString method, QByteArray data) {
-    QByteArray version = ("ShadowCoel/" + ConfigManager::version).toUtf8();
+    QByteArray version = ("ShadowClash/" + ConfigManager::version).toUtf8();
     QByteArray request_method = method.toUtf8();
     QNetworkAccessManager* manager = new QNetworkAccessManager();
     QNetworkRequest request(ConfigManager::apiUrl + url);
@@ -58,4 +58,11 @@ void ApiRequest::updateAllowLan(bool allow)
     req("/configs",
         "PATCH",
         data);
+}
+
+void ApiRequest::getProxyDelay()
+{
+    req("/proxies/%1",
+        "GET",
+        "{\"timeout\":5000,\"url\":\"http://www.gstatic.com/generate_204\"");
 }

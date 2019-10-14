@@ -37,21 +37,25 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
 #endif
 }
 
-void ProxyConfigHelperManager::showInstallHelperAlert()
+bool ProxyConfigHelperManager::showInstallHelperAlert()
 {
     QMessageBox alert;
-    alert.setWindowTitle("ShadowCoel");
-    alert.setText("ShadowCoel needs to install a small tool to ~/.config/clash with administrator privileges to set system proxy quickly.\nOtherwise you need to type in the administrator password every time you change system proxy through ShadowCoel.");
+    alert.setWindowTitle("ShadowClash");
+    alert.setText("ShadowClash needs to install a helper tool with administrator privileges to set system proxy quickly.");
     alert.addButton(tr("Install"), QMessageBox::YesRole);
     alert.addButton(tr("Quit"), QMessageBox::NoRole);
-    alert.exec();
+    if (alert.exec() == QMessageBox::Yes) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void ProxyConfigHelperManager::showCreateConfigDirFailAlert()
 {
     QMessageBox alert;
-    alert.setWindowTitle("ShadowCoel");
-    alert.setText("ShadowCoel fail to create ~/.config/clash folder. Please check privileges or manually create folder and restart ShadowCoel.");
+    alert.setWindowTitle("ShadowClash");
+    alert.setText("ShadowClash fail to create ~/.config/clash folder. Please check privileges or manually create folder and restart ShadowClash.");
     alert.addButton(tr("Quit"), QMessageBox::NoRole);
     alert.exec();
 }

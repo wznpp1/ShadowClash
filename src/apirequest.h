@@ -14,6 +14,7 @@ public:
     void updateOutBoundMode(QString mode);
     void requestProxyGroupList();
     void updateAllowLan(bool allow);
+    void getProxyDelay();
 };
 
 #endif // APIREQUEST_H

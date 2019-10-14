@@ -16,6 +16,8 @@ public:
     static QString apiUrl;
     static const QDate buildDate;
     static const QTime buildTime;
+    static bool startAtLogin;
+    static bool allowConnectFromLan;
 
     void checkFinalRuleAndShowAlert();
 };

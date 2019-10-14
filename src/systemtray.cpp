@@ -1,18 +1,23 @@
 #include "aboutwindow.h"
+#include "apirequest.h"
+#include "configmanager.h"
 #include "fvupdater.h"
 #include "mainwindow.h"
 #include "notificationcenter.h"
 #include "paths.h"
 #include "systemtray.h"
+#include "launchatlogin.h"
 
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
 #include <QCoreApplication>
+#include <QSettings>
 #include <QDesktopServices>
 #include <QKeySequence>
 #include <QMenu>
 #include <QUrl>
+#include <QDebug>
 
 SystemTray::SystemTray()
 {
@@ -44,9 +49,13 @@ void SystemTray::createActions()
     apiPortAction =  new QAction("Api Port:");
 
     quitAction = new QAction("Quit");
+
+    LaunchAtLogin *launchAtLogin = new LaunchAtLogin();
+
     connect(copyExportCommandAction, &QAction::triggered, this, &SystemTray::copyExportCommand);
     connect(speedTestAction, &QAction::triggered, this, &SystemTray::speedTest);
     connect(dashBoardAction, &QAction::triggered, this, &SystemTray::showWindow);
+    connect(startAtLoginAction, &QAction::triggered, launchAtLogin, &LaunchAtLogin::setupAutoStart);
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
     connect(aboutAction, &QAction::triggered, this, &SystemTray::pushAboutWindow);
     connect(aboutQtAction, &QAction::triggered, QApplication::aboutQt);
@@ -107,7 +116,7 @@ void SystemTray::createTrayIcon()
     trayIconMenu->addMenu(helpMenu);
     trayIconMenu->addAction(quitAction);
 
-    QIcon icon = QIcon(":/resources/icons/menu_icon.png");
+    QIcon icon = QIcon(":/icons/menu_icon.png");
 
 #if defined(Q_OS_MACOS) || defined(Q_OS_MAC)
     icon.setIsMask(true);
@@ -139,8 +148,15 @@ void SystemTray::speedTest()
 
 void SystemTray::showWindow()
 {
-    MainWindow *mainwindow;
-    mainwindow->show();
+    MainWindow mainwindow;
+    // prevent Mulitple Windows
+    qDebug() << mainwindow.isHidden();
+}
+
+void SystemTray::AllowFromLan()
+{
+    apirequest->updateAllowLan(!ConfigManager::allowConnectFromLan);
+    ConfigManager::allowConnectFromLan = !ConfigManager::allowConnectFromLan;
 }
 
 void SystemTray::openConfigFolder()

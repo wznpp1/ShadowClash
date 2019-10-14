@@ -9,7 +9,7 @@ AboutWindow::AboutWindow(QWidget *parent) :
     ui->setupUi(this);
     setupIcon();
     setupVersion();
-    setupCompileDate();
+    setupBuildDate();
     setupHyperLink();
 }
 
@@ -20,7 +20,7 @@ AboutWindow::~AboutWindow()
 
 void AboutWindow::setupIcon()
 {
-    QImage image(":/resources/icons/Icon_102.png");
+    QImage image(":/icons/Icon_102.png");
     ui->icon->setPixmap(QPixmap::fromImage(image));
     ui->icon->show();
 }
@@ -30,7 +30,7 @@ void AboutWindow::setupVersion()
     ui->version->setText(ConfigManager::version);
 }
 
-void AboutWindow::setupCompileDate()
+void AboutWindow::setupBuildDate()
 {
     ui->compileTime->setText(ConfigManager::buildDate.toString() + " " + ConfigManager::buildTime.toString());
 }
@@ -39,6 +39,6 @@ void AboutWindow::setupHyperLink()
 {
     ui->clashLink->setOpenExternalLinks(true);
     ui->clashLink->setText("<a href=\"https://github.com/Dreamacro/clash\">https://github.com/Dreamacro/clash");
-    ui->shadowcoelLink->setOpenExternalLinks(true);
-    ui->shadowcoelLink->setText("<a href=\"https://github.com/TheWanderingCoel/ShadowCoel-clash-ui\">https://github.com/TheWanderingCoel/ShadowCoel-clash-ui");
+    ui->shadowClashLink->setOpenExternalLinks(true);
+    ui->shadowClashLink->setText("<a href=\"https://github.com/TheWanderingCoel/ShadowClash-clash-ui\">https://github.com/TheWanderingCoel/ShadowClash-clash-ui");
 }

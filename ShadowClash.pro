@@ -1,4 +1,4 @@
-QT       += core gui network webenginewidgets
+QT       += core gui network webenginewidgets webchannel
 ICON      = resources/icons/icon.icns
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -32,30 +32,40 @@ macx {
 SOURCES += \
     src/aboutwindow.cpp \
     src/apirequest.cpp \
+    src/appdelegate.cpp \
     src/configmanager.cpp \
+    src/launchatlogin.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/paths.cpp \
     src/proxyconfighelpermanager.cpp \
+    src/runguard.cpp \
     src/systemtray.cpp
 
 HEADERS += \
+    src/appdelegate.h \
     src/framelesswindow.h \
     src/aboutwindow.h \
     src/apirequest.h \
     src/configmanager.h \
+    src/launchatlogin.h \
     src/mainwindow.h \
     src/notificationcenter.h \
     src/paths.h \
     src/proxyconfighelpermanager.h \
-    src/systemtray.h
+    src/runguard.h \
+    src/systemtray.h \
+    src/shadowclash.h
 
 FORMS += \
     ui/mainwindow.ui \
     ui/aboutwindow.ui
 
 TRANSLATIONS += \
-    translations/shadowcoel_en.ts
+    translations/shadowclash_en.ts
+
+INCLUDEPATH +=../framework
+LIBS += -L$$DESTDIR -lshadowclash
 
 !include("src/fervor/Fervor.pri") {
     error("Unable to include Fervor autoupdater.")
@@ -67,4 +77,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    resources/shadowcoel.qrc
+    resources/shadowclash.qrc

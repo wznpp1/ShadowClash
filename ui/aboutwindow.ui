@@ -36,7 +36,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>ShadowCoel</string>
+    <string>ShadowClash</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -88,7 +88,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Github for ShadowCoel:</string>
+    <string>Github for ShadowClash:</string>
    </property>
   </widget>
   <widget class="QLabel" name="clashLink">
@@ -104,7 +104,7 @@
     <string>https://github.com/Dreamacro/clash</string>
    </property>
   </widget>
-  <widget class="QLabel" name="shadowcoelLink">
+  <widget class="QLabel" name="shadowClashLink">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -114,7 +114,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>https://github.com/TheWanderingCoel/ShadowCoel-clash-ui</string>
+    <string>https://github.com/TheWanderingCoel/ShadowClash-clash-ui</string>
    </property>
   </widget>
   <widget class="QLabel" name="compileTime">

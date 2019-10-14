@@ -16,6 +16,10 @@ const QDate ConfigManager::buildDate = QLocale( QLocale::English ).toDate( QStri
 
 const QTime ConfigManager::buildTime = QTime::fromString( __TIME__, "hh:mm:ss" );
 
+bool ConfigManager::startAtLogin;
+
+bool ConfigManager::allowConnectFromLan;
+
 ConfigManager::ConfigManager()
 {
 
