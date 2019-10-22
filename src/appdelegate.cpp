@@ -25,7 +25,7 @@ void AppDelegate::startProxy()
 {
     // setup ui config first
     CFURLRef url = (CFURLRef)CFAutorelease((CFURLRef)CFBundleCopyBundleURL(CFBundleGetMainBundle()));
-    QString path = QUrl::fromCFURL(url).path() + "Contents/Resources/dashboard";
+    QString path = QUrl::fromCFURL(url).path() + "Contents/Resources/clashxdashboard";
     setUIPath(path.toLocal8Bit().data());
 
     char* string = run(1);

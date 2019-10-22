@@ -48,7 +48,7 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
     QStringList param;
 #ifdef Q_OS_WIN
     if (port && socksPort) {
-        param << "-p" << QString("127.0.0.1:") + QString(socksPort);
+        param << "-p" << QString("127.0.0.1:") + QString::number(socksPort);
     } else {
         param << "-d";
     }
@@ -57,11 +57,12 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
 
 #elif defined Q_OS_MAC
     if (port && socksPort) {
-        param << QString(port) << QString(socksPort) << "enable";
+        param << QString::number(port) << QString::number(socksPort) << "enable";
     } else {
         param << "0" << "0" << "disable";
     }
     task->start(QString(Paths::configFolderPath) + "ProxyConfig", param);
+    qDebug() << port;
     task->waitForFinished();
 #endif
 }

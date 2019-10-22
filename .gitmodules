@@ -1,3 +1,6 @@
 [submodule "src/fervor"]
 	path = src/fervor
 	url = https://github.com/TheWanderingCoel/fervor
+[submodule "src/plog"]
+	path = src/plog
+	url = https://github.com/SergiusTheBest/plog.git

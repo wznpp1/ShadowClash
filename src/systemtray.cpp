@@ -66,6 +66,7 @@ void SystemTray::createActions()
     quitAction = new QAction("Quit");
 
     connect(proxyModeGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchProxyMode(QAction*)));
+    connect(setAsSystemProxyAction, &QAction::triggered, this, &SystemTray::setSystemProxy);
     connect(copyExportCommandAction, &QAction::triggered, this, &SystemTray::copyExportCommand);
     connect(speedTestAction, &QAction::triggered, this, &SystemTray::speedTest);
     connect(dashBoardAction, &QAction::triggered, this, &SystemTray::showWindow);

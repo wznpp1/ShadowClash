@@ -60,7 +60,7 @@ HEADERS += \
     src/paths.h \
     src/proxyconfighelpermanager.h \
     src/runguard.h \
-    src/systemtray.h
+    src/systemtray.h \
     src/shadowclash.h
 
 FORMS += \
@@ -83,8 +83,9 @@ RESOURCES += \
     resources/shadowclash.qrc
 
 APP_QML_FILES.files = resources/clashxdashboard
-APP_QML_FILES.files += resources/yacdashboard
+APP_QML_FILES.files += resources/yacddashboard
 APP_QML_FILES.path = Contents/Resources
+
 QMAKE_BUNDLE_DATA += APP_QML_FILES
 
-LIBS += /Users/thewanderingcoel/Desktop/ShadowClash/framework/shadowclash.a
+LIBS += $$PWD/framework/shadowclash.a
