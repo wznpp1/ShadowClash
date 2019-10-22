@@ -4,7 +4,6 @@
 #include "systemtray.h"
 #include "apirequest.h"
 #include "proxyconfighelpermanager.h"
-#include "jsbridgeutil.h"
 
 #include <QDebug>
 

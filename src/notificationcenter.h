@@ -7,9 +7,9 @@ class NotificationCenter
 {
 public:
     NotificationCenter();
-    void postNotifiacation(QString title, QString info);
+    static void postNotifiacation(QString title, QString info);
     void postGenerateSimpleConfigNotice();
-    void postConfigFileChangeDetectionNotice();
+    static void postConfigFileChangeDetectionNotice();
     void postImportConfigFromUrlFailNotice(QString url);
     void postProxyRemarkDupNotice(QString name);
     void postSpeedTestBeginNotice();

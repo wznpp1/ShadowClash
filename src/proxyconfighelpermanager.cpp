@@ -3,14 +3,43 @@
 
 #include <QMessageBox>
 #include <QProcess>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
 
 ProxyConfigHelperManager::ProxyConfigHelperManager()
 {
 
 }
-void ProxyConfigHelperManager::checkMMDB()
+
+void ProxyConfigHelperManager::install()
 {
-    QString path = Paths::configFolderPath + "/Country.mmdb";
+    QString dir = Paths::configFolderPath;
+
+#ifdef Q_OS_WIN
+    QFile::copy(":/ProxyConfig.exe",Paths::configFolderPath);
+
+#elif defined(Q_OS_MAC)
+    QFile::copy(":/ProxyConfig",Paths::configFolderPath);
+
+#elif defined(Q_OS_LINUX)
+    QFile::copy(":/ProxyConfigLinux",Paths::configFolderPath);
+    QFile::rename(dir + "ProxyConfigLinux", dir + "ProxyConfig");
+#endif
+
+    QProcess *task = new QProcess;
+    QStringList param;
+    task->setWorkingDirectory(Paths::configFolderPath);
+#if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
+    param << "chown" << "root:admin" << "\"ProxyConfig\"";
+    task->start("sudo", param);
+    task->waitForFinished();
+    param.clear();
+    param << "chown" << "+s" << "\"ProxyConfig\"";
+    task->start("sudo", param);
+    task->waitForFinished();
+#endif
+
 }
 
 void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
@@ -23,7 +52,7 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
     } else {
         param << "-d";
     }
-    task->start(QString(Paths::configFolderPath) + "/ProxyConfig.exe", param);
+    task->start(QString(Paths::configFolderPath) + "ProxyConfig.exe", param);
     task->waitForFinished();
 
 #elif defined Q_OS_MAC
@@ -32,7 +61,7 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
     } else {
         param << "0" << "0" << "disable";
     }
-    task->start(QString(Paths::configFolderPath) + "/ProxyConfig", param);
+    task->start(QString(Paths::configFolderPath) + "ProxyConfig", param);
     task->waitForFinished();
 #endif
 }
@@ -49,13 +78,4 @@ bool ProxyConfigHelperManager::showInstallHelperAlert()
     } else {
         return false;
     }
-}
-
-void ProxyConfigHelperManager::showCreateConfigDirFailAlert()
-{
-    QMessageBox alert;
-    alert.setWindowTitle("ShadowClash");
-    alert.setText("ShadowClash fail to create ~/.config/clash folder. Please check privileges or manually create folder and restart ShadowClash.");
-    alert.addButton(tr("Quit"), QMessageBox::NoRole);
-    alert.exec();
 }

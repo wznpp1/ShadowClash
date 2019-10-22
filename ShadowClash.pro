@@ -1,9 +1,9 @@
-QT       += core gui network webenginewidgets webchannel
+QT       += core gui network webenginewidgets
 ICON      = resources/icons/icon.icns
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += gnu++11
 CONFIG += sdk_no_version_check
 
 # The following define makes your compiler emit warnings if you use
@@ -26,13 +26,16 @@ macx {
     OBJECTIVE_SOURCES += \
         src/framelesswindow.mm \
         src/notificationcenter.mm
-    LIBS += -framework Cocoa
+    LIBS += -framework Cocoa -framework Security
 }
 
 SOURCES += \
     src/aboutwindow.cpp \
     src/apirequest.cpp \
     src/appdelegate.cpp \
+    src/appversionutil.cpp \
+    src/clashconfig.cpp \
+    src/clashresourcemanager.cpp \
     src/configmanager.cpp \
     src/launchatlogin.cpp \
     src/main.cpp \
@@ -44,6 +47,9 @@ SOURCES += \
 
 HEADERS += \
     src/appdelegate.h \
+    src/appversionutil.h \
+    src/clashconfig.h \
+    src/clashresourcemanager.h \
     src/framelesswindow.h \
     src/aboutwindow.h \
     src/apirequest.h \
@@ -54,7 +60,7 @@ HEADERS += \
     src/paths.h \
     src/proxyconfighelpermanager.h \
     src/runguard.h \
-    src/systemtray.h \
+    src/systemtray.h
     src/shadowclash.h
 
 FORMS += \
@@ -63,9 +69,6 @@ FORMS += \
 
 TRANSLATIONS += \
     translations/shadowclash_en.ts
-
-INCLUDEPATH +=../framework
-LIBS += -L$$DESTDIR -lshadowclash
 
 !include("src/fervor/Fervor.pri") {
     error("Unable to include Fervor autoupdater.")
@@ -78,3 +81,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources/shadowclash.qrc
+
+APP_QML_FILES.files = resources/clashxdashboard
+APP_QML_FILES.files += resources/yacdashboard
+APP_QML_FILES.path = Contents/Resources
+QMAKE_BUNDLE_DATA += APP_QML_FILES
+
+LIBS += /Users/thewanderingcoel/Desktop/ShadowClash/framework/shadowclash.a

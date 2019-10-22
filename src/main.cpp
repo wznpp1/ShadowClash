@@ -3,6 +3,10 @@
 #include "fvupdater.h"
 #include "mainwindow.h"
 #include "runguard.h"
+#include "appdelegate.h"
+#include "clashresourcemanager.h"
+#include "proxyconfighelpermanager.h"
+#include "appversionutil.h"
 
 #include <QApplication>
 #include <QMessageBox>
@@ -15,11 +19,7 @@ int main(int argc, char *argv[])
 
     RunGuard guard("ShadowClash");
 
-    QApplication::setApplicationName("ShadowClash");
-    QApplication::setApplicationVersion(ConfigManager::version);
-    QApplication::setOrganizationName("coelwu");
-    QApplication::setOrganizationDomain("com.coelwu");
-
+    // make sure only one shadowclash
     if (!guard.isSingleInstance()) {
         QMessageBox alert;
         alert.setWindowTitle("ShadowClash");
@@ -28,14 +28,35 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    QApplication::setApplicationName("ShadowClash");
+    QApplication::setApplicationVersion(ConfigManager::version);
+    QApplication::setOrganizationName("coelwu");
+    QApplication::setOrganizationDomain("com.coelwu");
+
+    // setup systemtray first
     SystemTray *systemtray = new SystemTray;
     systemtray->createActions();
     systemtray->createShortCuts();
     systemtray->createTrayIcon();
+    systemtray->setCheckable();
     systemtray->trayIcon->show();
 
     FvUpdater::sharedUpdater()->SetFeedURL("https://raw.github.com/pypt/fervor/master/sample/Appcast.xml");
     FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+
+    // install proxy helper
+    ProxyConfigHelperManager::install();
+    ClashResourceManager::check();
+    ConfigManager::copySampleConfigIfNeed();
+
+    // start proxy
+    AppDelegate::updateConfig();
+
+    // start watch config file change
+    ConfigManager::watchConfigFile("config");
+
+    // setup app settings
+    AppVersionUtil::init();
 
     MainWindow w;
     w.show();

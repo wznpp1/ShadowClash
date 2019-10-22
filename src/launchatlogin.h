@@ -9,7 +9,7 @@ Q_OBJECT
 public:
     LaunchAtLogin();
     bool isAutoStart();
-    void setupAutoStart();
+    void setupAutoStart(bool enable);
 };
 
 #endif // LAUNCHATLOGIN_H

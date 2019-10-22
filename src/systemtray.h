@@ -13,15 +13,19 @@
 
 class SystemTray: public QObject
 {
+Q_OBJECT
 public:
     SystemTray();
     void createActions();
     void createShortCuts();
     void createTrayIcon();
+    void setCheckable();
+    void setSystemProxy();
     void copyExportCommand();
     void speedTest();
     void showWindow();
-    void AllowFromLan();
+    void setupAutoStart();
+    void allowFromLan();
     void openConfigFolder();
     void pushAboutWindow();
     bool isSpeedTesting;
@@ -30,8 +34,17 @@ public:
     LaunchAtLogin *launchAtLogin;
     QSystemTrayIcon *trayIcon;
 
+public slots:
+    void switchProxyMode(QAction *action);
+
 private:
-    QAction *proxyModeAction;
+
+    QActionGroup *proxyModeGroup;
+    QActionGroup *dashBoardGroup;
+
+    QAction *globeAction;
+    QAction *ruleAction;
+    QAction *directAction;
     QAction *setAsSystemProxyAction;
     QAction *copyExportCommandAction;
     // Separator
@@ -44,6 +57,8 @@ private:
     // Config Menu
     QAction *openConfigFolderAction;
     QAction *reloadConfigAction;
+    QAction *clashxAction;
+    QAction *yacdAction;
     // Help Menu
     QAction *aboutAction;
     QAction *aboutQtAction;
@@ -56,7 +71,9 @@ private:
     QAction *apiPortAction;
 
     QMenu *trayIconMenu;
+    QMenu *proxyModeMenu;
     QMenu *configMenu;
+    QMenu *dashBoardMenu;
     QMenu *helpMenu;
     QMenu *portsMenu;
 };

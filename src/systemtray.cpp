@@ -7,8 +7,11 @@
 #include "paths.h"
 #include "systemtray.h"
 #include "launchatlogin.h"
+#include "clashconfig.h"
+#include "proxyconfighelpermanager.h"
 
 #include <QAction>
+#include <QActionGroup>
 #include <QApplication>
 #include <QClipboard>
 #include <QCoreApplication>
@@ -25,7 +28,13 @@ SystemTray::SystemTray()
 
 void SystemTray::createActions()
 {
-    proxyModeAction = new QAction("Proxy Mode");
+    proxyModeGroup = new QActionGroup(this);
+    proxyModeGroup->setExclusive(true);
+
+    globeAction = new QAction(tr("Global"), proxyModeGroup);
+    ruleAction = new QAction(tr("Rule"), proxyModeGroup);
+    directAction = new QAction(tr("Direct"), proxyModeGroup);
+
     setAsSystemProxyAction = new QAction(tr("Set as system proxy"));
     copyExportCommandAction = new QAction(tr("Copy export command"));
 
@@ -38,6 +47,12 @@ void SystemTray::createActions()
     // Config Menu
     openConfigFolderAction = new QAction(tr("Open config Folder"));
     reloadConfigAction = new QAction(tr("Reload config"));
+
+    dashBoardGroup = new QActionGroup(this);
+    dashBoardGroup->setExclusive(true);
+
+    clashxAction = new QAction(tr("ClashX"));
+    yacdAction = new QAction(tr("Yacd"));
     // Help Menu
     aboutAction = new QAction(tr("About"));
     aboutQtAction = new QAction(tr("About Qt"));
@@ -50,12 +65,12 @@ void SystemTray::createActions()
 
     quitAction = new QAction("Quit");
 
-    LaunchAtLogin *launchAtLogin = new LaunchAtLogin();
-
+    connect(proxyModeGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchProxyMode(QAction*)));
     connect(copyExportCommandAction, &QAction::triggered, this, &SystemTray::copyExportCommand);
     connect(speedTestAction, &QAction::triggered, this, &SystemTray::speedTest);
     connect(dashBoardAction, &QAction::triggered, this, &SystemTray::showWindow);
-    connect(startAtLoginAction, &QAction::triggered, launchAtLogin, &LaunchAtLogin::setupAutoStart);
+    connect(startAtLoginAction, &QAction::triggered, this, &SystemTray::setupAutoStart);
+    connect(allowLanConnectionAction, &QAction::triggered, this, &SystemTray::allowFromLan);
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
     connect(aboutAction, &QAction::triggered, this, &SystemTray::pushAboutWindow);
     connect(aboutQtAction, &QAction::triggered, QApplication::aboutQt);
@@ -65,6 +80,10 @@ void SystemTray::createActions()
 
 void SystemTray::createShortCuts()
 {
+    globeAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_G));
+    ruleAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_R));
+    directAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_D));
+
     setAsSystemProxyAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     copyExportCommandAction->setShortcuts(QKeySequence::Copy);
 
@@ -83,10 +102,18 @@ void SystemTray::createShortCuts()
 void SystemTray::createTrayIcon()
 {
     trayIconMenu = new QMenu();
+    proxyModeMenu = new QMenu("Proxy Mode");
     configMenu = new QMenu(tr("Config"));
+    dashBoardMenu = new QMenu(tr("Dashboard"));
     helpMenu = new QMenu(tr("Help"));
     portsMenu = new QMenu(tr("Ports"));
 
+    proxyModeMenu->addAction(globeAction);
+    proxyModeMenu->addAction(ruleAction);
+    proxyModeMenu->addAction(directAction);
+
+    trayIconMenu->addMenu(proxyModeMenu);
+    trayIconMenu->addSeparator();
     trayIconMenu->addAction(setAsSystemProxyAction);
     trayIconMenu->addAction(copyExportCommandAction);
     trayIconMenu->addSeparator();
@@ -100,6 +127,10 @@ void SystemTray::createTrayIcon()
 
     configMenu->addAction(openConfigFolderAction);
     configMenu->addAction(reloadConfigAction);
+    configMenu->addMenu(dashBoardMenu);
+
+    dashBoardMenu->addAction(clashxAction);
+    dashBoardMenu->addAction(yacdAction);
 
     helpMenu->addAction(aboutAction);
     helpMenu->addAction(aboutQtAction);
@@ -126,10 +157,52 @@ void SystemTray::createTrayIcon()
     trayIcon->setContextMenu(trayIconMenu);
 }
 
+void SystemTray::setCheckable()
+{
+    globeAction->setCheckable(true);
+    ruleAction->setCheckable(true);
+    directAction->setCheckable(true);
+    setAsSystemProxyAction->setCheckable(true);
+    startAtLoginAction->setCheckable(true);
+    showNetworkIndicatorAction->setCheckable(true);
+    allowLanConnectionAction->setCheckable(true);
+}
+
+void SystemTray::switchProxyMode(QAction *action)
+{
+    if (action->text() == tr("Global")) {
+        apirequest->updateOutBoundMode("Global");
+        ClashConfig::mode = "Global";
+    } else if (action->text() == tr("Rule")) {
+        apirequest->updateOutBoundMode("Rule");
+        ClashConfig::mode = "Rule";
+    } else if (action->text() == tr("Direct")) {
+        apirequest->updateOutBoundMode("Direct");
+        ClashConfig::mode = "Direct";
+    }
+    action->setChecked(true);
+    proxyModeMenu->setTitle(tr(qPrintable(QString("Proxy Mode (%1)").arg(ClashConfig::mode))));
+}
+
+void SystemTray::setSystemProxy()
+{
+    ConfigManager::proxyPortAutoSet = !ConfigManager::proxyPortAutoSet;
+    if (ConfigManager::proxyPortAutoSet) {
+        int port = ClashConfig::port;
+        int socketPort = ClashConfig::socketPort;
+        ProxyConfigHelperManager::setUpSystemProxy(port, socketPort);
+    } else {
+        ProxyConfigHelperManager::setUpSystemProxy(0, 0);
+    }
+}
+
 void SystemTray::copyExportCommand()
 {
     QClipboard *clipboard = QApplication::clipboard();
-    clipboard->setText("export https_proxy=http://127.0.0.1:%1;export http_proxy=http://127.0.0.1:%1;export all_proxy=socks5://127.0.0.1:%2");
+    clipboard->clear();
+    int port = ClashConfig::port;
+    int socksport = ClashConfig::socketPort;
+    clipboard->setText(QString("export https_proxy=http://127.0.0.1:%1;export http_proxy=http://127.0.0.1:%1;export all_proxy=socks5://127.0.0.1:%2").arg(port).arg(socksport));
 }
 
 void SystemTray::speedTest()
@@ -150,18 +223,27 @@ void SystemTray::showWindow()
 {
     MainWindow mainwindow;
     // prevent Mulitple Windows
-    qDebug() << mainwindow.isHidden();
+    apirequest->requestConfigUpdate(true);
 }
 
-void SystemTray::AllowFromLan()
+void SystemTray::setupAutoStart()
 {
-    apirequest->updateAllowLan(!ConfigManager::allowConnectFromLan);
-    ConfigManager::allowConnectFromLan = !ConfigManager::allowConnectFromLan;
+    LaunchAtLogin *launchAtLogin = new LaunchAtLogin();
+    launchAtLogin->setupAutoStart(!ConfigManager::startAtLogin);
+    ConfigManager::startAtLogin = !ConfigManager::startAtLogin;
+    startAtLoginAction->setChecked(ConfigManager::startAtLogin);
+}
+
+void SystemTray::allowFromLan()
+{
+    apirequest->updateAllowLan(!ClashConfig::allowLan);
+    ClashConfig::allowLan = !ClashConfig::allowLan;
+    allowLanConnectionAction->setChecked(ClashConfig::allowLan);
 }
 
 void SystemTray::openConfigFolder()
 {
-    QDesktopServices::openUrl(QUrl(Paths::configFolderPath, QUrl::TolerantMode));
+    QDesktopServices::openUrl(QUrl("file://" + Paths::configFolderPath, QUrl::TolerantMode));
 }
 
 void SystemTray::pushAboutWindow()

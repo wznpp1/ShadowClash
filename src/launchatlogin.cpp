@@ -59,18 +59,17 @@ bool LaunchAtLogin::isAutoStart()
 }
 #endif
 
-void LaunchAtLogin::setupAutoStart()
+void LaunchAtLogin::setupAutoStart(bool enable)
 {
 #ifdef Q_OS_WIN
     QString appName = QApplication::applicationName();
     QSettings reg("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-    if (ConfigManager::startAtLogin) {
+    if (enable) {
         QString strAppPath=QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
         reg.setValue(appName,strAppPath);
     } else {
         reg.remove(appName);
     }
-    ConfigManager::startAtLogin = !ConfigManager::startAtLogin;
 }
 
 #elif defined Q_OS_MAC
@@ -79,7 +78,7 @@ void LaunchAtLogin::setupAutoStart()
     CFStringRef folderCFStr = CFStringCreateWithCString(0, filePath.toUtf8().data(), kCFStringEncodingUTF8);
     CFURLRef urlRef = CFURLCreateWithFileSystemPath(0, folderCFStr, kCFURLPOSIXPathStyle, true);
     LSSharedFileListRef loginItems = LSSharedFileListCreate(0, kLSSharedFileListSessionLoginItems, 0);
-    if (loginItems && ConfigManager::startAtLogin) {
+    if (loginItems && enable) {
             //Insert an item to the list.
             LSSharedFileListItemRef item = LSSharedFileListInsertItemURL(loginItems,
                 kLSSharedFileListItemLast, 0, 0,
@@ -87,7 +86,7 @@ void LaunchAtLogin::setupAutoStart()
             if (item)
                 CFRelease(item);
             CFRelease(loginItems);
-        } else if (loginItems && !ConfigManager::startAtLogin) {
+        } else if (loginItems && !enable) {
             // We need to iterate over the items and check which one is "ours".
             UInt32 seedValue;
             CFArrayRef itemsArray = LSSharedFileListCopySnapshot(loginItems, &seedValue);
@@ -108,7 +107,6 @@ void LaunchAtLogin::setupAutoStart()
             CFRelease(loginItems);
         }
 
-        ConfigManager::startAtLogin = !ConfigManager::startAtLogin;
         CFRelease(folderCFStr);
         CFRelease(urlRef);
 }
@@ -118,7 +116,7 @@ void LaunchAtLogin::setupAutoStart()
         QString appName = QApplication::applicationName();
         QString userAutoStartPath = getUserAutostartDir_private();
         QString desktopFileLocation = userAutoStartPath + appName + QLatin1String(".desktop");
-        if (ConfigManager::startAtLogin) {
+        if (enable) {
             if (!QDir().exists(userAutoStartPath) && !QDir().mkpath(userAutoStartPath)) {
                 qCWarning(lcUtility) << "Could not create autostart folder" << userAutoStartPath;
                 return;
@@ -145,7 +143,6 @@ void LaunchAtLogin::setupAutoStart()
                 qCWarning(lcUtility) << "Could not remove autostart desktop file";
             }
         }
-        ConfigManager::startAtLogin = !ConfigManager::startAtLogin;
 }
 
 #endif

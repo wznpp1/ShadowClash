@@ -3,12 +3,15 @@
 
 #include <QDate>
 #include <QTime>
+#include <QObject>
 #include <QString>
+#include <QFileSystemWatcher>
+#include <QSettings>
 
-class ConfigManager
+class ConfigManager: public QObject
 {
+Q_OBJECT
 public:
-    ConfigManager();
 
     static const QString version;
     static QString apiPort;
@@ -18,8 +21,20 @@ public:
     static const QTime buildTime;
     static bool startAtLogin;
     static bool allowConnectFromLan;
+    static QString selectConfigName;
+    static bool proxyPortAutoSet;
+    static QSettings settings;
 
-    void checkFinalRuleAndShowAlert();
+    static QFileSystemWatcher *watcher;
+
+    static void watchConfigFile(QString configName);
+    static void copySampleConfigIfNeed();
+    static void checkFinalRuleAndShowAlert();
+    static void showNoFinalRuleAlert();
+    QByteArray getConfigFilesList();
+
+private slots:
+    static void fileChanged();
 };
 
 #endif // CONFIGMANAGER_H

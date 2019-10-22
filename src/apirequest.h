@@ -4,17 +4,17 @@
 #include <QString>
 #include <QNetworkReply>
 
-class ApiRequest
+class ApiRequest: public QObject
 {
 public:
-    ApiRequest();
-    QNetworkReply* req(QString url, QString method, QByteArray data);
-    void requestConfig();
-    void requestConfigUpdate(QString path);
+    static QNetworkReply* req(QString url, QString method, QByteArray data);
+    static void requestConfig();
+    static void requestConfigUpdate(bool showNotification);
     void updateOutBoundMode(QString mode);
     void requestProxyGroupList();
     void updateAllowLan(bool allow);
     void getProxyDelay();
+    static QJsonObject getRules();
 };
 
 #endif // APIREQUEST_H

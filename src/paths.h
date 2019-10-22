@@ -6,7 +6,6 @@
 class Paths
 {
 public:
-    Paths();
     static const QString configFolderPath;
     static const QString defaultConfigFilePath;
     static QString currentConfigPath;
