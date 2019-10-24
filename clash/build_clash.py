@@ -22,7 +22,6 @@ go build -ldflags '-X "github.com/Dreamacro/clash/constant.Version={version}" \
     subprocess.check_output(command, shell=True)
     try:
         os.system("mv shadowclash.h ../src")
-        os.mkdir("../framework")
         os.system("mv shadowclash.a ../framework")
     except Exception as e:
         print(e)

@@ -9,7 +9,7 @@ public:
     ProxyConfigHelperManager();
     static void install();
     static void setUpSystemProxy(int port, int socksPort);
-    bool showInstallHelperAlert();
+    static bool showInstallHelperAlert();
 };
 
 #endif // PROXYCONFIGHELPERMANAGER_H

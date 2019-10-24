@@ -36,6 +36,8 @@ QString ConfigManager::selectConfigName;
 
 bool ConfigManager::proxyPortAutoSet;
 
+bool ConfigManager::enhanceMode;
+
 QSettings ConfigManager::settings(QApplication::organizationName(), QApplication::applicationName());
 
 void ConfigManager::watchConfigFile(QString configName)

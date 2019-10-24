@@ -15,29 +15,36 @@ ProxyConfigHelperManager::ProxyConfigHelperManager()
 void ProxyConfigHelperManager::install()
 {
     QString dir = Paths::configFolderPath;
-
-#ifdef Q_OS_WIN
-    QFile::copy(":/ProxyConfig.exe",Paths::configFolderPath);
-
-#elif defined(Q_OS_MAC)
-    QFile::copy(":/ProxyConfig",Paths::configFolderPath);
-
-#elif defined(Q_OS_LINUX)
-    QFile::copy(":/ProxyConfigLinux",Paths::configFolderPath);
-    QFile::rename(dir + "ProxyConfigLinux", dir + "ProxyConfig");
-#endif
-
     QProcess *task = new QProcess;
     QStringList param;
-    task->setWorkingDirectory(Paths::configFolderPath);
-#if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
-    param << "chown" << "root:admin" << "\"ProxyConfig\"";
-    task->start("sudo", param);
-    task->waitForFinished();
-    param.clear();
-    param << "chown" << "+s" << "\"ProxyConfig\"";
-    task->start("sudo", param);
-    task->waitForFinished();
+
+#ifdef Q_OS_WIN
+    if (!QFile::exists(dir + "ProxyConfig.exe")) {
+        QFile::copy(":/ProxyConfig.exe",dir);
+    }
+
+#elif defined(Q_OS_MAC)
+    if (!QFile::exists(dir + "ProxyConfig")) {
+        QFile::copy(":/ProxyConfig",dir);
+    }
+
+    if (!QFile::exists(dir + "install_proxy_helper.sh")) {
+        QFile::copy(":/install_proxy_helper.sh",dir + "install_proxy_helper.sh");
+        if (showInstallHelperAlert()) {
+            QString script = QString("do shell script \"bash %1 \\\"%2\\\"\" with administrator privileges").arg(dir + "install_proxy_helper.sh").arg(dir);
+            param << "-l" << "AppleScript";
+            task->start("/usr/bin/osascript", param);
+            task->write(script.toUtf8());
+            task->closeWriteChannel();
+            task->waitForFinished();
+        }
+    }
+
+#elif defined(Q_OS_LINUX)
+    if (!QFile::exists(dir + "ProxyConfig")) {
+        QFile::copy(":/ProxyConfigLinux",dir);
+        QFile::rename(dir + "ProxyConfigLinux", dir + "ProxyConfig");
+    }
 #endif
 
 }
@@ -74,7 +81,9 @@ bool ProxyConfigHelperManager::showInstallHelperAlert()
     alert.setText("ShadowClash needs to install a helper tool with administrator privileges to set system proxy quickly.");
     alert.addButton(tr("Install"), QMessageBox::YesRole);
     alert.addButton(tr("Quit"), QMessageBox::NoRole);
-    if (alert.exec() == QMessageBox::Yes) {
+    QList<QAbstractButton*> alertButtons = alert.buttons();
+    alert.exec();
+    if (alertButtons.at(0) == alert.clickedButton()) {
         return true;
     } else {
         return false;

@@ -4,3 +4,6 @@
 [submodule "src/plog"]
 	path = src/plog
 	url = https://github.com/SergiusTheBest/plog.git
+[submodule "src/yaml-cpp"]
+	path = src/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git

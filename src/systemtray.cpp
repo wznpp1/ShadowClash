@@ -9,6 +9,7 @@
 #include "launchatlogin.h"
 #include "clashconfig.h"
 #include "proxyconfighelpermanager.h"
+#include "enhancemodemanager.h"
 
 #include <QAction>
 #include <QActionGroup>
@@ -37,6 +38,7 @@ void SystemTray::createActions()
 
     setAsSystemProxyAction = new QAction(tr("Set as system proxy"));
     copyExportCommandAction = new QAction(tr("Copy export command"));
+    enhanceModeAction = new QAction(tr("Enhance Mode"));
 
     startAtLoginAction = new QAction(tr("Start at login"));
     showNetworkIndicatorAction = new QAction(tr("Show network indicator"));
@@ -60,14 +62,18 @@ void SystemTray::createActions()
     showLogAction = new QAction(tr("Show Log"));
     // Ports Menu
     httpPortAction = new QAction("Http Port:");
+    httpPortAction->setEnabled(false);
     socksPortAction = new QAction("Socks Port:");
-    apiPortAction =  new QAction("Api Port:");
+    socksPortAction->setEnabled(false);
+    apiPortAction = new QAction("Api Port:");
+    apiPortAction->setEnabled(false);
 
     quitAction = new QAction("Quit");
 
     connect(proxyModeGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchProxyMode(QAction*)));
     connect(setAsSystemProxyAction, &QAction::triggered, this, &SystemTray::setSystemProxy);
     connect(copyExportCommandAction, &QAction::triggered, this, &SystemTray::copyExportCommand);
+    connect(enhanceModeAction, &QAction::triggered, this, &SystemTray::setEnhanceMode);
     connect(speedTestAction, &QAction::triggered, this, &SystemTray::speedTest);
     connect(dashBoardAction, &QAction::triggered, this, &SystemTray::showWindow);
     connect(startAtLoginAction, &QAction::triggered, this, &SystemTray::setupAutoStart);
@@ -87,6 +93,7 @@ void SystemTray::createShortCuts()
 
     setAsSystemProxyAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     copyExportCommandAction->setShortcuts(QKeySequence::Copy);
+    enhanceModeAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
 
     dashBoardAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
     speedTestAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
@@ -117,6 +124,7 @@ void SystemTray::createTrayIcon()
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(setAsSystemProxyAction);
     trayIconMenu->addAction(copyExportCommandAction);
+    trayIconMenu->addAction(enhanceModeAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(startAtLoginAction);
     trayIconMenu->addAction(showNetworkIndicatorAction);
@@ -164,9 +172,29 @@ void SystemTray::setCheckable()
     ruleAction->setCheckable(true);
     directAction->setCheckable(true);
     setAsSystemProxyAction->setCheckable(true);
+    enhanceModeAction->setCheckable(true);
     startAtLoginAction->setCheckable(true);
     showNetworkIndicatorAction->setCheckable(true);
     allowLanConnectionAction->setCheckable(true);
+}
+
+void SystemTray::setTrayProxyMode()
+{
+    proxyModeMenu->setTitle(tr(qPrintable(QString("Proxy Mode (%1)").arg(ClashConfig::mode))));
+    if (ClashConfig::mode == "Globe") {
+        globeAction->setChecked(true);
+    } else if (ClashConfig::mode == "Rule") {
+        ruleAction->setChecked(true);
+    } else if (ClashConfig::mode == "Direct") {
+        directAction->setChecked(true);
+    }
+}
+
+void SystemTray::setPortsMenu()
+{
+    httpPortAction->setText("Http Port:" + QString::number(ClashConfig::port));
+    socksPortAction->setText("Socks Port:" + QString::number(ClashConfig::socketPort));
+    apiPortAction->setText("Api Port:" + ConfigManager::apiPort);
 }
 
 void SystemTray::switchProxyMode(QAction *action)
@@ -204,6 +232,16 @@ void SystemTray::copyExportCommand()
     int port = ClashConfig::port;
     int socksport = ClashConfig::socketPort;
     clipboard->setText(QString("export https_proxy=http://127.0.0.1:%1;export http_proxy=http://127.0.0.1:%1;export all_proxy=socks5://127.0.0.1:%2").arg(port).arg(socksport));
+}
+
+void SystemTray::setEnhanceMode()
+{
+    ConfigManager::enhanceMode = !ConfigManager::enhanceMode;
+    if (ConfigManager::enhanceMode) {
+        EnhanceModeManager::startTun2socks();
+    } else {
+        EnhanceModeManager::stopTun2socks();
+    }
 }
 
 void SystemTray::speedTest()

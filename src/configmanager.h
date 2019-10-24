@@ -24,6 +24,7 @@ public:
     static QString selectConfigName;
     static bool proxyPortAutoSet;
     static QSettings settings;
+    static bool enhanceMode;
 
     static QFileSystemWatcher *watcher;
 

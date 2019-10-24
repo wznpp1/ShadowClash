@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 win32 {
     SOURCES += \
         src/framelesswindow.cpp
+    RESOURCES += resources/shadowclash_windows.qrc
 }
 
 macx {
@@ -27,6 +28,11 @@ macx {
         src/framelesswindow.mm \
         src/notificationcenter.mm
     LIBS += -framework Cocoa -framework Security
+    RESOURCES += resources/shadowclash_mac.qrc
+}
+
+unix:!mac {
+    RESOURCES += resources/shadowclash_linux.qrc
 }
 
 SOURCES += \
@@ -37,6 +43,7 @@ SOURCES += \
     src/clashconfig.cpp \
     src/clashresourcemanager.cpp \
     src/configmanager.cpp \
+    src/enhancemodemanager.cpp \
     src/launchatlogin.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
@@ -50,6 +57,7 @@ HEADERS += \
     src/appversionutil.h \
     src/clashconfig.h \
     src/clashresourcemanager.h \
+    src/enhancemodemanager.h \
     src/framelesswindow.h \
     src/aboutwindow.h \
     src/apirequest.h \
@@ -62,6 +70,9 @@ HEADERS += \
     src/runguard.h \
     src/systemtray.h \
     src/shadowclash.h
+
+INCLUDEPATH += $$PWD/src/plog/include
+INCLUDEPATH += $$PWD/src/yaml-cpp/include
 
 FORMS += \
     ui/mainwindow.ui \
@@ -88,4 +99,5 @@ APP_QML_FILES.path = Contents/Resources
 
 QMAKE_BUNDLE_DATA += APP_QML_FILES
 
+LIBS += $$PWD/framework/libyaml-cpp.a
 LIBS += $$PWD/framework/shadowclash.a

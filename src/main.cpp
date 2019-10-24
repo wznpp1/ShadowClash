@@ -7,6 +7,7 @@
 #include "clashresourcemanager.h"
 #include "proxyconfighelpermanager.h"
 #include "appversionutil.h"
+#include "enhancemodemanager.h"
 
 #include <QApplication>
 #include <QMessageBox>
@@ -46,11 +47,16 @@ int main(int argc, char *argv[])
 
     // install proxy helper
     ProxyConfigHelperManager::install();
+    EnhanceModeManager::install();
     ClashResourceManager::check();
     ConfigManager::copySampleConfigIfNeed();
 
     // start proxy
     AppDelegate::updateConfig();
+
+    // update Systemtray's info after proxy start
+    systemtray->setTrayProxyMode();
+    systemtray->setPortsMenu();
 
     // start watch config file change
     ConfigManager::watchConfigFile("config");

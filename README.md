@@ -17,6 +17,7 @@ A rule based proxy For Window, Mac and Linux base on [Clash](https://github.com/
 - GeoIP rule support
 - Support Vmess/Shadowsocks/Socks5
 - Support for Netfilter TCP redirect
+- EnhanceMode support(tun2socks)
 
 ## Install
 
@@ -29,7 +30,7 @@ You can download from [release](https://github.com/TheWanderingCoel/ShadowClash/
   ```
 - Build clash core. 
   ```
-  cd ClashX
+  cd resources
   python3 build_clash.py
   ```
 - Build and run.

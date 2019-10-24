@@ -20,8 +20,11 @@ public:
     void createShortCuts();
     void createTrayIcon();
     void setCheckable();
+    void setTrayProxyMode();
+    void setPortsMenu();
     void setSystemProxy();
     void copyExportCommand();
+    void setEnhanceMode();
     void speedTest();
     void showWindow();
     void setupAutoStart();
@@ -47,6 +50,7 @@ private:
     QAction *directAction;
     QAction *setAsSystemProxyAction;
     QAction *copyExportCommandAction;
+    QAction *enhanceModeAction;
     // Separator
     QAction *startAtLoginAction;
     QAction *showNetworkIndicatorAction;

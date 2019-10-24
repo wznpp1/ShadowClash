@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>tun2socks</file>
+        <file>ProxyConfig</file>
+    </qresource>
+</RCC>
