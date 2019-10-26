@@ -22,6 +22,8 @@ public:
     void setCheckable();
     void setTrayProxyMode();
     void setPortsMenu();
+    void setConfigList();
+    void setTrayLogLevel();
     void setSystemProxy();
     void copyExportCommand();
     void setEnhanceMode();
@@ -39,11 +41,14 @@ public:
 
 public slots:
     void switchProxyMode(QAction *action);
+    void setLogLevel(QAction *action);
 
 private:
 
     QActionGroup *proxyModeGroup;
     QActionGroup *dashBoardGroup;
+    QActionGroup *configListGroup;
+    QActionGroup *logGroup;
 
     QAction *globeAction;
     QAction *ruleAction;
@@ -67,6 +72,11 @@ private:
     QAction *aboutAction;
     QAction *aboutQtAction;
     QAction *checkUpdateAction;
+    QAction *errorAction;
+    QAction *warningAction;
+    QAction *infoAction;
+    QAction *debugAction;
+    QAction *silentAction;
     QAction *showLogAction;
     QAction *quitAction;
 
@@ -75,10 +85,12 @@ private:
     QAction *apiPortAction;
 
     QMenu *trayIconMenu;
+    QMenu *logMenu;
     QMenu *proxyModeMenu;
     QMenu *configMenu;
     QMenu *dashBoardMenu;
     QMenu *helpMenu;
+    QMenu *configListMenu;
     QMenu *portsMenu;
 };
 

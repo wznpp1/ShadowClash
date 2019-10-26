@@ -57,6 +57,8 @@ int main(int argc, char *argv[])
     // update Systemtray's info after proxy start
     systemtray->setTrayProxyMode();
     systemtray->setPortsMenu();
+    systemtray->setTrayLogLevel();
+    systemtray->setConfigList();
 
     // start watch config file change
     ConfigManager::watchConfigFile("config");

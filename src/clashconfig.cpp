@@ -7,3 +7,5 @@ int ClashConfig::socketPort;
 bool ClashConfig::allowLan;
 
 QString ClashConfig::mode;
+
+QString ClashConfig::logLevel;

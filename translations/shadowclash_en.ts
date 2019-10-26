@@ -45,6 +45,35 @@
     </message>
 </context>
 <context>
+    <name>ClashResourceManager</name>
+    <message>
+        <location filename="../src/clashresourcemanager.cpp" line="61"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigManager</name>
+    <message>
+        <location filename="../src/configmanager.cpp" line="90"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EnhanceModeManager</name>
+    <message>
+        <location filename="../src/enhancemodemanager.cpp" line="140"/>
+        <source>Install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/enhancemodemanager.cpp" line="141"/>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FvUpdateConfirmDialog</name>
     <message>
         <location filename="../src/fervor/fvupdateconfirmdialog.ui" line="14"/>
@@ -175,13 +204,12 @@
 <context>
     <name>ProxyConfigHelperManager</name>
     <message>
-        <location filename="../src/proxyconfighelpermanager.cpp" line="45"/>
+        <location filename="../src/proxyconfighelpermanager.cpp" line="82"/>
         <source>Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/proxyconfighelpermanager.cpp" line="46"/>
-        <location filename="../src/proxyconfighelpermanager.cpp" line="59"/>
+        <location filename="../src/proxyconfighelpermanager.cpp" line="83"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -189,7 +217,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="26"/>
+        <location filename="../src/main.cpp" line="27"/>
         <source>Another instance of ShadowClash is already running.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -197,100 +225,145 @@
 <context>
     <name>SystemTray</name>
     <message>
-        <location filename="../src/systemtray.cpp" line="32"/>
-        <location filename="../src/systemtray.cpp" line="162"/>
+        <location filename="../src/systemtray.cpp" line="35"/>
+        <location filename="../src/systemtray.cpp" line="210"/>
         <source>Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="33"/>
-        <location filename="../src/systemtray.cpp" line="164"/>
+        <location filename="../src/systemtray.cpp" line="36"/>
+        <location filename="../src/systemtray.cpp" line="213"/>
         <source>Rule</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="34"/>
-        <location filename="../src/systemtray.cpp" line="166"/>
+        <location filename="../src/systemtray.cpp" line="37"/>
+        <location filename="../src/systemtray.cpp" line="216"/>
         <source>Direct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="36"/>
+        <location filename="../src/systemtray.cpp" line="39"/>
         <source>Set as system proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="37"/>
+        <location filename="../src/systemtray.cpp" line="40"/>
         <source>Copy export command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="39"/>
-        <source>Start at login</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/systemtray.cpp" line="40"/>
-        <source>Show network indicator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/systemtray.cpp" line="41"/>
-        <source>Allow connect from Lan</source>
+        <source>Enhance Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="43"/>
-        <source>DashBoard</source>
+        <source>Start at login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="44"/>
-        <source>SpeedTest</source>
+        <source>Show network indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="46"/>
-        <source>Open config Folder</source>
+        <location filename="../src/systemtray.cpp" line="45"/>
+        <source>Allow connect from Lan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="47"/>
-        <source>Reload config</source>
+        <source>DashBoard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="49"/>
-        <source>About</source>
+        <location filename="../src/systemtray.cpp" line="48"/>
+        <source>SpeedTest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="50"/>
-        <source>About Qt</source>
+        <source>Open config Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="51"/>
+        <source>Reload config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="56"/>
+        <source>ClashX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="57"/>
+        <source>Yacd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="59"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="60"/>
+        <source>About Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="63"/>
+        <source>ERROR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="64"/>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="65"/>
+        <source>INFO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="66"/>
+        <source>DEBUG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="67"/>
+        <source>SILENT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="69"/>
         <source>Check Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="52"/>
+        <location filename="../src/systemtray.cpp" line="70"/>
         <source>Show Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="100"/>
+        <location filename="../src/systemtray.cpp" line="122"/>
         <source>Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="101"/>
+        <location filename="../src/systemtray.cpp" line="123"/>
+        <source>Dashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="124"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="102"/>
+        <location filename="../src/systemtray.cpp" line="125"/>
         <source>Ports</source>
         <translation type="unfinished"></translation>
     </message>

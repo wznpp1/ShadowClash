@@ -35,11 +35,11 @@ void SystemTray::createActions()
     globeAction = new QAction(tr("Global"), proxyModeGroup);
     ruleAction = new QAction(tr("Rule"), proxyModeGroup);
     directAction = new QAction(tr("Direct"), proxyModeGroup);
-
+    // Separator
     setAsSystemProxyAction = new QAction(tr("Set as system proxy"));
     copyExportCommandAction = new QAction(tr("Copy export command"));
     enhanceModeAction = new QAction(tr("Enhance Mode"));
-
+    // Separator
     startAtLoginAction = new QAction(tr("Start at login"));
     showNetworkIndicatorAction = new QAction(tr("Show network indicator"));
     allowLanConnectionAction = new QAction(tr("Allow connect from Lan"));
@@ -47,6 +47,8 @@ void SystemTray::createActions()
     dashBoardAction = new QAction(tr("DashBoard"));
     speedTestAction = new QAction(tr("SpeedTest"));
     // Config Menu
+    configListGroup = new QActionGroup(this);
+    configListGroup->setExclusive(true);
     openConfigFolderAction = new QAction(tr("Open config Folder"));
     reloadConfigAction = new QAction(tr("Reload config"));
 
@@ -58,6 +60,13 @@ void SystemTray::createActions()
     // Help Menu
     aboutAction = new QAction(tr("About"));
     aboutQtAction = new QAction(tr("About Qt"));
+    logGroup = new QActionGroup(this);
+    logGroup->setExclusive(true);
+    errorAction = new QAction(tr("ERROR"), logGroup);
+    warningAction = new QAction(tr("WARNING"), logGroup);
+    infoAction = new QAction(tr("INFO"), logGroup);
+    debugAction = new QAction(tr("DEBUG"), logGroup);
+    silentAction = new QAction(tr("SILENT"), logGroup);
     checkUpdateAction = new QAction(tr("Check Update"));
     showLogAction = new QAction(tr("Show Log"));
     // Ports Menu
@@ -81,6 +90,7 @@ void SystemTray::createActions()
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
     connect(aboutAction, &QAction::triggered, this, &SystemTray::pushAboutWindow);
     connect(aboutQtAction, &QAction::triggered, QApplication::aboutQt);
+    connect(logGroup, SIGNAL(triggered(QAction*)), this, SLOT(setLogLevel(QAction*)));
     connect(checkUpdateAction, &QAction::triggered, FvUpdater::sharedUpdater(), &FvUpdater::CheckForUpdatesNotSilent);
     connect(quitAction, &QAction::triggered, &QCoreApplication::quit);
 }
@@ -114,6 +124,8 @@ void SystemTray::createTrayIcon()
     configMenu = new QMenu(tr("Config"));
     dashBoardMenu = new QMenu(tr("Dashboard"));
     helpMenu = new QMenu(tr("Help"));
+    configListMenu = new QMenu(tr("Swtich Config"));
+    logMenu = new QMenu(tr("Log level"));
     portsMenu = new QMenu(tr("Ports"));
 
     proxyModeMenu->addAction(globeAction);
@@ -134,6 +146,7 @@ void SystemTray::createTrayIcon()
     trayIconMenu->addAction(speedTestAction);
     trayIconMenu->addSeparator();
 
+    configMenu->addMenu(configListMenu);
     configMenu->addAction(openConfigFolderAction);
     configMenu->addAction(reloadConfigAction);
     configMenu->addMenu(dashBoardMenu);
@@ -143,6 +156,12 @@ void SystemTray::createTrayIcon()
 
     helpMenu->addAction(aboutAction);
     helpMenu->addAction(aboutQtAction);
+    helpMenu->addMenu(logMenu);
+    logMenu->addAction(errorAction);
+    logMenu->addAction(warningAction);
+    logMenu->addAction(infoAction);
+    logMenu->addAction(debugAction);
+    logMenu->addAction(silentAction);
     helpMenu->addAction(checkUpdateAction);
     helpMenu->addAction(showLogAction);
 
@@ -176,6 +195,11 @@ void SystemTray::setCheckable()
     startAtLoginAction->setCheckable(true);
     showNetworkIndicatorAction->setCheckable(true);
     allowLanConnectionAction->setCheckable(true);
+    errorAction->setCheckable(true);
+    warningAction->setCheckable(true);
+    infoAction->setCheckable(true);
+    debugAction->setCheckable(true);
+    silentAction->setCheckable(true);
 }
 
 void SystemTray::setTrayProxyMode()
@@ -195,6 +219,30 @@ void SystemTray::setPortsMenu()
     httpPortAction->setText("Http Port:" + QString::number(ClashConfig::port));
     socksPortAction->setText("Socks Port:" + QString::number(ClashConfig::socketPort));
     apiPortAction->setText("Api Port:" + ConfigManager::apiPort);
+}
+
+void SystemTray::setConfigList()
+{
+    QStringList configList = ConfigManager::getConfigFilesList();
+    for (int i=0; i<configList.size(); i++){
+        QAction *action = new QAction(configList[i]);
+        configListMenu->addAction(action);
+    }
+}
+
+void SystemTray::setTrayLogLevel()
+{
+    if (ClashConfig::logLevel == "error") {
+        errorAction->setChecked(true);
+    } else if (ClashConfig::logLevel == "warning") {
+        warningAction->setChecked(true);
+    } else if (ClashConfig::logLevel == "info") {
+        infoAction->setChecked(true);
+    } else if (ClashConfig::logLevel == "debug") {
+        debugAction->setChecked(true);
+    } else if (ClashConfig::logLevel == "silent") {
+        silentAction->setChecked(true);
+    }
 }
 
 void SystemTray::switchProxyMode(QAction *action)
@@ -289,4 +337,24 @@ void SystemTray::pushAboutWindow()
 {
     AboutWindow *view = new AboutWindow();
     view->exec();
+}
+
+void SystemTray::setLogLevel(QAction *action)
+{
+    if (action->text() == tr("ERROR")) {
+        apirequest->updateLogLevel("error");
+        ClashConfig::mode = "error";
+    } else if (action->text() == tr("WARNING")) {
+        apirequest->updateLogLevel("warning");
+        ClashConfig::mode = "warning";
+    } else if (action->text() == tr("INFO")) {
+        apirequest->updateLogLevel("info");
+        ClashConfig::mode = "info";
+    } else if (action->text() == tr("DEBUG")) {
+        apirequest->updateLogLevel("debug");
+        ClashConfig::mode = "debug";
+    } else if (action->text() == tr("SILENT")) {
+        apirequest->updateLogLevel("silent");
+        ClashConfig::mode = "silent";
+    }
 }

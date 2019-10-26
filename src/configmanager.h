@@ -32,7 +32,7 @@ public:
     static void copySampleConfigIfNeed();
     static void checkFinalRuleAndShowAlert();
     static void showNoFinalRuleAlert();
-    QByteArray getConfigFilesList();
+    static QStringList getConfigFilesList();
 
 private slots:
     static void fileChanged();

@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Disable Right Click
     m_pWebView->setContextMenuPolicy(Qt::NoContextMenu);
     m_pWebView->load(QUrl(ConfigManager::apiUrl + "/ui"));
+
 }
 
 MainWindow::~MainWindow()

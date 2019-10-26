@@ -42,6 +42,7 @@ void ApiRequest::requestConfig()
         ClashConfig::socketPort = obj["socks-port"].toInt();
         ClashConfig::allowLan = obj["allow-lan"].toBool();
         ClashConfig::mode = obj["mode"].toString();
+        ClashConfig::logLevel = obj["log-level"].toString();
     } catch (...) {
         NotificationCenter::postNotifiacation("Error", "Get clash config failed. Try Fix your config file then reload config or restart ShadowClah.");
     }
@@ -61,7 +62,9 @@ void ApiRequest::requestConfigUpdate(bool showNotification)
         }
     } else {
         if (showNotification) {
-            NotificationCenter::postNotifiacation("Reload Config Fail", reply->readAll());
+            QJsonDocument jsonResponse = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject obj = jsonResponse.object();
+            NotificationCenter::postNotifiacation("Reload Config Fail", obj["message"].toString());
         }
     }
     reply->deleteLater();
@@ -70,6 +73,14 @@ void ApiRequest::requestConfigUpdate(bool showNotification)
 void ApiRequest::updateOutBoundMode(QString mode)
 {
     QByteArray data = (QString("{\"mode\":\"%1\"}").arg(mode)).toUtf8();
+    req("/configs",
+        "PATCH",
+        data);
+}
+
+void ApiRequest::updateLogLevel(QString logLevel)
+{
+    QByteArray data = (QString("{\"log-level\":\"%1\"}").arg(logLevel)).toUtf8();
     req("/configs",
         "PATCH",
         data);

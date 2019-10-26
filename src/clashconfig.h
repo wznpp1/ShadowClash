@@ -10,6 +10,7 @@ public:
     static int socketPort;
     static bool allowLan;
     static QString mode;
+    static QString logLevel;
 };
 
 #endif // CLASHCONFIG_H

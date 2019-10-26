@@ -29,6 +29,8 @@ macx {
         src/notificationcenter.mm
     LIBS += -framework Cocoa -framework Security
     RESOURCES += resources/shadowclash_mac.qrc
+    # Support low macOS version
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
 }
 
 unix:!mac {
@@ -93,7 +95,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     resources/shadowclash.qrc
 
-APP_QML_FILES.files = resources/clashxdashboard
+APP_QML_FILES.files += resources/clashxdashboard
 APP_QML_FILES.files += resources/yacddashboard
 APP_QML_FILES.path = Contents/Resources
 

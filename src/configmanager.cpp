@@ -91,9 +91,9 @@ void ConfigManager::showNoFinalRuleAlert()
     alert.exec();
 }
 
-QByteArray ConfigManager::getConfigFilesList()
+QStringList ConfigManager::getConfigFilesList()
 {
-    QByteArray result;
+    QStringList result;
     QDir dir(Paths::configFolderPath);
     QFileInfoList list = dir.entryInfoList();
     for (int i=0;i<list.size();++i) {
@@ -102,5 +102,6 @@ QByteArray ConfigManager::getConfigFilesList()
             result.append(fileInfo.fileName().split(".")[0]);
         }
     }
+    qDebug() << result;
     return result;
 }

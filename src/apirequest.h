@@ -11,6 +11,7 @@ public:
     static void requestConfig();
     static void requestConfigUpdate(bool showNotification);
     void updateOutBoundMode(QString mode);
+    void updateLogLevel(QString logLevel);
     void requestProxyGroupList();
     void updateAllowLan(bool allow);
     void getProxyDelay();
