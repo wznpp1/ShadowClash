@@ -18,7 +18,6 @@ install:
 
 before_script:
   - if [ "$BADGE" = "osx" ];   then    export PATH="/usr/local/Cellar/qt/5.13.1/bin:$PATH"; fi
-  - if [ "$BADGE" = "linux" ]; then    sudo cp ./libs/lrelease.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/; fi
 
 script:
   - git submodule update --init
@@ -26,8 +25,15 @@ script:
   - qmake ../
   - make -j8
 
+defore_deplot:
+  - if [[ $BADGE == "osx" ]]; then
+      macdeployqt ShadowCoel.app
+      macdeployqt ShadowCoel.app -dmg
+    fi
+
 deploy:
   provider: release
+  api_key: $GIT_REPO_TOKEN
   skip_cleanup: true
   overwrite: true
   on:

@@ -23,12 +23,12 @@ void ProxyConfigHelperManager::install()
 
 #ifdef Q_OS_WIN
     if (!QFile::exists(dir + "ProxyConfig.exe")) {
-        QFile::copy(":/ProxyConfig.exe",dir);
+        QFile::copy(":/ProxyConfig.exe",dir + "ProxyConfig.exe");
     }
 
 #elif defined(Q_OS_MAC)
     if (!QFile::exists(dir + "ProxyConfig")) {
-        QFile::copy(":/ProxyConfig",dir);
+        QFile::copy(":/ProxyConfig",dir + "ProxyConfig");
     }
 
     if (!QFile::exists(dir + "install_proxy_helper.sh")) {
