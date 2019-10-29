@@ -9,9 +9,15 @@
 A rule based proxy For Window, Mac and Linux base on [Clash](https://github.com/Dreamacro/clash).
 
 
+[![](https://travis-ci.org/TheWanderingCoel/ShadowClash.svg?branch=master)](https://travis-ci.org/TheWanderingCoel/ShadowClash)
+[![HitCount](http://hits.dwyl.io/TheWanderingCoel/ShadowClash.svg)](http://hits.dwyl.io/TheWanderingCoel/ShadowClash)
+[![](https://img.shields.io/github/downloads/TheWanderingCoel/ShadowClash/total.svg)]()
+[![](https://img.shields.io/badge/license-GPL-000000.svg)](https://github.com)
+
+
 
 ## Features
-
+- Cross platform Support
 - HTTP/HTTPS and SOCKS protocol
 - Surge like configuration
 - GeoIP rule support

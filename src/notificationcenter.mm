@@ -1,13 +1,16 @@
+//
+//  notificationcenter.mm
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2018/6/12.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include "notificationcenter.h"
 
 #include <QString>
 
 #import <Foundation/Foundation.h>
-
-NotificationCenter::NotificationCenter()
-{
-
-}
 
 void NotificationCenter::postNotifiacation(QString title, QString info)
 {
@@ -17,6 +20,11 @@ void NotificationCenter::postNotifiacation(QString title, QString info)
     notification.soundName = NSUserNotificationDefaultSoundName;
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification: notification];
     [notification autorelease];
+}
+
+void NotificationCenter::postConfigErrorNotice(QString message)
+{
+    postNotifiacation("Config loading Fail!", message);
 }
 
 void NotificationCenter::postGenerateSimpleConfigNotice()

@@ -1,3 +1,11 @@
+//
+//  systemtray.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2018/6/12.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include "aboutwindow.h"
 #include "apirequest.h"
 #include "configmanager.h"
@@ -10,6 +18,7 @@
 #include "clashconfig.h"
 #include "proxyconfighelpermanager.h"
 #include "enhancemodemanager.h"
+#include "appdelegate.h"
 
 #include <QAction>
 #include <QActionGroup>
@@ -87,12 +96,13 @@ void SystemTray::createActions()
     connect(dashBoardAction, &QAction::triggered, this, &SystemTray::showWindow);
     connect(startAtLoginAction, &QAction::triggered, this, &SystemTray::setupAutoStart);
     connect(allowLanConnectionAction, &QAction::triggered, this, &SystemTray::allowFromLan);
+    connect(configListGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchConfig(QAction*)));
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
     connect(aboutAction, &QAction::triggered, this, &SystemTray::pushAboutWindow);
     connect(aboutQtAction, &QAction::triggered, QApplication::aboutQt);
     connect(logGroup, SIGNAL(triggered(QAction*)), this, SLOT(setLogLevel(QAction*)));
     connect(checkUpdateAction, &QAction::triggered, FvUpdater::sharedUpdater(), &FvUpdater::CheckForUpdatesNotSilent);
-    connect(quitAction, &QAction::triggered, &QCoreApplication::quit);
+    connect(quitAction, &QAction::triggered, &AppDelegate::applicationWillTerminate);
 }
 
 void SystemTray::createShortCuts()
@@ -214,6 +224,13 @@ void SystemTray::setTrayProxyMode()
     }
 }
 
+void SystemTray::switchConfig(QAction *action)
+{
+    ConfigManager::selectConfigName = action->text();
+    ApiRequest::requestConfigUpdate(true);
+    action->setChecked(true);
+}
+
 void SystemTray::setPortsMenu()
 {
     httpPortAction->setText("Http Port:" + QString::number(ClashConfig::port));
@@ -226,6 +243,10 @@ void SystemTray::setConfigList()
     QStringList configList = ConfigManager::getConfigFilesList();
     for (int i=0; i<configList.size(); i++){
         QAction *action = new QAction(configList[i]);
+        if (configList[i] == ConfigManager::selectConfigName) {
+            action->setCheckable(true);
+            action->setChecked(true);
+        }
         configListMenu->addAction(action);
     }
 }

@@ -86,8 +86,8 @@ void EnhanceModeManager::setupRoute()
     task->start("/usr/bin/osascript", param);
     task->write(script.toUtf8());
     task->closeWriteChannel();
-    qDebug() << task->readAll();
     task->waitForFinished();
+    file.remove();
 }
 
 void EnhanceModeManager::startTun2socks()

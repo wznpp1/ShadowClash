@@ -25,6 +25,7 @@ public:
     static bool proxyPortAutoSet;
     static QSettings settings;
     static bool enhanceMode;
+    static bool buildInApiMode;
 
     static QFileSystemWatcher *watcher;
 

@@ -13,7 +13,7 @@ def get_version():
 
 def build_clash(version):
     build_time = datetime.datetime.now().strftime("%Y-%m-%d-%H%M")
-    command = f"""CGO_CFLAGS=-mmacosx-version-min=10.12 \
+    command = f"""CGO_CFLAGS=-mmacosx-version-min=10.11 \
 CGO_LDFLAGS=-mmacosx-version-min=10.10 \
 GOBUILD=CGO_ENABLED=0 \
 go build -ldflags '-X "github.com/Dreamacro/clash/constant.Version={version}" \

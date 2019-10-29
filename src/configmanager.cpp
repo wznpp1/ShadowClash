@@ -1,4 +1,4 @@
-#include "configmanager.h"
+ #include "configmanager.h"
 #include "apirequest.h"
 
 #include <QDir>
@@ -13,7 +13,7 @@
 #include <QJsonArray>
 #include "paths.h"
 #include <QSettings>
-
+#include <QJsonValue>
 #include <QFileSystemWatcher>
 #include "notificationcenter.h"
 #include <QJsonDocument>
@@ -32,11 +32,13 @@ const QTime ConfigManager::buildTime = QTime::fromString( __TIME__, "hh:mm:ss");
 
 bool ConfigManager::startAtLogin;
 
-QString ConfigManager::selectConfigName;
+QString ConfigManager::selectConfigName = QString("config");
 
 bool ConfigManager::proxyPortAutoSet;
 
 bool ConfigManager::enhanceMode;
+
+bool ConfigManager::buildInApiMode = true;
 
 QSettings ConfigManager::settings(QApplication::organizationName(), QApplication::applicationName());
 
@@ -69,7 +71,8 @@ void ConfigManager::checkFinalRuleAndShowAlert()
 
     for (int i=0; i<array.size(); i++) {
         QJsonObject each = array[i].toObject();
-        if (each.value("type") == "MATCH") {
+        QString value = each.value("type").toString();
+        if (value.toUpper() == "MATCH") {
             hasFinalRule = true;
             break;
         } else {
@@ -102,6 +105,5 @@ QStringList ConfigManager::getConfigFilesList()
             result.append(fileInfo.fileName().split(".")[0]);
         }
     }
-    qDebug() << result;
     return result;
 }

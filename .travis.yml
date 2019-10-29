@@ -1,0 +1,35 @@
+language: cpp
+
+matrix:
+  include:
+    - os: osx
+      env: BADGE=osx
+    - os: linux
+      dist: bionic
+      sudo: required
+      env: BADGE=linux
+
+before_install:
+  - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
+
+install:
+  - if [ "$BADGE" = "linux" ]; then    sudo apt-get install qtchooser libgl-dev qt5-default qttools5-dev-tools; fi
+  - if [ "$BADGE" = "osx" ];   then    brew install qt5 --verbose; fi
+
+before_script:
+  - if [ "$BADGE" = "osx" ];   then    export PATH="/usr/local/Cellar/qt/5.13.1/bin:$PATH"; fi
+  - if [ "$BADGE" = "linux" ]; then    sudo cp ./libs/lrelease.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/; fi
+
+script:
+  - git submodule update --init
+  - mkdir build && cd ./build
+  - qmake ../
+  - make -j8
+
+deploy:
+  provider: release
+  skip_cleanup: true
+  overwrite: true
+  on:
+    branch: master
+    tags: true

@@ -2,6 +2,10 @@ github.com/Dreamacro/clash v0.15.1-0.20191011121118-4cd8b6f24fb3 h1:wN0ffMc5OAt+
 github.com/Dreamacro/clash v0.15.1-0.20191011121118-4cd8b6f24fb3/go.mod h1:ZoBUQxijDmqL2TNQpdUbhdIobsxGDmX9c89fAphz6BI=
 github.com/Dreamacro/clash v0.15.1-0.20191014101122-0a3595414e26 h1:imvPbppxuesWgZfutPVZW8D+OL1O6qTcjkERczei7s4=
 github.com/Dreamacro/clash v0.15.1-0.20191014101122-0a3595414e26/go.mod h1:4ZBtABBmIGqISniBtu9fpYORrE5mKqIP8SMCTrNNVNY=
+github.com/Dreamacro/clash v0.16.1-0.20191018031235-e5284cf64771 h1:AVBQMz1Gnmn7LBNBxcdDPcfPVTJbM9Msk/fhwxmODcw=
+github.com/Dreamacro/clash v0.16.1-0.20191018031235-e5284cf64771/go.mod h1:4ZBtABBmIGqISniBtu9fpYORrE5mKqIP8SMCTrNNVNY=
+github.com/Dreamacro/clash v0.16.1-0.20191027160223-82a8c03953a5 h1:e9PNxoU0zZn012OyDiYJNB7+vSHZJNsmxLyI1gcNqeM=
+github.com/Dreamacro/clash v0.16.1-0.20191027160223-82a8c03953a5/go.mod h1:4ZBtABBmIGqISniBtu9fpYORrE5mKqIP8SMCTrNNVNY=
 github.com/Dreamacro/go-shadowsocks2 v0.1.4 h1:SqSVFdtBHVx2rrMOK+qipO10rRSQQKEeAF9Igm8qB9g=
 github.com/Dreamacro/go-shadowsocks2 v0.1.4/go.mod h1:RPU9lnoesqJ/0jFzntFrYpbQI0+NoYiJVu7mWn3Y0cs=
 github.com/Dreamacro/go-shadowsocks2 v0.1.5-0.20191012162057-46254afc8b68 h1:UBDLpj1IGVkUcUBuZWE6DmZApPTZcnmcV6AfyDN/yhg=
@@ -22,6 +26,7 @@ github.com/gofrs/uuid v3.2.0+incompatible h1:y12jRkkFxsd7GpqdSZ+/KCs/fJbqpEXSGd4
 github.com/gofrs/uuid v3.2.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRxnplIgP/c0N/04lM=
 github.com/gorilla/websocket v1.4.1 h1:q7AeDBpnBk8AogcD4DSag/Ukw/KV+YhzLj2bP5HvKCM=
 github.com/gorilla/websocket v1.4.1/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
+github.com/konsorten/go-windows-terminal-sequences v1.0.1 h1:mweAR1A6xJ3oS2pRaGiHgQ4OO8tzTaLawm8vnODuwDk=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/miekg/dns v1.1.16 h1:iMEQ/IVHxPTtx2Q07JP/k4CKRvSjiAZjZ0hnhgYEDmE=
 github.com/miekg/dns v1.1.16/go.mod h1:YNV562EiewvSmpCB6/W4c6yqjK7Z+M/aIS1JHsIVeg8=

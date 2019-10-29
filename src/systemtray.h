@@ -41,6 +41,7 @@ public:
 
 public slots:
     void switchProxyMode(QAction *action);
+    void switchConfig(QAction *action);
     void setLogLevel(QAction *action);
 
 private:

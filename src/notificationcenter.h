@@ -6,8 +6,8 @@
 class NotificationCenter
 {
 public:
-    NotificationCenter();
     static void postNotifiacation(QString title, QString info);
+    static void postConfigErrorNotice(QString message);
     void postGenerateSimpleConfigNotice();
     static void postConfigFileChangeDetectionNotice();
     void postImportConfigFromUrlFailNotice(QString url);

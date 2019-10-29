@@ -1,3 +1,11 @@
+//
+//  launchatlogin.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2018/6/12.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include "configmanager.h"
 #include "launchatlogin.h"
 

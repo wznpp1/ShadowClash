@@ -1,8 +1,3 @@
-/*
- * Come From https://github.com/lhy0403/Qv2ray
- * I'm too lazy to write a guard, so I decided to just copy this code
-*/
-
 #include "runguard.h"
 
 #include <QCryptographicHash>
