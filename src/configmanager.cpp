@@ -1,4 +1,4 @@
- #include "configmanager.h"
+#include "configmanager.h"
 #include "apirequest.h"
 
 #include <QDir>

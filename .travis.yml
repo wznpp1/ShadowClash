@@ -13,7 +13,13 @@ before_install:
   - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
 
 install:
-  - if [ "$BADGE" = "linux" ]; then    sudo apt-get install qtchooser libgl-dev qt5-default qttools5-dev-tools; fi
+  - if [ "$BADGE" = "linux" ]; then    
+      sudo apt-get install qtchooser libgl-dev qt5-default qttools5-dev-tools python3.6 qtwebengine5-dev
+      sudo tar -xvf go1.13.1.linux-amd64.tar.gz
+      sudo mv go /usr/local
+      export GOROOT=/usr/local/go
+      export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    fi
   - if [ "$BADGE" = "osx" ];   then    brew install qt5 --verbose; fi
 
 before_script:
@@ -21,6 +27,9 @@ before_script:
 
 script:
   - git submodule update --init
+  - bash install_dependency.sh
+  - cd clash && python3 build_clash.py
+  - cd ..
   - mkdir build && cd ./build
   - qmake ../
   - make -j8
