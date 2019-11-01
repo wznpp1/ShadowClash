@@ -21,7 +21,7 @@ install:
       export GOROOT=/usr/local/go;
       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH;
     fi
-  - if [ "$BADGE" = "osx" ];   then    brew install qt5 qt5-qtwebengine --verbose; fi
+  - if [ "$BADGE" = "osx" ];   then    HOMEBREW_NO_AUTO_UPDATE=1 brew install qt5 qt5-qtwebengine --verbose; fi
 
 before_script:
   - if [ "$BADGE" = "osx" ];   then    export PATH="/usr/local/Cellar/qt/5.13.1/bin:$PATH"; fi

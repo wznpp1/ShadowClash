@@ -15,11 +15,17 @@
 
 #include <QDebug>
 
+#if defined(Q_OS_MAC)
 MainWindow::MainWindow(QWidget *parent)
     : CFramelessWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+#else
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+#endif
 
 // Mac Os Only
 #if defined(Q_OS_MACOS) || defined(Q_OS_MAC)

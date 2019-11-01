@@ -10,8 +10,13 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+#if defined (Q_OS_MAC)
 class MainWindow : public CFramelessWindow
 {
+#else
+class MainWindow : public QMainWindow
+{
+#endif
     Q_OBJECT
 
 public:
