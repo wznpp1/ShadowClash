@@ -20,6 +20,7 @@ public:
     void createShortCuts();
     void createTrayIcon();
     void setCheckable();
+    void updateInfo();
     void setTrayProxyMode();
     void setPortsMenu();
     void setConfigList();
@@ -32,6 +33,7 @@ public:
     void setupAutoStart();
     void allowFromLan();
     void openConfigFolder();
+    void requestConfigUpdate();
     void pushAboutWindow();
     bool isSpeedTesting;
     NotificationCenter *notificationCenter;
@@ -69,6 +71,9 @@ private:
     QAction *reloadConfigAction;
     QAction *clashxAction;
     QAction *yacdAction;
+    QAction *showCurrentProxyAction;
+    QAction *useBuildInApiAction;
+    QAction *setBenchmarkUrlAction;
     // Help Menu
     QAction *aboutAction;
     QAction *aboutQtAction;
@@ -90,6 +95,7 @@ private:
     QMenu *proxyModeMenu;
     QMenu *configMenu;
     QMenu *dashBoardMenu;
+    QMenu *experimentalMenu;
     QMenu *helpMenu;
     QMenu *configListMenu;
     QMenu *portsMenu;

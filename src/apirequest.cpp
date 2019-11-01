@@ -122,9 +122,13 @@ void ApiRequest::updateLogLevel(QString logLevel)
 
 void ApiRequest::requestProxyGroupList()
 {
-    req("/proxies",
-        "GET",
-        "");
+    if (!ConfigManager::buildInApiMode) {
+        req("/proxies",
+            "GET",
+            "");
+    }
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(clashGetProxies());
 }
 
 void ApiRequest::updateAllowLan(bool allow)
@@ -135,7 +139,7 @@ void ApiRequest::updateAllowLan(bool allow)
         data);
 }
 
-void ApiRequest::getProxyDelay()
+void ApiRequest::getProxyDelay(QString proxyName)
 {
     req("/proxies/%1/delay",
         "GET",

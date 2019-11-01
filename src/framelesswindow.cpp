@@ -1,4 +1,12 @@
-﻿#include "framelesswindow.h"
+﻿//
+//  framelesswindow.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2019/6/12.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
+#include "framelesswindow.h"
 #include <QApplication>
 #include <QPoint>
 #include <QSize>

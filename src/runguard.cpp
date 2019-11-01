@@ -1,3 +1,11 @@
+//
+//  runguard.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2019/6/12.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include "runguard.h"
 
 #include <QCryptographicHash>

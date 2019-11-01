@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     this->setCloseBtnQuit(false);
 #endif
 
+// Prevent window being resized
+    this->setFixedSize(920,580);
+
     m_pWebView = new QWebEngineView(this);
     // Set WebView Size
     m_pWebView->setGeometry(0,0,920,580);

@@ -31,6 +31,7 @@
 #include <QMenu>
 #include <QUrl>
 #include <QDebug>
+#include <QMessageBox>
 
 SystemTray::SystemTray()
 {
@@ -66,6 +67,11 @@ void SystemTray::createActions()
 
     clashxAction = new QAction(tr("ClashX"));
     yacdAction = new QAction(tr("Yacd"));
+
+    showCurrentProxyAction = new QAction(tr("Show current proxy in menu"));
+    useBuildInApiAction = new QAction(tr("Use built in api"));
+    setBenchmarkUrlAction = new QAction(tr("Set benchmark url"));
+
     // Help Menu
     aboutAction = new QAction(tr("About"));
     aboutQtAction = new QAction(tr("About Qt"));
@@ -98,6 +104,7 @@ void SystemTray::createActions()
     connect(allowLanConnectionAction, &QAction::triggered, this, &SystemTray::allowFromLan);
     connect(configListGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchConfig(QAction*)));
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
+    connect(reloadConfigAction, &QAction::triggered, this, &SystemTray::requestConfigUpdate);
     connect(aboutAction, &QAction::triggered, this, &SystemTray::pushAboutWindow);
     connect(aboutQtAction, &QAction::triggered, QApplication::aboutQt);
     connect(logGroup, SIGNAL(triggered(QAction*)), this, SLOT(setLogLevel(QAction*)));
@@ -133,6 +140,7 @@ void SystemTray::createTrayIcon()
     proxyModeMenu = new QMenu("Proxy Mode");
     configMenu = new QMenu(tr("Config"));
     dashBoardMenu = new QMenu(tr("Dashboard"));
+    experimentalMenu = new QMenu(tr("Experimental"));
     helpMenu = new QMenu(tr("Help"));
     configListMenu = new QMenu(tr("Swtich Config"));
     logMenu = new QMenu(tr("Log level"));
@@ -160,9 +168,14 @@ void SystemTray::createTrayIcon()
     configMenu->addAction(openConfigFolderAction);
     configMenu->addAction(reloadConfigAction);
     configMenu->addMenu(dashBoardMenu);
+    configMenu->addMenu(experimentalMenu);
 
     dashBoardMenu->addAction(clashxAction);
     dashBoardMenu->addAction(yacdAction);
+
+    experimentalMenu->addAction(showCurrentProxyAction);
+    experimentalMenu->addAction(useBuildInApiAction);
+    experimentalMenu->addAction(setBenchmarkUrlAction);
 
     helpMenu->addAction(aboutAction);
     helpMenu->addAction(aboutQtAction);
@@ -193,6 +206,8 @@ void SystemTray::createTrayIcon()
 
     trayIcon = new QSystemTrayIcon(icon);
     trayIcon->setContextMenu(trayIconMenu);
+
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &SystemTray::updateInfo);
 }
 
 void SystemTray::setCheckable()
@@ -210,6 +225,15 @@ void SystemTray::setCheckable()
     infoAction->setCheckable(true);
     debugAction->setCheckable(true);
     silentAction->setCheckable(true);
+}
+
+void SystemTray::updateInfo()
+{
+    ApiRequest::requestConfig();
+    setTrayProxyMode();
+    allowLanConnectionAction->setChecked(ClashConfig::allowLan);
+    setPortsMenu();
+    setTrayLogLevel();
 }
 
 void SystemTray::setTrayProxyMode()
@@ -354,6 +378,11 @@ void SystemTray::openConfigFolder()
     QDesktopServices::openUrl(QUrl("file://" + Paths::configFolderPath, QUrl::TolerantMode));
 }
 
+void SystemTray::requestConfigUpdate()
+{
+    ApiRequest::requestConfigUpdate(true);
+}
+
 void SystemTray::pushAboutWindow()
 {
     AboutWindow *view = new AboutWindow();
@@ -379,3 +408,10 @@ void SystemTray::setLogLevel(QAction *action)
         ClashConfig::mode = "silent";
     }
 }
+
+/*
+void SystemTray::setBenchmarkUrl()
+{
+    QMessageBox alert;
+    alert.setText("Benchmark");
+}*/

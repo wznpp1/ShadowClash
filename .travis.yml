@@ -14,13 +14,14 @@ before_install:
 
 install:
   - if [ "$BADGE" = "linux" ]; then    
-      sudo apt-get install qtchooser libgl-dev qt5-default qttools5-dev-tools python3.6 qtwebengine5-dev
-      sudo tar -xvf go1.13.1.linux-amd64.tar.gz
-      sudo mv go /usr/local
-      export GOROOT=/usr/local/go
-      export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+      sudo apt-get install qtchooser libgl-dev qt5-default qttools5-dev-tools python3.6 qtwebengine5-dev;
+      sudo wget https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz;
+      sudo tar -xvf go1.13.1.linux-amd64.tar.gz;
+      sudo mv go /usr/local;
+      export GOROOT=/usr/local/go;
+      export PATH=$GOPATH/bin:$GOROOT/bin:$PATH;
     fi
-  - if [ "$BADGE" = "osx" ];   then    brew install qt5 --verbose; fi
+  - if [ "$BADGE" = "osx" ];   then    brew install qt5 qt5-qtwebengine --verbose; fi
 
 before_script:
   - if [ "$BADGE" = "osx" ];   then    export PATH="/usr/local/Cellar/qt/5.13.1/bin:$PATH"; fi
@@ -36,8 +37,8 @@ script:
 
 defore_deplot:
   - if [[ $BADGE == "osx" ]]; then
-      macdeployqt ShadowCoel.app
-      macdeployqt ShadowCoel.app -dmg
+      macdeployqt ShadowCoel.app;
+      macdeployqt ShadowCoel.app -dmg;
     fi
 
 deploy:

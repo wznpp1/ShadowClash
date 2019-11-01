@@ -26,6 +26,7 @@ public:
     static QSettings settings;
     static bool enhanceMode;
     static bool buildInApiMode;
+    static QString benchMarkUrl;
 
     static QFileSystemWatcher *watcher;
 
