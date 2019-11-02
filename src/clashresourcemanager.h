@@ -10,7 +10,9 @@ public:
     static void checkConfigDir();
     static void upgardeYmlExtensionName();
     static void checkMMDB();
+    static void installHelper();
     static void showCreateConfigDirFailAlert();
+    static bool showInstallHelperAlert();
 };
 
 #endif // CLASHRESOURCEMANAGER_H

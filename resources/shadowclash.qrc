@@ -5,8 +5,7 @@
         <file>icons/menu_icon.png</file>
         <file>sampleConfig.yaml</file>
         <file>Country.mmdb</file>
-        <file>install_enhancemode_helper.sh</file>
-        <file>install_proxy_helper.sh</file>
         <file>tun2socks.sh</file>
+        <file>install_helper.sh</file>
     </qresource>
 </RCC>

@@ -13,7 +13,7 @@ before_install:
   - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
   - if [ "$BADGE" = "osx" ]; then
       sudo curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci;
-      sudo source ./macports-ci install;
+      source ./macports-ci install;
     fi
 
 install:

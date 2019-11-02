@@ -15,7 +15,6 @@ public:
     static void restoreRoute();
     static void startTun2socks();
     static void stopTun2socks();
-    static bool showInstallHelperAlert();
     static void startLog();
 };
 

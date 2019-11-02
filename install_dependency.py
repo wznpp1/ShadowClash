@@ -1,4 +1,5 @@
 import os
+import shutil
 import platform
 
 if __name__ == "__main__":
@@ -44,4 +45,4 @@ if __name__ == "__main__":
         os.system("mv libyaml-cpp.a ../../../framework/")
     os.chdir("..")
     os.chdir("..")
-    os.removedirs("yaml-cpp")
+    shutil.rmtree("yaml-cpp", ignore_errors=True)

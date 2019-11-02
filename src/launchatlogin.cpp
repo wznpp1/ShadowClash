@@ -16,6 +16,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QStandardPaths>
+#include <QTextStream>
 
 QString LaunchAtLogin::getUserAutostartDir_private()
 {
@@ -131,12 +132,12 @@ void LaunchAtLogin::setupAutoStart(bool enable)
         QString desktopFileLocation = userAutoStartPath + appName + QLatin1String(".desktop");
         if (enable) {
             if (!QDir().exists(userAutoStartPath) && !QDir().mkpath(userAutoStartPath)) {
-                qCWarning(lcUtility) << "Could not create autostart folder" << userAutoStartPath;
+                // qCWarning(lcUtility) << "Could not create autostart folder" << userAutoStartPath;
                 return;
             }
             QFile iniFile(desktopFileLocation);
             if (!iniFile.open(QIODevice::WriteOnly)) {
-                qCWarning(lcUtility) << "Could not write auto start entry" << desktopFileLocation;
+                // qCWarning(lcUtility) << "Could not write auto start entry" << desktopFileLocation;
                 return;
             }
             QTextStream ts(&iniFile);
@@ -153,7 +154,7 @@ void LaunchAtLogin::setupAutoStart(bool enable)
                << QLatin1String("X-GNOME-Autostart-enabled=") << "true" << endl;
         } else {
             if (!QFile::remove(desktopFileLocation)) {
-                qCWarning(lcUtility) << "Could not remove autostart desktop file";
+                // qCWarning(lcUtility) << "Could not remove autostart desktop file";
             }
         }
 }

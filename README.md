@@ -9,10 +9,11 @@
 A rule based proxy For Window, Mac and Linux base on [Clash](https://github.com/Dreamacro/clash).
 
 
-[![](https://travis-ci.org/TheWanderingCoel/ShadowClash.svg?branch=master)](https://travis-ci.org/TheWanderingCoel/ShadowClash)
+[![Build status](https://travis-ci.org/TheWanderingCoel/ShadowClash.svg?branch=master)](https://travis-ci.org/TheWanderingCoel/ShadowClash)
+[![Build status](https://ci.appveyor.com/api/projects/status/gf5b5rffa5esbey5?svg=true)](https://ci.appveyor.com/project/CoelWu/shadowclash)
 [![HitCount](http://hits.dwyl.io/TheWanderingCoel/ShadowClash.svg)](http://hits.dwyl.io/TheWanderingCoel/ShadowClash)
-[![](https://img.shields.io/github/downloads/TheWanderingCoel/ShadowClash/total.svg)]()
-[![](https://img.shields.io/badge/license-GPL-000000.svg)](https://github.com)
+[![Download status](https://img.shields.io/github/downloads/TheWanderingCoel/ShadowClash/total.svg)]()
+[![](https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 
 

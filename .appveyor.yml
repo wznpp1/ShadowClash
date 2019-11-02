@@ -2,13 +2,14 @@ image:
   - Visual Studio 2017
 
 install:
-  - set QTDIR=C:\Qt\5.13.1\msvc2017_64
-  - set PATH=%QTDIR%\bin;%PATH%
+  - set QTDIR=C:\Qt\5.13.0\msvc2017_64
+  - set PYTHONDIR=C:\Python36-x64
+  - set PATH=%QTDIR%\bin;%PYTHONDIR;%PATH%;
   - git submodule update --init
 
 build_script:
-  - python3 install_dependency.py
-  - cd clash && python3 build_clash.py
+  - python install_dependency.py
+  - cd clash && python build_clash.py
   - cd .. && mkdir build && cd build
   - qmake ../
   - nmake

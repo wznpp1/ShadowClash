@@ -16,8 +16,6 @@ QString EnhanceModeManager::gateway;
 void EnhanceModeManager::install()
 {
     QString dir = Paths::configFolderPath;
-    QProcess *task = new QProcess;
-    QStringList param;
 
 #ifdef Q_OS_WIN
     if (!QFile::exists(dir + "tun2socks.exe")) {
@@ -31,18 +29,6 @@ void EnhanceModeManager::install()
 
     if (!QFile::exists(dir + "tun2socks.sh")) {
         QFile::copy(":/tun2socks.sh",dir + "tun2socks.sh");
-    }
-
-    if (!QFile::exists(dir + "install_enhancemode_helper.sh")) {
-        QFile::copy(":/install_enhancemode_helper.sh",dir + "install_enhancemode_helper.sh");
-        if (showInstallHelperAlert()) {
-            QString script = QString("do shell script \"bash %1 \\\"%2\\\"\" with administrator privileges").arg(dir + "install_enhancemode_helper.sh").arg(dir);
-            param << "-l" << "AppleScript";
-            task->start("/usr/bin/osascript", param);
-            task->write(script.toUtf8());
-            task->closeWriteChannel();
-            task->waitForFinished();
-        }
     }
 
 #elif defined(Q_OS_LINUX)
@@ -131,18 +117,3 @@ void EnhanceModeManager::stopTun2socks()
     task->waitForFinished();
 }
 
-bool EnhanceModeManager::showInstallHelperAlert()
-{
-    QMessageBox alert;
-    alert.setWindowTitle("ShadowClash");
-    alert.setText("ShadowClash needs to install a helper tool with administrator privileges to set system proxy quickly.");
-    alert.addButton(tr("Install"), QMessageBox::YesRole);
-    alert.addButton(tr("Quit"), QMessageBox::NoRole);
-    QList<QAbstractButton*> alertButtons = alert.buttons();
-    alert.exec();
-    if (alertButtons.at(0) == alert.clickedButton()) {
-        return true;
-    } else {
-        return false;
-    }
-}
