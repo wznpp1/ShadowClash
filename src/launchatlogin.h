@@ -7,7 +7,7 @@ class LaunchAtLogin: public QObject
 {
 Q_OBJECT
 public:
-    LaunchAtLogin();
+    QString getUserAutostartDir_private();
     bool isAutoStart();
     void setupAutoStart(bool enable);
 };

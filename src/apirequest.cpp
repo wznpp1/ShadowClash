@@ -1,19 +1,17 @@
 #include "apirequest.h"
+#include "clashconfig.h"
 #include "configmanager.h"
-#include "paths.h"
 #include "notificationcenter.h"
+#include "paths.h"
 #include "shadowclash.h"
 
-#include <QString>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QDebug>
 #include <QDir>
+#include <QEventLoop>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QEventLoop>
-#include "clashconfig.h"
-
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QString>
 #include <QUrl>
 
 QNetworkReply* ApiRequest::req(QString url, QString method, QByteArray data) {

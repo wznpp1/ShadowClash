@@ -6,14 +6,12 @@
 //  Copyright © 2019 Coel Wu. All rights reserved.
 //
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "configmanager.h"
-#include "systemtray.h"
 #include "apirequest.h"
+#include "configmanager.h"
+#include "mainwindow.h"
 #include "proxyconfighelpermanager.h"
-
-#include <QDebug>
+#include "systemtray.h"
+#include "ui_mainwindow.h"
 
 #if defined(Q_OS_MAC)
 MainWindow::MainWindow(QWidget *parent)

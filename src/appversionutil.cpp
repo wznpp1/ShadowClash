@@ -9,9 +9,8 @@
 #include "appversionutil.h"
 #include "configmanager.h"
 
-#include <QSettings>
 #include <QApplication>
-#include <QDebug>
+#include <QSettings>
 
 void AppVersionUtil::init()
 {

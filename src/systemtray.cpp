@@ -8,34 +8,29 @@
 
 #include "aboutwindow.h"
 #include "apirequest.h"
+#include "appdelegate.h"
+#include "clashconfig.h"
 #include "configmanager.h"
+#include "enhancemodemanager.h"
 #include "fvupdater.h"
+#include "launchatlogin.h"
 #include "mainwindow.h"
 #include "notificationcenter.h"
 #include "paths.h"
-#include "systemtray.h"
-#include "launchatlogin.h"
-#include "clashconfig.h"
 #include "proxyconfighelpermanager.h"
-#include "enhancemodemanager.h"
-#include "appdelegate.h"
+#include "systemtray.h"
 
 #include <QAction>
 #include <QActionGroup>
 #include <QApplication>
 #include <QClipboard>
 #include <QCoreApplication>
-#include <QSettings>
 #include <QDesktopServices>
 #include <QKeySequence>
 #include <QMenu>
-#include <QUrl>
-#include <QDebug>
 #include <QMessageBox>
-
-SystemTray::SystemTray()
-{
-}
+#include <QSettings>
+#include <QUrl>
 
 void SystemTray::createActions()
 {
@@ -230,6 +225,7 @@ void SystemTray::setCheckable()
 void SystemTray::updateInfo()
 {
     ApiRequest::requestConfig();
+    setConfigList();
     setTrayProxyMode();
     allowLanConnectionAction->setChecked(ClashConfig::allowLan);
     setPortsMenu();

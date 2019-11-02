@@ -11,7 +11,7 @@ matrix:
 
 before_install:
   - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
-  - if [ "$BADGE" = "osx"]; then
+  - if [ "$BADGE" = "osx" ]; then
       sudo curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci;
       sudo source ./macports-ci install;
     fi
@@ -25,14 +25,14 @@ install:
       export GOROOT=/usr/local/go;
       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH;
     fi
-  - if [ "$BADGE" = "osx" ]; then
+  - if [ "$BADGE" = "osx" ]; then    
       export QT_MACPORTS=true;
       sudo port -b install qt5 qt5-qtcharts qt5-qtdatavis3d qt5-qtpurchasing qt5-qtremoteobjects qt5-qtscript qt5-qtwebglplugin qt5-qtwebengine qt5-qtwebview;
     fi
 
 script:
   - git submodule update --init
-  - bash install_dependency.sh
+  - python3 install_dependency.py
   - cd clash && python3 build_clash.py
   - cd ..
   - mkdir build && cd ./build

@@ -6,25 +6,23 @@
 //  Copyright © 2019 Coel Wu. All rights reserved.
 //
 
-#include "configmanager.h"
 #include "apirequest.h"
-
-#include <QDir>
-#include <QLocale>
-#include <QDebug>
-#include <QTime>
-#include <QString>
-#include <QApplication>
-#include <QFileInfoList>
-#include <QMessageBox>
-#include <QJsonObject>
-#include <QJsonArray>
-#include "paths.h"
-#include <QSettings>
-#include <QJsonValue>
-#include <QFileSystemWatcher>
+#include "configmanager.h"
 #include "notificationcenter.h"
+#include "paths.h"
+
+#include <QApplication>
+#include <QDir>
+#include <QFileInfoList>
+#include <QFileSystemWatcher>
+#include <QJsonArray>
 #include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QLocale>
+#include <QMessageBox>
+#include <QSettings>
+#include <QString>
 
 const QString ConfigManager::version = QString("0.0.1");
 

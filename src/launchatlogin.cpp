@@ -15,10 +15,13 @@
 #endif
 #include <QApplication>
 #include <QDir>
+#include <QStandardPaths>
 
-LaunchAtLogin::LaunchAtLogin()
+QString LaunchAtLogin::getUserAutostartDir_private()
 {
-
+    QString config = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    config += QLatin1String("/autostart/");
+    return config;
 }
 
 bool LaunchAtLogin::isAutoStart()

@@ -1,6 +1,6 @@
 #include "aboutwindow.h"
-#include "ui_aboutwindow.h"
 #include "configmanager.h"
+#include "ui_aboutwindow.h"
 
 AboutWindow::AboutWindow(QWidget *parent) :
     QDialog(parent),

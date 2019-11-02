@@ -6,14 +6,14 @@
 //  Copyright © 2019 Coel Wu. All rights reserved.
 //
 
+#include "appversionutil.h"
 #include "clashresourcemanager.h"
 #include "paths.h"
-#include "appversionutil.h"
 
 #include <QDir>
-#include <QString>
 #include <QFile>
 #include <QMessageBox>
+#include <QString>
 
 void ClashResourceManager::check()
 {

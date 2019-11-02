@@ -1,14 +1,13 @@
+#include "clashconfig.h"
 #include "enhancemodemanager.h"
 #include "paths.h"
-#include "clashconfig.h"
-
-#include <QProcess>
-#include <QFile>
 #include "yaml-cpp/yaml.h"
 
-#include <QDebug>
 #include <iostream>
+#include <QFile>
 #include <QMessageBox>
+#include <QProcess>
+
 
 using namespace std;
 

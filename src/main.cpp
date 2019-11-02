@@ -6,21 +6,20 @@
 //  Copyright © 2019 Coel Wu. All rights reserved.
 //
 
+#include "appdelegate.h"
+#include "appversionutil.h"
+#include "clashresourcemanager.h"
 #include "configmanager.h"
-#include "systemtray.h"
+#include "enhancemodemanager.h"
 #include "fvupdater.h"
 #include "mainwindow.h"
-#include "runguard.h"
-#include "appdelegate.h"
-#include "clashresourcemanager.h"
 #include "proxyconfighelpermanager.h"
-#include "appversionutil.h"
-#include "enhancemodemanager.h"
+#include "runguard.h"
+#include "systemtray.h"
 
 #include <QApplication>
 #include <QMessageBox>
 #include <QObject>
-#include <QDebug>
 
 int main(int argc, char *argv[])
 {

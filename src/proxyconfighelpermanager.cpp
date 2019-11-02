@@ -9,11 +9,11 @@
 #include "paths.h"
 #include "proxyconfighelpermanager.h"
 
+#include <QDebug>
+#include <QDir>
+#include <QFile>
 #include <QMessageBox>
 #include <QProcess>
-#include <QFile>
-#include <QDir>
-#include <QDebug>
 
 void ProxyConfigHelperManager::install()
 {

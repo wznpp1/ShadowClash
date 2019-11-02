@@ -6,26 +6,26 @@
 //  Copyright © 2019 Coel Wu. All rights reserved.
 //
 
-#include "appdelegate.h"
-#include "shadowclash.h"
-#include "configmanager.h"
 #include "apirequest.h"
-#include "runguard.h"
-#include "proxyconfighelpermanager.h"
-#include "notificationcenter.h"
+#include "appdelegate.h"
+#include "configmanager.h"
 #include "enhancemodemanager.h"
+#include "notificationcenter.h"
+#include "proxyconfighelpermanager.h"
+#include "runguard.h"
+#include "shadowclash.h"
 
-#include <QDebug>
 #if defined (Q_OS_MAC)
 #include <CoreServices/CoreServices.h>
 #include <CoreFoundation/CoreFoundation.h>
 #endif
+
+#include <QApplication>
 #include <QCoreApplication>
-#include <QUrl>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMessageBox>
-#include <QApplication>
+#include <QUrl>
 
 void AppDelegate::applicationWillTerminate()
 {

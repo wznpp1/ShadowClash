@@ -15,7 +15,6 @@ class SystemTray: public QObject
 {
 Q_OBJECT
 public:
-    SystemTray();
     void createActions();
     void createShortCuts();
     void createTrayIcon();
