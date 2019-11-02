@@ -9,8 +9,10 @@
 #include "configmanager.h"
 #include "launchatlogin.h"
 
+#if defined(Q_OS_MAC)
 #include <CoreServices/CoreServices.h>
 #include <CoreFoundation/CoreFoundation.h>
+#endif
 #include <QApplication>
 #include <QDir>
 

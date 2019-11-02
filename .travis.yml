@@ -11,6 +11,10 @@ matrix:
 
 before_install:
   - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
+  - if [ "$BADGE" = "osx"]; then
+      sudo curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci;
+      sudo source ./macports-ci install;
+    fi
 
 install:
   - if [ "$BADGE" = "linux" ]; then    
@@ -21,10 +25,10 @@ install:
       export GOROOT=/usr/local/go;
       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH;
     fi
-  - if [ "$BADGE" = "osx" ];   then    HOMEBREW_NO_AUTO_UPDATE=1 brew install qt5 qt5-qtwebengine --verbose; fi
-
-before_script:
-  - if [ "$BADGE" = "osx" ];   then    export PATH="/usr/local/Cellar/qt/5.13.1/bin:$PATH"; fi
+  - if [ "$BADGE" = "osx" ]; then
+      export QT_MACPORTS=true;
+      sudo port -b install qt5 qt5-qtcharts qt5-qtdatavis3d qt5-qtpurchasing qt5-qtremoteobjects qt5-qtscript qt5-qtwebglplugin qt5-qtwebengine qt5-qtwebview;
+    fi
 
 script:
   - git submodule update --init

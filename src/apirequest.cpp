@@ -23,6 +23,9 @@ QNetworkReply* ApiRequest::req(QString url, QString method, QByteArray data) {
     QNetworkRequest request(ConfigManager::apiUrl + url);
     request.setRawHeader("Content-Type", "application/json");
     request.setRawHeader("User-Agent", version);
+    if (ConfigManager::apiSecret.length() > 0) {
+        request.setRawHeader("Authorization", QString("Bearer %1").arg(ConfigManager::apiSecret).toUtf8());
+    }
     QNetworkReply* reply = manager->sendCustomRequest(request, request_method, data);
     // Come from https://stackoverflow.com/a/58403924/11802671
     QEventLoop loop;

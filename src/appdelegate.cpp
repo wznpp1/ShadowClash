@@ -16,8 +16,10 @@
 #include "enhancemodemanager.h"
 
 #include <QDebug>
+#if defined (Q_OS_MAC)
 #include <CoreServices/CoreServices.h>
 #include <CoreFoundation/CoreFoundation.h>
+#endif
 #include <QCoreApplication>
 #include <QUrl>
 #include <QJsonDocument>
