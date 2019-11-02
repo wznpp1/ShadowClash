@@ -19,7 +19,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 win32 {
     SOURCES += \
-        src/framelesswindow.cpp
+        src/framelesswindow.cpp \
+        src/notificationcenter.cpp
     RESOURCES += resources/shadowclash_windows.qrc
 }
 
@@ -34,6 +35,8 @@ macx {
 }
 
 unix:!mac {
+    SOURCES += \
+        src/notificationcenter.cpp
     RESOURCES += resources/shadowclash_linux.qrc
 }
 
@@ -49,7 +52,6 @@ SOURCES += \
     src/launchatlogin.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/notificationcenter.cpp \
     src/paths.cpp \
     src/proxyconfighelpermanager.cpp \
     src/runguard.cpp \

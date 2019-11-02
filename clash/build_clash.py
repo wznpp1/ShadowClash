@@ -51,9 +51,10 @@ def run():
     print("current clash version:", version)
     build_clash(version)
     print("build static library complete!")
-    if os.environ.get("CI", False):
-        print("writing info.plist")
-        write_to_info(version)
+    if platform.system() == "Darwin":
+        if os.environ.get("CI", False):
+            print("writing info.plist")
+            write_to_info(version)
     print("done")
 
 

@@ -25,12 +25,13 @@ install:
       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH;
     fi
   - if [ "$BADGE" = "osx" ]; then    
+      brew upgrade go --verbose;
       brew install qt5 --verbose;
     fi
 
 before_script:
   - if [ "$BADGE" = "osx" ];   then    export PATH="/usr/local/Cellar/qt/5.13.1/bin:$PATH"; fi
-  
+
 script:
   - git submodule update --init
   - python3 install_dependency.py
