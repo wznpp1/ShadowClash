@@ -49,6 +49,7 @@ SOURCES += \
     src/launchatlogin.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/notificationcenter.cpp \
     src/paths.cpp \
     src/proxyconfighelpermanager.cpp \
     src/runguard.cpp \

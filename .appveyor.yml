@@ -3,8 +3,7 @@ image:
 
 install:
   - set QTDIR=C:\Qt\5.13.0\msvc2017_64
-  - set PYTHONDIR=C:\Python36-x64
-  - set PATH=%QTDIR%\bin;%PYTHONDIR;%PATH%;
+  - set PATH=%QTDIR%\bin;%PATH%;
   - git submodule update --init
 
 build_script:
