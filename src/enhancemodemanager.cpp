@@ -80,7 +80,8 @@ void EnhanceModeManager::setupRoute()
     task->closeWriteChannel();
     task->waitForFinished();
 #elif defined(Q_OS_LINUX)
-    task->start("kdesu", Paths::configFolderPath + "tun2socks.sh");
+    param << Paths::configFolderPath + "tun2socks.sh";
+    task->start("kdesu", param);
     task->waitForFinished();
 #endif
     file.remove();

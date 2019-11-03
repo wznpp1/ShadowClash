@@ -40,8 +40,12 @@ if __name__ == "__main__":
     os.system("cmake ../")
     os.system("make -j8")
     if platform.system() == "Windows":
+        if os.environ.get("CI", False):
+            print("[*] Debug: %s"%os.getcwd())
         os.system("move ibyaml-cpp.a ../../../framework/")
     else:
+        if os.environ.get("CI", False):
+            print("[*] Debug: %s"%os.getcwd())
         os.system("mv libyaml-cpp.a ../../../framework/")
     os.chdir("..")
     os.chdir("..")

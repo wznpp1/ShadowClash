@@ -27,6 +27,8 @@ def build_clash(version):
         -buildmode=c-archive """
     subprocess.check_output(command, shell=True)
     try:
+        if os.environ.get("CI", False):
+            print("[*] Debug: %s"%os.getcwd())
         os.system("mv shadowclash.h ../src")
         os.system("mv shadowclash.a ../framework")
     except Exception as e:
