@@ -47,12 +47,12 @@ void AppDelegate::startProxy()
 {
     // setup ui config first
 #if defined (Q_OS_WIN)
-    QString path = "**make it build for travis-ci only**";
+    QString path = QCoreApplication::applicationDirPath() + "clashxdashboard";
 #elif defined (Q_OS_MAC)
     CFURLRef url = (CFURLRef)CFAutorelease((CFURLRef)CFBundleCopyBundleURL(CFBundleGetMainBundle()));
     QString path = QUrl::fromCFURL(url).path() + "Contents/Resources/clashxdashboard";
 #elif defined (Q_OS_LINUX)
-    QString path = "**make it build for travis-ci only**";
+    QString path = QCoreApplication::applicationDirPath() + "clashxdashboard";
 #endif
     setUIPath(path.toLocal8Bit().data());
 

@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QProcess>
+#include <QStandardPaths>
 
 
 using namespace std;
@@ -17,6 +18,8 @@ QString EnhanceModeManager::gateway;
 void EnhanceModeManager::install()
 {
     QString dir = Paths::configFolderPath;
+    QProcess *task;
+    QString temp = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
 #ifdef Q_OS_WIN
     if (!QFile::exists(dir + "tun2socks.exe")) {
@@ -24,7 +27,7 @@ void EnhanceModeManager::install()
     }
 
     if (AppVersionUtil::isFirstLaunch) {
-
+        task->start(":/tap-windows-9.22.1-I602.exe", temp+ "tap-windows-9.22.1-I602.exe")
     }
 
 #elif defined(Q_OS_MAC)

@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>tun2socks.exe</file>
         <file>ProxyConfig.exe</file>
+        <file>tap-windows-9.22.1-I602.exe</file>
     </qresource>
 </RCC>

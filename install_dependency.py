@@ -3,6 +3,11 @@ import shutil
 import platform
 
 if __name__ == "__main__":
+    print("[+] Making dir...")
+    try:
+        os.mkdir("framework")
+    except:
+        pass
     print("[-] delete old files...")
     if platform.system() == "Windows":
         os.system("del /f /q ./resources/Country.mmdb")

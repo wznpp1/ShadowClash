@@ -228,6 +228,7 @@ void SystemTray::updateInfo()
     ApiRequest::requestConfig();
     setConfigList();
     setTrayProxyMode();
+    startAtLoginAction->setChecked(LaunchAtLogin::isAutoStart());
     allowLanConnectionAction->setChecked(ClashConfig::allowLan);
     setPortsMenu();
     setTrayLogLevel();
