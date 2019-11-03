@@ -5,7 +5,6 @@
         <file>icons/menu_icon.png</file>
         <file>sampleConfig.yaml</file>
         <file>Country.mmdb</file>
-        <file>tun2socks.sh</file>
         <file>install_helper.sh</file>
     </qresource>
 </RCC>

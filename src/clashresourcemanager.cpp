@@ -70,9 +70,9 @@ void ClashResourceManager::installHelper()
     QStringList param;
 
     if (!QFile::exists(dir + "install_helper.sh")) {
-        QFile::copy(":/install_proxy_helper.sh",dir + "install_proxy_helper.sh");
+        QFile::copy(":/install_helper.sh",dir + "install_helper.sh");
         if (showInstallHelperAlert()) {
-            QString script = QString("do shell script \"bash %1 \\\"%2\\\"\" with administrator privileges").arg(dir + "install_proxy_helper.sh").arg(dir);
+            QString script = QString("do shell script \"bash %1 \\\"%2\\\"\" with administrator privileges").arg(dir + "install_helper.sh").arg(dir);
             param << "-l" << "AppleScript";
             task->start("/usr/bin/osascript", param);
             task->write(script.toUtf8());

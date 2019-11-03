@@ -14,7 +14,7 @@ public:
     void updateLogLevel(QString logLevel);
     void requestProxyGroupList();
     void updateAllowLan(bool allow);
-    void getProxyDelay(QString proxyName);
+    int getProxyDelay(QString proxyName);
     static QJsonObject getRules();
 };
 

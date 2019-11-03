@@ -1,3 +1,4 @@
+#include "appversionutil.h"
 #include "clashconfig.h"
 #include "enhancemodemanager.h"
 #include "paths.h"
@@ -20,6 +21,10 @@ void EnhanceModeManager::install()
 #ifdef Q_OS_WIN
     if (!QFile::exists(dir + "tun2socks.exe")) {
         QFile::copy(":/tun2socks.exe",dir + "tun2socks.exe");
+    }
+
+    if (AppVersionUtil::isFirstLaunch) {
+
     }
 
 #elif defined(Q_OS_MAC)
@@ -66,12 +71,18 @@ void EnhanceModeManager::setupRoute()
         file.write("\n");
     }
     file.close();
+#if defined(Q_OS_WIN)
+#elif defined(Q_OS_MAC)
     QString script = QString("do shell script \"bash %1 \\\"%2\\\" \\\"%3\\\" \\\"%4\\\"\" with administrator privileges").arg(Paths::configFolderPath + "tun2socks.sh").arg(Paths::configFolderPath).arg(EnhanceModeManager::gateway).arg("start");
     param << "-l" << "AppleScript";
     task->start("/usr/bin/osascript", param);
     task->write(script.toUtf8());
     task->closeWriteChannel();
     task->waitForFinished();
+#elif defined(Q_OS_LINUX)
+    task->start("kdesu", Paths::configFolderPath + "tun2socks.sh");
+    task->waitForFinished();
+#endif
     file.remove();
 }
 

@@ -42,13 +42,12 @@ script:
   - make -j8
 
 defore_deplot:
-  - if [[ $BADGE == "osx" ]]; then
-      macdeployqt ShadowCoel.app;
-      macdeployqt ShadowCoel.app -dmg;
-    fi
+  - cd ..
+  - python3 release.py
 
 deploy:
   provider: release
+  file: "ShadowClash-$BADGE.zip"
   api_key: $GIT_REPO_TOKEN
   skip_cleanup: true
   overwrite: true

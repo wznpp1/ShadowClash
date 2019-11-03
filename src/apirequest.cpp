@@ -124,7 +124,7 @@ void ApiRequest::updateLogLevel(QString logLevel)
 void ApiRequest::requestProxyGroupList()
 {
     if (!ConfigManager::buildInApiMode) {
-        req("/proxies",
+        QNetworkReply *reply = req("/proxies",
             "GET",
             "");
     }
@@ -140,11 +140,20 @@ void ApiRequest::updateAllowLan(bool allow)
         data);
 }
 
-void ApiRequest::getProxyDelay(QString proxyName)
+int ApiRequest::getProxyDelay(QString proxyName)
 {
-    req("/proxies/%1/delay",
+    QString proxyNameEncoded = QUrl::toPercentEncoding(proxyName);
+    QNetworkReply *reply = req(QString("/proxies/%1/delay").arg(proxyNameEncoded),
         "GET",
         "{\"timeout\":5000,\"url\":\"http://www.gstatic.com/generate_204\"");
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(reply->readAll());
+    QJsonObject obj = jsonResponse.object();
+    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 504) {
+        return obj["delay"].toInt();
+    } else {
+        return -1;
+    }
+
 }
 
 QJsonObject ApiRequest::getRules()

@@ -73,6 +73,7 @@ private:
     QAction *showCurrentProxyAction;
     QAction *useBuildInApiAction;
     QAction *setBenchmarkUrlAction;
+    QAction *autoCloseConnectionAction;
     // Help Menu
     QAction *aboutAction;
     QAction *aboutQtAction;

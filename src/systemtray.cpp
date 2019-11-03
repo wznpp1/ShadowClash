@@ -66,6 +66,7 @@ void SystemTray::createActions()
     showCurrentProxyAction = new QAction(tr("Show current proxy in menu"));
     useBuildInApiAction = new QAction(tr("Use built in api"));
     setBenchmarkUrlAction = new QAction(tr("Set benchmark url"));
+    autoCloseConnectionAction = new QAction(tr("Auto Close Connection"));
 
     // Help Menu
     aboutAction = new QAction(tr("About"));
