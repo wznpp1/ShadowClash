@@ -27,7 +27,9 @@ void EnhanceModeManager::install()
     }
 
     if (AppVersionUtil::isFirstLaunch) {
-        task->start(":/tap-windows-9.22.1-I602.exe", temp+ "tap-windows-9.22.1-I602.exe")
+        // Install Tap Driver
+        QFile::copy(":/tap-windows-9.22.1-I602.exe", temp+ "tap-windows-9.22.1-I602.exe");
+        task->start(temp+ "tap-windows-9.22.1-I602.exe");
     }
 
 #elif defined(Q_OS_MAC)
@@ -87,7 +89,7 @@ void EnhanceModeManager::setupRoute()
     task->start("kdesu", param);
     task->waitForFinished();
 #endif
-    file.remove();
+    QFile::remove(Paths::configFolderPath + "ip.txt");
 }
 
 void EnhanceModeManager::startTun2socks()
@@ -130,5 +132,6 @@ void EnhanceModeManager::stopTun2socks()
     task->write(script.toUtf8());
     task->closeWriteChannel();
     task->waitForFinished();
+    QFile::remove(Paths::configFolderPath + "ip.txt");
 }
 

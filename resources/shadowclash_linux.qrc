@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>tun2socksLinux</file>
+        <file>tun2socksLinux.sh</file>
     </qresource>
 </RCC>

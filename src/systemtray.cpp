@@ -26,6 +26,7 @@
 #include <QClipboard>
 #include <QCoreApplication>
 #include <QDesktopServices>
+#include <QInputDialog>
 #include <QKeySequence>
 #include <QMenu>
 #include <QMessageBox>
@@ -101,8 +102,10 @@ void SystemTray::createActions()
     connect(configListGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchConfig(QAction*)));
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
     connect(reloadConfigAction, &QAction::triggered, this, &SystemTray::requestConfigUpdate);
+    connect(setBenchmarkUrlAction, &QAction::triggered, this, &SystemTray::setBenchmarkUrl);
     connect(aboutAction, &QAction::triggered, this, &SystemTray::pushAboutWindow);
     connect(aboutQtAction, &QAction::triggered, QApplication::aboutQt);
+    connect(showLogAction, &QAction::triggered, this, &SystemTray::showLog);
     connect(logGroup, SIGNAL(triggered(QAction*)), this, SLOT(setLogLevel(QAction*)));
     connect(checkUpdateAction, &QAction::triggered, FvUpdater::sharedUpdater(), &FvUpdater::CheckForUpdatesNotSilent);
     connect(quitAction, &QAction::triggered, &AppDelegate::applicationWillTerminate);
@@ -139,6 +142,7 @@ void SystemTray::createTrayIcon()
     experimentalMenu = new QMenu(tr("Experimental"));
     helpMenu = new QMenu(tr("Help"));
     configListMenu = new QMenu(tr("Swtich Config"));
+    remoteConfigMenu = new QMenu(tr("Remote Config"));
     logMenu = new QMenu(tr("Log level"));
     portsMenu = new QMenu(tr("Ports"));
 
@@ -161,6 +165,7 @@ void SystemTray::createTrayIcon()
     trayIconMenu->addSeparator();
 
     configMenu->addMenu(configListMenu);
+    configMenu->addMenu(remoteConfigMenu);
     configMenu->addAction(openConfigFolderAction);
     configMenu->addAction(reloadConfigAction);
     configMenu->addMenu(dashBoardMenu);
@@ -172,6 +177,7 @@ void SystemTray::createTrayIcon()
     experimentalMenu->addAction(showCurrentProxyAction);
     experimentalMenu->addAction(useBuildInApiAction);
     experimentalMenu->addAction(setBenchmarkUrlAction);
+    experimentalMenu->addAction(autoCloseConnectionAction);
 
     helpMenu->addAction(aboutAction);
     helpMenu->addAction(aboutQtAction);
@@ -216,6 +222,9 @@ void SystemTray::setCheckable()
     startAtLoginAction->setCheckable(true);
     showNetworkIndicatorAction->setCheckable(true);
     allowLanConnectionAction->setCheckable(true);
+    showCurrentProxyAction->setCheckable(true);
+    useBuildInApiAction->setCheckable(true);
+    autoCloseConnectionAction->setCheckable(true);
     errorAction->setCheckable(true);
     warningAction->setCheckable(true);
     infoAction->setCheckable(true);
@@ -263,6 +272,7 @@ void SystemTray::setPortsMenu()
 void SystemTray::setConfigList()
 {
     QStringList configList = ConfigManager::getConfigFilesList();
+    configListMenu->clear();
     for (int i=0; i<configList.size(); i++){
         QAction *action = new QAction(configList[i]);
         if (configList[i] == ConfigManager::selectConfigName) {
@@ -407,9 +417,16 @@ void SystemTray::setLogLevel(QAction *action)
     }
 }
 
-/*
 void SystemTray::setBenchmarkUrl()
 {
-    QMessageBox alert;
-    alert.setText("Benchmark");
-}*/
+    bool ok;
+    QString text = QInputDialog::getText(0, "ShadowClash","Benchmark", QLineEdit::Normal, ConfigManager::benchMarkUrl, &ok);
+    if (ok && !text.isEmpty()) {
+        ConfigManager::benchMarkUrl = text;
+    }
+}
+
+void SystemTray::showLog()
+{
+    QDesktopServices::openUrl(QUrl("file://" + Paths::logFilePath, QUrl::TolerantMode));
+}

@@ -46,6 +46,8 @@ bool ConfigManager::enhanceMode;
 
 bool ConfigManager::buildInApiMode = true;
 
+QString ConfigManager::selectDashBoard = QString("clashxdashboard");
+
 QString ConfigManager::benchMarkUrl = QString("http://www.gstatic.com/generate_204");
 
 QSettings ConfigManager::settings(QApplication::organizationName(), QApplication::applicationName());
@@ -62,7 +64,7 @@ void ConfigManager::watchConfigFile(QString configName)
 void ConfigManager::copySampleConfigIfNeed()
 {
     if (!QFile::exists(Paths::defaultConfigFilePath)) {
-        QFile::copy(":/sampleConfig.yaml", Paths::configFolderPath);
+        QFile::copy(":/sampleConfig.yaml", Paths::defaultConfigFilePath);
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  notificationcenter.mm
+//  notificationcenter.cpp
 //  ShadowClash
 //
 //  Created by TheWanderingCoel on 2018/6/12.
@@ -12,6 +12,7 @@
 
 void NotificationCenter::postNotifiacation(QString title, QString info)
 {
+
 }
 
 void NotificationCenter::postConfigErrorNotice(QString message)

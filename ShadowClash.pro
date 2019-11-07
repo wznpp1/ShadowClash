@@ -50,12 +50,14 @@ SOURCES += \
     src/configmanager.cpp \
     src/enhancemodemanager.cpp \
     src/launchatlogin.cpp \
+    src/logger.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/paths.cpp \
     src/proxyconfighelpermanager.cpp \
     src/runguard.cpp \
-    src/systemtray.cpp
+    src/systemtray.cpp \
+    src/remoteconfigwindow.cpp
 
 HEADERS += \
     src/appdelegate.h \
@@ -68,20 +70,23 @@ HEADERS += \
     src/apirequest.h \
     src/configmanager.h \
     src/launchatlogin.h \
+    src/logger.h \
     src/mainwindow.h \
     src/notificationcenter.h \
     src/paths.h \
     src/proxyconfighelpermanager.h \
     src/runguard.h \
     src/systemtray.h \
-    src/shadowclash.h
+    src/shadowclash.h \
+    src/remoteconfigwindow.h
 
 INCLUDEPATH += $$PWD/src/plog/include
 INCLUDEPATH += $$PWD/src/yaml-cpp/include
 
 FORMS += \
     ui/mainwindow.ui \
-    ui/aboutwindow.ui
+    ui/aboutwindow.ui \
+    ui/remoteconfigwindow.ui
 
 TRANSLATIONS += \
     translations/shadowclash_en.ts

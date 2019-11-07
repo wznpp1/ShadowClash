@@ -34,6 +34,8 @@ public:
     void openConfigFolder();
     void requestConfigUpdate();
     void pushAboutWindow();
+    void setBenchmarkUrl();
+    void showLog();
     bool isSpeedTesting;
     NotificationCenter *notificationCenter;
     ApiRequest *apirequest;
@@ -68,6 +70,8 @@ private:
     // Config Menu
     QAction *openConfigFolderAction;
     QAction *reloadConfigAction;
+    QAction *manageAction;
+    QAction *updateAction;
     QAction *clashxAction;
     QAction *yacdAction;
     QAction *showCurrentProxyAction;
@@ -98,6 +102,7 @@ private:
     QMenu *experimentalMenu;
     QMenu *helpMenu;
     QMenu *configListMenu;
+    QMenu *remoteConfigMenu;
     QMenu *portsMenu;
 };
 

@@ -4,7 +4,9 @@ image:
 install:
   - set QTDIR=C:\Qt\5.13.0\msvc2017_64
   - set PYDIR=C:\Python36
-  - set PATH=%QTDIR%\bin;%PYDIR%;%PATH%;
+  - set GODIR=C:\go113
+  - set PATH=%QTDIR%\bin;%PYDIR%;%GODIR%;%PATH%;
+  - ./install_go.ps1
   - git submodule update --init
 
 build_script:
@@ -13,3 +15,15 @@ build_script:
   - cd .. && mkdir build && cd build
   - qmake ../
   - nmake
+
+deploy:
+  provider: GitHub
+  description: "ShadowClash Release"
+  auth_token:
+    secure: uAMRAuhJjhHbPRvsKDUGYBDrrDPhlj2q1zHICgjSo7K2CSmVMxHreSMJYqer4y2k
+  artifact: /.*\.zip/
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true

@@ -9,7 +9,9 @@
 #include "paths.h"
 
 #include <QDir>
+#include <QStandardPaths>
 #include <QString>
+
 
 const QString Paths::configFolderPath = QDir::homePath() + "/.config/clash/";
 
@@ -17,6 +19,8 @@ const QString Paths::defaultConfigFilePath = configFolderPath + "config.yaml";
 
 QString Paths::currentConfigPath = configFolderPath + ".yaml";
 
-#if defined (Q_OS_MAC)
-const QString Paths::logsPath = QDir::homePath() + "/Library/Logs/ShadowClash/";
-#endif
+QString Paths::tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+
+const QString Paths::logsPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+
+const QString Paths::logFilePath = Paths::logsPath + "/ShadowClash.log";
