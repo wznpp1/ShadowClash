@@ -6,12 +6,7 @@ install:
   - set PYDIR=C:\Python36
   - set GODIR=C:\go113
   - set PATH=%QTDIR%\bin;%PYDIR%;%GODIR%;%PATH%;
-  - ps: $goDistPath = "$env:TEMP\go1.13.3.windows-amd64.zip"
-  - ps: (New-Object Net.WebClient).DownloadFile('https://dl.google.com/go/go1.13.3.windows-amd64.zip', $goDistPath)
-  - ps: 7z x $goDistPath -oC:\go1133-x64 | Out-Null
-  - ps: [IO.Directory]::Move('C:\go1133-x64\go', 'C:\go113')
-  - ps: Remove-Item 'C:\go1133-x64' -Recurse -Force
-  - ps: del $goDistPath
+  - ps: install_go.ps1
   - git submodule update --init
 
 build_script:
