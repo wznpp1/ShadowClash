@@ -26,7 +26,7 @@ install:
     fi
   - if [ "$BADGE" = "osx" ]; then    
       brew upgrade go --verbose;
-      brew install qt5 --verbose;
+      brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/89bf3a54383d884f8b8511c6237325dd5b5ae6ba/Formula/qt.rb --verbose;
     fi
 
 before_script:
