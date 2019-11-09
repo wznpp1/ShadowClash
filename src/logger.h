@@ -6,9 +6,9 @@
 class Logger
 {
 public:
-    QStringList logLevel;
-    void init();
-    void log(QString msg, QString level);
+    static QStringList logLevel;
+    static void init();
+    static void log(QString msg, QString level);
 };
 
 #endif // LOGGER_H

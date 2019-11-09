@@ -10,6 +10,7 @@
 #include "appdelegate.h"
 #include "configmanager.h"
 #include "enhancemodemanager.h"
+#include "logger.h"
 #include "notificationcenter.h"
 #include "proxyconfighelpermanager.h"
 #include "runguard.h"
@@ -56,6 +57,7 @@ void AppDelegate::startProxy()
 #endif
     setUIPath(path.toLocal8Bit().data());
 
+    Logger::log("Trying start proxy","debug");
     char* string = run(1);
     QJsonDocument jsonResponse = QJsonDocument::fromJson(string);
     QJsonObject obj = jsonResponse.object();

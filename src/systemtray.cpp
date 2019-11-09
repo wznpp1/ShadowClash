@@ -200,7 +200,7 @@ void SystemTray::createTrayIcon()
     trayIconMenu->addMenu(helpMenu);
     trayIconMenu->addAction(quitAction);
 
-    QIcon icon = QIcon(":/icons/menu_icon.png");
+    QIcon icon = QIcon(":/icons/menu_icon@0,5x.png");
 
 #if defined(Q_OS_MACOS) || defined(Q_OS_MAC)
     icon.setIsMask(true);

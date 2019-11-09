@@ -165,3 +165,18 @@ QJsonObject ApiRequest::getRules()
     QJsonObject obj = jsonResponse.object();
     return obj;
 }
+
+/*
+void ApiRequest::requestTrafficInfo()
+{
+    QByteArray version = ("ShadowClash/" + ConfigManager::version).toUtf8();
+    QNetworkAccessManager* manager = new QNetworkAccessManager();
+    QNetworkRequest request(ConfigManager::apiUrl + "/traffic");
+    request.setRawHeader("Content-Type", "application/json");
+    request.setRawHeader("User-Agent", version);
+    if (ConfigManager::apiSecret.length() > 0) {
+        request.setRawHeader("Authorization", QString("Bearer %1").arg(ConfigManager::apiSecret).toUtf8());
+    }
+    QNetworkReply* reply = manager->sendCustomRequest(request, "GET", "");
+    reply->read();
+}*/

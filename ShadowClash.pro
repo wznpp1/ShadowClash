@@ -22,6 +22,7 @@ win32 {
         src/framelesswindow.cpp \
         src/notificationcenter.cpp
     RESOURCES += resources/shadowclash_windows.qrc
+    QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
 }
 
 macx {
@@ -30,8 +31,6 @@ macx {
         src/notificationcenter.mm
     LIBS += -framework Cocoa -framework Security
     RESOURCES += resources/shadowclash_mac.qrc
-    # Support low macOS version
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
 }
 
 unix:!mac {

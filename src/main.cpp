@@ -12,6 +12,7 @@
 #include "configmanager.h"
 #include "enhancemodemanager.h"
 #include "fvupdater.h"
+#include "logger.h"
 #include "mainwindow.h"
 #include "proxyconfighelpermanager.h"
 #include "runguard.h"
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
     EnhanceModeManager::install();
     ClashResourceManager::check();
     ConfigManager::copySampleConfigIfNeed();
+    Logger::init();
 
     // start proxy
     AppDelegate::updateConfig();

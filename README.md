@@ -31,16 +31,24 @@ A rule based proxy For Window, Mac and Linux base on [Clash](https://github.com/
 You can download from [release](https://github.com/TheWanderingCoel/ShadowClash/releases) page
 
 ## Build
-- Download deps
+- Download and build deps
   ```
-  bash install_dependency.sh
+  python3 install_dependency.py
   ```
 - Build clash core. 
   ```
-  cd resources
+  cd clash
   python3 build_clash.py
   ```
-- Build and run.
+- Run qmake
+  ```
+  mkdir build && cd build
+  qmake ../
+  ```
+- Run make
+  ```
+  make -j8
+  ```
 
 ## Config
 
@@ -52,3 +60,19 @@ The default name of the configuration file is `config.ymal`. You can use your cu
 To Change the ports of ClashX, you need to modify the `config.ymal` file. The `General` section settings in your custom config file would be ignored.
 
 Checkout [Clash](https://github.com/Dreamacro/clash) or [SS-Rule-Snippet for Clash](https://github.com/Hackl0us/SS-Rule-Snippet/blob/master/LAZY_RULES/clash.yml) for more detail.
+
+## Special Thanks
+
+- [clash](https://github.com/Dreamacro/clash) Under GPLv3 license
+
+- [yaml-cpp](https://github.com/jbeder/yaml-cpp) Under MIT
+
+- [plog](https://github.com/SergiusTheBest/plog) Under MPL-2.0
+
+- [clashX](https://github.com/yichengchen/clashX)
+
+- [openVPN(Tap Driver)](https://github.com/DanStevens/ieproxy) Under MIT and GPLv2 license
+
+- [tun2socks](https://github.com/eycorsican/go-tun2socks)
+
+- [ieproxy](https://github.com/DanStevens/ieproxy)

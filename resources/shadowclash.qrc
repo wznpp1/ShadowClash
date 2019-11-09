@@ -6,5 +6,6 @@
         <file>sampleConfig.yaml</file>
         <file>Country.mmdb</file>
         <file>install_helper.sh</file>
+        <file>icons/menu_icon@0,5x.png</file>
     </qresource>
 </RCC>

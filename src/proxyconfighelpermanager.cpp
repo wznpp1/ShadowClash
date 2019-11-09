@@ -6,6 +6,7 @@
 //  Copyright © 2019 Coel Wu. All rights reserved.
 //
 
+#include "logger.h"
 #include "paths.h"
 #include "proxyconfighelpermanager.h"
 
@@ -44,8 +45,10 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
     QStringList param;
 #ifdef Q_OS_WIN
     if (port && socksPort) {
+        Logger::log("enableProxy", "debug");
         param << "-p" << QString("127.0.0.1:") + QString::number(socksPort);
     } else {
+        Logger::log("disableProxy", "debug");
         param << "-d";
     }
     task->start(QString(Paths::configFolderPath) + "ProxyConfig.exe", param);
@@ -53,8 +56,10 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
 
 #elif defined Q_OS_MAC
     if (port && socksPort) {
+        Logger::log("enableProxy", "debug");
         param << QString::number(port) << QString::number(socksPort) << "enable";
     } else {
+        Logger::log("disableProxy", "debug");
         param << "0" << "0" << "disable";
     }
     task->start(QString(Paths::configFolderPath) + "ProxyConfig", param);

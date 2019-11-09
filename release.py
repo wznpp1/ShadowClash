@@ -22,7 +22,6 @@ if __name__ == "__main__":
         os.system("cp ./resources/clashxdashboard ./build/clashxdashboard")
         os.system("cp ./resources/yacddashboard ./build/yacddashboard")
         os.chdir("build")
-         os.system("rm -rf *.o *.h *.cpp Makefile")
+        os.system("rm -rf *.o *.h *.cpp Makefile")
         os.system("zip -r ShadowClash-linux.zip *")
         print("[+] Release Linux -> Done")
-        

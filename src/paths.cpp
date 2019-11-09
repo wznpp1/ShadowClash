@@ -23,4 +23,4 @@ QString Paths::tempPath = QStandardPaths::writableLocation(QStandardPaths::TempL
 
 const QString Paths::logsPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
 
-const QString Paths::logFilePath = Paths::logsPath + "/ShadowClash.log";
+const QString Paths::logFilePath = configFolderPath + "ShadowClash/ShadowClash.log";

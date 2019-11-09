@@ -21,10 +21,12 @@ def build_clash(version):
         go build -ldflags '-X "github.com/Dreamacro/clash/constant.Version={version}" \
         -X "github.com/Dreamacro/clash/constant.BuildTime={build_time}"' \
         -buildmode=c-archive """
-    else:
+    elif platform.system() == "Linux":
         command = f"""go build -ldflags '-X "github.com/Dreamacro/clash/constant.Version={version}" \
         -X "github.com/Dreamacro/clash/constant.BuildTime={build_time}"' \
         -buildmode=c-archive """
+    else:
+        command = """go build -buildmode=c-archive """
     subprocess.check_output(command, shell=True)
     try:
         if os.environ.get("CI", False):
