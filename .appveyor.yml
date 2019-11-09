@@ -6,7 +6,6 @@ install:
   - set PYDIR=C:\Python36
   - set GODIR=C:\go113
   - set PATH=%QTDIR%\bin;%PYDIR%;%GODIR%;%PATH%;
-  - ps: .\install_go.ps1
   - git submodule update --init
 
 build_script:
