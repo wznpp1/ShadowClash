@@ -90,6 +90,7 @@ void EnhanceModeManager::startTun2socks()
     param << "-tunName" <<  "utun1" << "-tunAddr" << "240.0.0.2" << "-tunGw" << "240.0.0.1" << "-proxyType" << "socks" << "-proxyServer" << "127.0.0.1:" + QString::number(ClashConfig::socketPort);
     task->startDetached(Paths::configFolderPath + "tun2socks", param);
     QString script = QString("do shell script \"bash %1 \\\"%2\\\" \\\"%3\\\" \\\"%4\\\"\" with administrator privileges").arg(Paths::configFolderPath + "tun2socks.sh").arg(Paths::configFolderPath).arg(EnhanceModeManager::gateway).arg("start");
+    param.clear();
     param << "-l" << "AppleScript";
     task->start("/usr/bin/osascript", param);
     task->write(script.toUtf8());

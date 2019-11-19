@@ -13,6 +13,7 @@ If option = "start" Then
     objShell.Run command,0
     command = "route add " & gateway & " 10.0.2.2 metric 5"
     objShell.Run command,0
+    command = ""
 Else If option = "stop" Then
     command = "route delete 0.0.0.0 mask 0.0.0.0"
     objShell.Run command,0

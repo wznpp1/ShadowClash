@@ -12,6 +12,8 @@ int ClashConfig::port;
 
 int ClashConfig::socketPort;
 
+int ClashConfig::redirPort;
+
 bool ClashConfig::allowLan;
 
 QString ClashConfig::mode;

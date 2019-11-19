@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>280</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>20</y>
+     <y>10</y>
      <width>58</width>
      <height>16</height>
     </rect>
@@ -30,18 +30,18 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>50</y>
+     <y>40</y>
      <width>361</width>
      <height>192</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="addButton">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>250</y>
-     <width>112</width>
+     <y>240</y>
+     <width>81</width>
      <height>32</height>
     </rect>
    </property>
@@ -49,12 +49,12 @@
     <string>Add</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="updateButton">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>250</y>
-     <width>112</width>
+     <x>110</x>
+     <y>240</y>
+     <width>81</width>
      <height>32</height>
     </rect>
    </property>
@@ -62,12 +62,12 @@
     <string>Update</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="deleteButton">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>250</y>
-     <width>112</width>
+     <x>200</x>
+     <y>240</y>
+     <width>81</width>
      <height>32</height>
     </rect>
    </property>

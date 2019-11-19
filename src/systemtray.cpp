@@ -18,6 +18,7 @@
 #include "notificationcenter.h"
 #include "paths.h"
 #include "proxyconfighelpermanager.h"
+#include "remoteconfigwindow.h"
 #include "systemtray.h"
 
 #include <QAction>
@@ -58,6 +59,10 @@ void SystemTray::createActions()
     openConfigFolderAction = new QAction(tr("Open config Folder"));
     reloadConfigAction = new QAction(tr("Reload config"));
 
+    manageAction = new QAction(tr("Manage"));
+    updateAction = new QAction(tr("Update"));
+    autoUpdateAction = new QAction(tr("Auto Update"));
+
     dashBoardGroup = new QActionGroup(this);
     dashBoardGroup->setExclusive(true);
 
@@ -86,6 +91,8 @@ void SystemTray::createActions()
     httpPortAction->setEnabled(false);
     socksPortAction = new QAction("Socks Port:");
     socksPortAction->setEnabled(false);
+    redirPortAction = new QAction("Redir Port:");
+    redirPortAction->setEnabled(false);
     apiPortAction = new QAction("Api Port:");
     apiPortAction->setEnabled(false);
 
@@ -99,6 +106,7 @@ void SystemTray::createActions()
     connect(dashBoardAction, &QAction::triggered, this, &SystemTray::showWindow);
     connect(startAtLoginAction, &QAction::triggered, this, &SystemTray::setupAutoStart);
     connect(allowLanConnectionAction, &QAction::triggered, this, &SystemTray::allowFromLan);
+    connect(manageAction, &QAction::triggered, this, &SystemTray::showRemoteConfigWindow);
     connect(configListGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchConfig(QAction*)));
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
     connect(reloadConfigAction, &QAction::triggered, this, &SystemTray::requestConfigUpdate);
@@ -124,6 +132,7 @@ void SystemTray::createShortCuts()
     dashBoardAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
     speedTestAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
 
+    manageAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_M));
     openConfigFolderAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     reloadConfigAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
 
@@ -171,6 +180,10 @@ void SystemTray::createTrayIcon()
     configMenu->addMenu(dashBoardMenu);
     configMenu->addMenu(experimentalMenu);
 
+    remoteConfigMenu->addAction(manageAction);
+    remoteConfigMenu->addAction(updateAction);
+    remoteConfigMenu->addAction(autoUpdateAction);
+
     dashBoardMenu->addAction(clashxAction);
     dashBoardMenu->addAction(yacdAction);
 
@@ -192,6 +205,7 @@ void SystemTray::createTrayIcon()
 
     portsMenu->addAction(httpPortAction);
     portsMenu->addAction(socksPortAction);
+    portsMenu->addAction(redirPortAction);
     portsMenu->addAction(apiPortAction);
 
     helpMenu->addMenu(portsMenu);
@@ -266,6 +280,7 @@ void SystemTray::setPortsMenu()
 {
     httpPortAction->setText("Http Port:" + QString::number(ClashConfig::port));
     socksPortAction->setText("Socks Port:" + QString::number(ClashConfig::socketPort));
+    redirPortAction->setText("Redir Port:" + QString::number(ClashConfig::redirPort));
     apiPortAction->setText("Api Port:" + ConfigManager::apiPort);
 }
 
@@ -429,4 +444,10 @@ void SystemTray::setBenchmarkUrl()
 void SystemTray::showLog()
 {
     QDesktopServices::openUrl(QUrl("file://" + Paths::logFilePath, QUrl::TolerantMode));
+}
+
+void SystemTray::showRemoteConfigWindow()
+{
+    RemoteConfigWindow *remoteconfigWindow = new RemoteConfigWindow();
+    remoteconfigWindow->exec();
 }

@@ -54,10 +54,10 @@ int main(int argc, char *argv[])
     FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
 
     // install proxy helper
-    ProxyConfigHelperManager::install();
-    EnhanceModeManager::install();
     ClashResourceManager::check();
     ConfigManager::copySampleConfigIfNeed();
+    ProxyConfigHelperManager::install();
+    EnhanceModeManager::install();
     Logger::init();
 
     // start proxy

@@ -42,6 +42,7 @@ void ApiRequest::requestConfig()
         if (!obj.isEmpty()) {
             ClashConfig::port = obj["port"].toInt();
             ClashConfig::socketPort = obj["socks-port"].toInt();
+            ClashConfig::redirPort = obj["redir-port"].toInt();
             ClashConfig::allowLan = obj["allow-lan"].toBool();
             ClashConfig::mode = obj["mode"].toString();
             ClashConfig::logLevel = obj["log-level"].toString();
@@ -59,6 +60,7 @@ void ApiRequest::requestConfig()
     if (!obj.isEmpty()) {
         ClashConfig::port = obj["port"].toInt();
         ClashConfig::socketPort = obj["socks-port"].toInt();
+        ClashConfig::redirPort = obj["redir-port"].toInt();
         ClashConfig::allowLan = obj["allow-lan"].toBool();
         ClashConfig::mode = obj["mode"].toString();
         ClashConfig::logLevel = obj["log-level"].toString();

@@ -36,6 +36,7 @@ public:
     void pushAboutWindow();
     void setBenchmarkUrl();
     void showLog();
+    void showRemoteConfigWindow();
     bool isSpeedTesting;
     NotificationCenter *notificationCenter;
     ApiRequest *apirequest;
@@ -72,6 +73,7 @@ private:
     QAction *reloadConfigAction;
     QAction *manageAction;
     QAction *updateAction;
+    QAction *autoUpdateAction;
     QAction *clashxAction;
     QAction *yacdAction;
     QAction *showCurrentProxyAction;
@@ -92,6 +94,7 @@ private:
 
     QAction *httpPortAction;
     QAction *socksPortAction;
+    QAction *redirPortAction;
     QAction *apiPortAction;
 
     QMenu *trayIconMenu;

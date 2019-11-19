@@ -8,6 +8,7 @@ class ClashConfig
 public:
     static int port;
     static int socketPort;
+    static int redirPort;
     static bool allowLan;
     static QString mode;
     static QString logLevel;

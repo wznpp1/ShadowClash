@@ -29,7 +29,7 @@ void ClashResourceManager::checkConfigDir()
     QDir dir(Paths::configFolderPath);
     if (!dir.exists()) {
         try {
-            dir.mkdir(".");
+            dir.mkpath(".");
         } catch (...) {
             showCreateConfigDirFailAlert();
         }
