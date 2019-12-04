@@ -265,7 +265,7 @@ void SystemTray::updateInfo()
 void SystemTray::setTrayProxyMode()
 {
     proxyModeMenu->setTitle(tr(qPrintable(QString("Proxy Mode (%1)").arg(ClashConfig::mode))));
-    if (ClashConfig::mode == "Globe") {
+    if (ClashConfig::mode == "Global") {
         globeAction->setChecked(true);
     } else if (ClashConfig::mode == "Rule") {
         ruleAction->setChecked(true);

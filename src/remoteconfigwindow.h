@@ -16,6 +16,7 @@ public:
     explicit RemoteConfigWindow(QWidget *parent = nullptr);
     ~RemoteConfigWindow();
     QStandardItemModel *model;
+    void showAdd();
     void requestUpdate();
 
 private:

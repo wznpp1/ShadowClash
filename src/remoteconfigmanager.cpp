@@ -41,7 +41,7 @@ QString RemoteConfigManager::updateConfig()
         // Download Failed
     }
 
-    QString verifyRes = verifyConfig();
+    QString verifyRes = verifyConfig(configString);
     if (verifyRes != "success") {
         // Verify Failed
     }

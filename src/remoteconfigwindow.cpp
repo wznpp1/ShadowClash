@@ -63,16 +63,21 @@ void RemoteConfigWindow::actionDelete()
 {
     // get row index first
     QModelIndex index = ui->tableView->currentIndex();
-    // then we delete the row by index
+    // and then we delete the config file
+    // finally, we del2ete the row by index
     model->removeRow(index.row());
 }
 
 void RemoteConfigWindow::actionUpdate()
+{
+    requestUpdate();
+}
+
+void RemoteConfigWindow::showAdd()
 {
 
 }
 
 void RemoteConfigWindow::requestUpdate()
 {
-    // RemoteConfigWindow::
 }
