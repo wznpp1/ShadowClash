@@ -7,6 +7,7 @@
 //
 
 #include "framelesswindow.h"
+#include "configmanager.h"
 #ifdef Q_OS_MAC
 #include <QDebug>
 #include <Cocoa/Cocoa.h>
@@ -44,6 +45,10 @@ CFramelessWindow::CFramelessWindow(QWidget *parent)
     ProcessSerialNumber pn;
     GetFrontProcess (&pn);
     ShowHideProcess(&pn,false);
+    //隐藏Dock图标
+    [NSApp setActivationPolicy: NSApplicationActivationPolicyProhibited];
+    //Only way I can think of to hide & restore window
+    ConfigManager::windowNumber -= 1;
 }
 - (void)zoomButtonAction:(id)sender
 {
@@ -79,6 +84,8 @@ void CFramelessWindow::initUI()
     //window.movableByWindowBackground = YES;
     //设置view扩展到标题栏
     window.styleMask |=  NSWindowStyleMaskFullSizeContentView; //MAC_10_10及以上版本支持
+    //恢复Dock图标
+    [NSApp setActivationPolicy: NSApplicationActivationPolicyRegular];
 
     m_bNativeSystemBtn = true;
 

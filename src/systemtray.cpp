@@ -34,6 +34,11 @@
 #include <QSettings>
 #include <QUrl>
 
+#if defined(Q_OS_MAC)
+#include <CoreServices/CoreServices.h>
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
 void SystemTray::createActions()
 {
     proxyModeGroup = new QActionGroup(this);
@@ -378,7 +383,11 @@ void SystemTray::showWindow()
 {
     MainWindow mainwindow;
     // prevent Mulitple Windows
-    apirequest->requestConfigUpdate(true);
+    if (ConfigManager::windowNumber == 0) {
+        mainwindow.show();
+        mainwindow.raise();
+        ConfigManager::windowNumber += 1;
+    }
 }
 
 void SystemTray::setupAutoStart()

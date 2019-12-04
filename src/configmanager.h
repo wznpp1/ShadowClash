@@ -28,6 +28,7 @@ public:
     static bool buildInApiMode;
     static QString selectDashBoard;
     static QString benchMarkUrl;
+    static int windowNumber; // current number of windows active
 
     static QFileSystemWatcher *watcher;
 

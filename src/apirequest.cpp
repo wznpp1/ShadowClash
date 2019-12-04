@@ -1,3 +1,11 @@
+//
+//  apirequest.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2019/12/4.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include "apirequest.h"
 #include "clashconfig.h"
 #include "configmanager.h"

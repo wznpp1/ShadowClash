@@ -1,3 +1,11 @@
+//
+//  enhancemodemanager.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2019/12/4.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include "appversionutil.h"
 #include "clashconfig.h"
 #include "enhancemodemanager.h"

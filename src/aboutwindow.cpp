@@ -1,3 +1,11 @@
+//
+//  aboutwindow.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2019/12/4.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include "aboutwindow.h"
 #include "configmanager.h"
 #include "ui_aboutwindow.h"

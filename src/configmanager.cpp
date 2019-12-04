@@ -53,6 +53,8 @@ QString ConfigManager::benchMarkUrl = QString("http://www.gstatic.com/generate_2
 
 QSettings ConfigManager::settings(QApplication::organizationName(), QApplication::applicationName());
 
+int ConfigManager::windowNumber = 1;
+
 void ConfigManager::watchConfigFile(QString configName)
 {
     ConfigManager cm;

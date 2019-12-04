@@ -1,3 +1,11 @@
+//
+//  remoteconfigwindow.cpp
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2019/12/4.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #include <QStandardItem>
 
 #include "remoteconfigwindow.h"
@@ -66,5 +74,5 @@ void RemoteConfigWindow::actionUpdate()
 
 void RemoteConfigWindow::requestUpdate()
 {
-    RemoteConfigWindow::
+    // RemoteConfigWindow::
 }
