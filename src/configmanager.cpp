@@ -13,6 +13,7 @@
 
 #include <QApplication>
 #include <QDir>
+#include <QDebug>
 #include <QFileInfoList>
 #include <QFileSystemWatcher>
 #include <QJsonArray>
@@ -112,7 +113,8 @@ QStringList ConfigManager::getConfigFilesList()
     for (int i=0;i<list.size();++i) {
         QFileInfo fileInfo = list.at(i);
         if (fileInfo.suffix() == "yaml") {
-            result.append(fileInfo.fileName().split(".")[0]);
+            QString fileName = fileInfo.fileName().replace(".yaml","");
+            result.append(fileName);
         }
     }
     return result;

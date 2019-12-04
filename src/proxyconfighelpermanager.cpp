@@ -63,7 +63,6 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
         param << "0" << "0" << "disable";
     }
     task->start(QString(Paths::configFolderPath) + "ProxyConfig", param);
-    qDebug() << port;
     task->waitForFinished();
 #endif
 }

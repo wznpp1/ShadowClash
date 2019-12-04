@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
     ConfigManager::copySampleConfigIfNeed();
     ProxyConfigHelperManager::install();
     EnhanceModeManager::install();
+    ClashResourceManager::installHelper();
     Logger::init();
 
     // start proxy

@@ -54,6 +54,7 @@ SOURCES += \
     src/mainwindow.cpp \
     src/paths.cpp \
     src/proxyconfighelpermanager.cpp \
+    src/remoteconfigmanager.cpp \
     src/runguard.cpp \
     src/systemtray.cpp \
     src/remoteconfigwindow.cpp
@@ -74,6 +75,7 @@ HEADERS += \
     src/notificationcenter.h \
     src/paths.h \
     src/proxyconfighelpermanager.h \
+    src/remoteconfigmanager.h \
     src/runguard.h \
     src/systemtray.h \
     src/shadowclash.h \

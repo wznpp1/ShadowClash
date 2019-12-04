@@ -21,7 +21,6 @@ void ClashResourceManager::check()
     checkConfigDir();
     checkMMDB();
     upgardeYmlExtensionName();
-    installHelper();
 }
 
 void ClashResourceManager::checkConfigDir()

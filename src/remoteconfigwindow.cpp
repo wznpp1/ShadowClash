@@ -63,3 +63,8 @@ void RemoteConfigWindow::actionUpdate()
 {
 
 }
+
+void RemoteConfigWindow::requestUpdate()
+{
+    RemoteConfigWindow::
+}

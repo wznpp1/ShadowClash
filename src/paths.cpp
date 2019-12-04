@@ -21,6 +21,6 @@ QString Paths::currentConfigPath = configFolderPath + ".yaml";
 
 QString Paths::tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
-const QString Paths::logsPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+const QString Paths::logsPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/ShadowClash";
 
-const QString Paths::logFilePath = configFolderPath + "ShadowClash/ShadowClash.log";
+const QString Paths::logFilePath = logsPath + "/ShadowClash.log";

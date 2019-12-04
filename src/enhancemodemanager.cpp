@@ -19,10 +19,11 @@ QString EnhanceModeManager::gateway;
 void EnhanceModeManager::install()
 {
     QString dir = Paths::configFolderPath;
-    QProcess *task;
     QString temp = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
 #ifdef Q_OS_WIN
+    QProcess *task;
+
     if (!QFile::exists(dir + "tun2socks.exe")) {
         QFile::copy(":/tun2socks.exe",dir + "tun2socks.exe");
     }
@@ -30,7 +31,7 @@ void EnhanceModeManager::install()
     if (AppVersionUtil::isFirstLaunch) {
         // Install Tap Driver
         QFile::copy(":/tap-windows-9.22.1-I602.exe", temp+ "tap-windows-9.22.1-I602.exe");
-        task->start(temp+ "tap-windows-9.22.1-I602.exe");
+        task->start(temp + "tap-windows-9.22.1-I602.exe");
     }
 
 #elif defined(Q_OS_MAC)
