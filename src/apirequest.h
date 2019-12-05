@@ -1,7 +1,6 @@
 #ifndef APIREQUEST_H
 #define APIREQUEST_H
 
-#include <QString>
 #include <QNetworkReply>
 
 class ApiRequest: public QObject

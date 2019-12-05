@@ -1,9 +1,9 @@
 #ifndef CLASHCONFIG_H
 #define CLASHCONFIG_H
 
-#include <QString>
+#include <QObject>
 
-class ClashConfig
+class ClashConfig: public QObject
 {
 public:
     static int port;

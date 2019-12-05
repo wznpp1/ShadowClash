@@ -12,6 +12,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QDebug>
 #include <QMessageBox>
 #include <QProcess>
 #include <QString>
@@ -46,6 +47,7 @@ void ClashResourceManager::checkMMDB()
     }
 
     if (!QFile::exists(path)) {
+
         QFile::copy(":/Country.mmdb", path);
     }
 }

@@ -24,5 +24,5 @@ bool AppVersionUtil::isFirstLaunch()
 
 bool AppVersionUtil::hasVersionChanged()
 {
-    return QApplication::applicationVersion() != ConfigManager::settings.value("settings");
+    return QApplication::applicationVersion() != ConfigManager::settings.value("version");
 }
