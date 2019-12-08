@@ -15,7 +15,6 @@ AboutWindow::AboutWindow(QWidget *parent) :
     ui(new Ui::AboutWindow)
 {
     ui->setupUi(this);
-    setupIcon();
     setupVersion();
     setupBuildDate();
     setupHyperLink();
@@ -24,13 +23,6 @@ AboutWindow::AboutWindow(QWidget *parent) :
 AboutWindow::~AboutWindow()
 {
     delete ui;
-}
-
-void AboutWindow::setupIcon()
-{
-    QImage image(":/icons/Icon_102.png");
-    ui->icon->setPixmap(QPixmap::fromImage(image));
-    ui->icon->show();
 }
 
 void AboutWindow::setupVersion()
@@ -48,5 +40,12 @@ void AboutWindow::setupHyperLink()
     ui->clashLink->setOpenExternalLinks(true);
     ui->clashLink->setText("<a href=\"https://github.com/Dreamacro/clash\">https://github.com/Dreamacro/clash");
     ui->shadowClashLink->setOpenExternalLinks(true);
-    ui->shadowClashLink->setText("<a href=\"https://github.com/TheWanderingCoel/ShadowClash-clash-ui\">https://github.com/TheWanderingCoel/ShadowClash-clash-ui");
+    ui->shadowClashLink->setText("<a href=\"https://github.com/TheWanderingCoel/ShadowClash\">https://github.com/TheWanderingCoel/ShadowClash");
+    ui->licenseLink->setOpenExternalLinks(true);
+    ui->licenseLink->setText("<a href=\"https://www.gnu.org/licenses/gpl-3.0.txt\">GPL V3 (https://www.gnu.org/licenses/gpl-3.0.txt)");
+}
+
+void AboutWindow::on_aboutQtBtn_clicked()
+{
+    QApplication::aboutQt();
 }

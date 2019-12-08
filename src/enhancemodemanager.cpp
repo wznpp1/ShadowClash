@@ -19,7 +19,6 @@
 #include <QProcess>
 #include <QStandardPaths>
 
-
 using namespace std;
 
 QString EnhanceModeManager::gateway;

@@ -1,3 +1,11 @@
+//
+//  enhancemodemanager.h
+//  ShadowClash
+//
+//  Created by TheWanderingCoel on 2018/6/12.
+//  Copyright © 2019 Coel Wu. All rights reserved.
+//
+
 #ifndef ENHANCEMODEMANAGER_H
 #define ENHANCEMODEMANAGER_H
 

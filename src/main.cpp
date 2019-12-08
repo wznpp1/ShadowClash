@@ -19,6 +19,7 @@
 #include "systemtray.h"
 
 #include <QApplication>
+#include <QLoggingCategory>
 #include <QMessageBox>
 #include <QObject>
 
@@ -41,6 +42,9 @@ int main(int argc, char *argv[])
     QApplication::setApplicationVersion(ConfigManager::version);
     QApplication::setOrganizationName("coelwu");
     QApplication::setOrganizationDomain("com.coelwu");
+
+    // qt.network.ssl: Failed to create SecCertificate from QSslCertificate
+    QLoggingCategory::setFilterRules("qt.network.ssl.warning=false");
 
     // setup systemtray first
     SystemTray *systemtray = new SystemTray;
