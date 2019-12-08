@@ -18,6 +18,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QStandardPaths>
+#include <QHostInfo>
 
 using namespace std;
 
@@ -77,6 +78,7 @@ void EnhanceModeManager::startTun2socks()
 
     QProcess *task = new QProcess;
     QStringList param;
+    QRegExp pattern("^([a-zA-Z0-9-]+.)+([a-zA-Z])+$");
 
     YAML::Node config = YAML::LoadFile(Paths::defaultConfigFilePath.toStdString());
     const YAML::Node& proxies = config["Proxy"];
@@ -84,7 +86,15 @@ void EnhanceModeManager::startTun2socks()
     file.open(QIODevice::ReadWrite|QIODevice::Truncate);
     for (std::size_t i = 0; i < proxies.size(); i++) {
         const YAML::Node& proxy = proxies[i];
-        file.write(QString::fromStdString(proxy["server"].as<string>()).toUtf8());
+        // convert domain to ip address
+        if (pattern.exactMatch(QString::fromStdString(proxy["server"].as<string>()))) {
+            QString ip = QHostInfo::fromName(QString::fromStdString(proxy["server"].as<string>())).addresses().first().toString();
+            file.write(ip.toUtf8());
+        } else
+        // ip address only
+        {
+           file.write(QString::fromStdString(proxy["server"].as<string>()).toUtf8());
+        }
         file.write("\n");
     }
     file.close();
