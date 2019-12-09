@@ -75,7 +75,7 @@ void AppDelegate::startProxy()
 void AppDelegate::updateConfig()
 {
     startProxy();
-    ApiRequest::requestConfigUpdate(false);
+    ApiRequest::requestConfigUpdate();
     syncConfig();
     // check config vaild via api
     ConfigManager::checkFinalRuleAndShowAlert();

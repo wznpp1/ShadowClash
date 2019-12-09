@@ -16,7 +16,7 @@ class ApiRequest: public QObject
 public:
     static QNetworkReply* req(QString url, QString method, QByteArray data);
     static void requestConfig();
-    static void requestConfigUpdate(bool showNotification);
+    static void requestConfigUpdate(bool showNotification = false);
     void updateOutBoundMode(QString mode);
     void updateLogLevel(QString logLevel);
     void requestProxyGroupList();

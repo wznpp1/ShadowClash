@@ -277,7 +277,7 @@ void SystemTray::setTrayProxyMode()
 void SystemTray::switchConfig(QAction *action)
 {
     ConfigManager::selectConfigName = action->text();
-    ApiRequest::requestConfigUpdate(true);
+    ApiRequest::requestConfigUpdate();
     action->setChecked(true);
 }
 
@@ -294,7 +294,7 @@ void SystemTray::setConfigList()
     QStringList configList = ConfigManager::getConfigFilesList();
     configListMenu->clear();
     for (int i=0; i<configList.size(); i++){
-        QAction *action = new QAction(configList[i]);
+        QAction *action = new QAction(configList[i], configListGroup);
         if (configList[i] == ConfigManager::selectConfigName) {
             action->setCheckable(true);
             action->setChecked(true);
