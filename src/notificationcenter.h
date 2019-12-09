@@ -1,9 +1,9 @@
 #ifndef NSUSERNOTIFICATIONCENTER_H
 #define NSUSERNOTIFICATIONCENTER_H
 
-#include <QString>
+#include <QObject>
 
-class NotificationCenter
+class NotificationCenter: public QObject
 {
 public:
     static void postNotifiacation(QString title, QString info, QString identifier = "");

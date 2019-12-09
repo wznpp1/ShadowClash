@@ -86,7 +86,7 @@ void ClashResourceManager::showCreateConfigDirFailAlert()
 {
     QMessageBox alert;
     alert.setWindowTitle("ShadowClash");
-    alert.setText("ShadowClash fail to create ~/.config/clash folder. Please check privileges or manually create folder and restart ShadowClash.");
+    alert.setText(tr("ShadowClash fail to create ~/.config/clash folder. Please check privileges or manually create folder and restart ShadowClash."));
     alert.addButton(tr("OK"), QMessageBox::YesRole);
     alert.exec();
 }
@@ -95,7 +95,7 @@ bool ClashResourceManager::showInstallHelperAlert()
 {
     QMessageBox alert;
     alert.setWindowTitle("ShadowClash");
-    alert.setText("ShadowClash needs to install a helper tool with administrator privileges to set system proxy and enchance mode quickly.");
+    alert.setText(tr("ShadowClash needs to install a helper tool with administrator privileges to set system proxy and enchance mode quickly."));
     alert.addButton(tr("Install"), QMessageBox::YesRole);
     alert.addButton(tr("Quit"), QMessageBox::NoRole);
     QList<QAbstractButton*> alertButtons = alert.buttons();

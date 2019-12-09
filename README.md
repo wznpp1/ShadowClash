@@ -61,18 +61,25 @@ To Change the ports of ClashX, you need to modify the `config.ymal` file. The `G
 
 Checkout [Clash](https://github.com/Dreamacro/clash) or [SS-Rule-Snippet for Clash](https://github.com/Hackl0us/SS-Rule-Snippet/blob/master/LAZY_RULES/clash.yml) for more detail.
 
+
+## Translate
+
+You can help us to translate ShadowClash into different languages by using [Transifex](https://www.transifex.com/coel-information-technologyco-ltd/shadowclash).
+
+Transifex is a localization website, free for open-source projects
+
 ## Special Thanks
 
-- [clash](https://github.com/Dreamacro/clash) Under GPLv3 license
+- [clash](https://github.com/Dreamacro/clash) Under GPL-3.0 license
 
-- [yaml-cpp](https://github.com/jbeder/yaml-cpp) Under MIT
+- [yaml-cpp](https://github.com/jbeder/yaml-cpp) Under MIT license
 
-- [plog](https://github.com/SergiusTheBest/plog) Under MPL-2.0
+- [plog](https://github.com/SergiusTheBest/plog) Under MPL-2.0 license
 
-- [clashX](https://github.com/yichengchen/clashX)
+- [clashX](https://github.com/yichengchen/clashX) Under GPLv3 license
 
 - [openVPN(Tap Driver)](https://github.com/DanStevens/ieproxy) Under MIT and GPLv2 license
 
-- [tun2socks](https://github.com/eycorsican/go-tun2socks)
+- [tun2socks](https://github.com/eycorsican/go-tun2socks) Under MIT license
 
-- [ieproxy](https://github.com/DanStevens/ieproxy)
+- [ieproxy](https://github.com/DanStevens/ieproxy) Under BSL-1.0 license

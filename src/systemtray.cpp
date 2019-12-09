@@ -71,8 +71,11 @@ void SystemTray::createActions()
     dashBoardGroup = new QActionGroup(this);
     dashBoardGroup->setExclusive(true);
 
-    clashxAction = new QAction(tr("ClashX"));
-    yacdAction = new QAction(tr("Yacd"));
+    uiGroup = new QActionGroup(this);
+    uiGroup->setExclusive(true);
+
+    clashxAction = new QAction(tr("ClashX"), uiGroup);
+    yacdAction = new QAction(tr("Yacd"), uiGroup);
 
     showCurrentProxyAction = new QAction(tr("Show current proxy in menu"));
     useBuildInApiAction = new QAction(tr("Use built in api"));
@@ -115,6 +118,7 @@ void SystemTray::createActions()
     connect(configListGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchConfig(QAction*)));
     connect(openConfigFolderAction, &QAction::triggered, this, &SystemTray::openConfigFolder);
     connect(reloadConfigAction, &QAction::triggered, this, &SystemTray::requestConfigUpdate);
+    connect(uiGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchUiDashboard(QAction*)));
     connect(setBenchmarkUrlAction, &QAction::triggered, this, &SystemTray::setBenchmarkUrl);
     connect(aboutAction, &QAction::triggered, this, &SystemTray::pushAboutWindow);
     connect(aboutQtAction, &QAction::triggered, QApplication::aboutQt);
@@ -249,6 +253,8 @@ void SystemTray::setCheckable()
     infoAction->setCheckable(true);
     debugAction->setCheckable(true);
     silentAction->setCheckable(true);
+    clashxAction->setCheckable(true);
+    yacdAction->setCheckable(true);
 }
 
 void SystemTray::updateInfo()
@@ -441,6 +447,16 @@ void SystemTray::setLogLevel(QAction *action)
     }
 }
 
+void SystemTray::switchUiDashboard(QAction *action)
+{
+    if (action->text() == tr("clashx")) {
+        ConfigManager::selectDashBoard = "clashxdashboard";
+    } else if (action->text() == tr("Yacd")) {
+        ConfigManager::selectDashBoard = "yacddashboard";
+    }
+    showSwitchUiNotification();
+}
+
 void SystemTray::setBenchmarkUrl()
 {
     bool ok;
@@ -459,4 +475,13 @@ void SystemTray::showRemoteConfigWindow()
 {
     RemoteConfigWindow *remoteconfigWindow = new RemoteConfigWindow();
     remoteconfigWindow->exec();
+}
+
+void SystemTray::showSwitchUiNotification()
+{
+    QMessageBox alert;
+    alert.setWindowTitle("ShadowClash");
+    alert.setText(tr("You have to restart this application inorder to change dashboard"));
+    alert.addButton(tr("OK"), QMessageBox::YesRole);
+    alert.exec();
 }

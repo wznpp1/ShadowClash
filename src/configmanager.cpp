@@ -102,7 +102,7 @@ void ConfigManager::showNoFinalRuleAlert()
 {
     QMessageBox alert;
     alert.setWindowTitle("ShadowClash");
-    alert.setText("No FINAL rule were found in clash configs,This might caused by incorrect upgradation during earily version of ShadowClash or error setting of FINAL rule.Please check your config file.\n\nNO FINAL rule would cause traffic send to DIRECT which no match any rules.");
+    alert.setText(tr("No FINAL rule were found in clash configs,This might caused by incorrect upgradation during earily version of ShadowClash or error setting of FINAL rule.Please check your config file.\n\nNO FINAL rule would cause traffic send to DIRECT which no match any rules."));
     alert.addButton(tr("OK"), QMessageBox::YesRole);
     alert.exec();
 }

@@ -37,6 +37,7 @@ public:
     void setBenchmarkUrl();
     void showLog();
     void showRemoteConfigWindow();
+    void showSwitchUiNotification();
     bool isSpeedTesting;
     NotificationCenter *notificationCenter;
     ApiRequest *apirequest;
@@ -47,6 +48,7 @@ public slots:
     void switchProxyMode(QAction *action);
     void switchConfig(QAction *action);
     void setLogLevel(QAction *action);
+    void switchUiDashboard(QAction *action);
 
 private:
 
@@ -74,6 +76,7 @@ private:
     QAction *manageAction;
     QAction *updateAction;
     QAction *autoUpdateAction;
+    QActionGroup *uiGroup;
     QAction *clashxAction;
     QAction *yacdAction;
     QAction *showCurrentProxyAction;

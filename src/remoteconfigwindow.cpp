@@ -19,15 +19,15 @@ RemoteConfigWindow::RemoteConfigWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Remote Configs");
+    this->setWindowTitle(tr("Remote Configs"));
 
     model = new QStandardItemModel();
     // set column number
     model->setColumnCount(3);
     // set up horizontal headers
     model->setHeaderData(0,Qt::Horizontal,"Url");
-    model->setHeaderData(1,Qt::Horizontal,"Config Name");
-    model->setHeaderData(2,Qt::Horizontal,"Update Time");
+    model->setHeaderData(1,Qt::Horizontal,tr("Config Name"));
+    model->setHeaderData(2,Qt::Horizontal,tr("Update Time"));
     // have to be before other settings
     ui->tableView->setModel(model);
     // disable showing grid
