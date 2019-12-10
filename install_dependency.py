@@ -24,7 +24,7 @@ if __name__ == "__main__":
         os.system("certutil.exe -urlcache -split -f http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz")
         os.system("7z.exe x GeoLite2-Country.tar.gz")
         for each in os.listdir("."):
-            if (each.startswith("GeoLite2-Country")):
+            if (each.startswith("GeoLite2-Country_")):
                 shutil.move(each + "/GeoLite2-Country.mmdb", "resources/Country.mmdb")
         os.system("del /f /q GeoLite2-Country.tar.gz")
         os.system("del /f /q GeoLite2-Country_*")
@@ -45,14 +45,13 @@ if __name__ == "__main__":
     os.mkdir("build")
     os.chdir("build")
     os.system("cmake ../")
-    os.system("make -j8")
     if platform.system() == "Windows":
-        if os.environ.get("CI", False):
-            print("[*] Debug: %s"%os.getcwd())
-        os.system("move ibyaml-cpp.a ..\\..\\..\\framework\\")
+        os.system("nmake")
     else:
-        if os.environ.get("CI", False):
-            print("[*] Debug: %s"%os.getcwd())
+        os.system("make -j8")
+    if platform.system() == "Windows":
+        os.system("move libyaml-cpp.a ..\\..\\..\\framework\\")
+    else:
         os.system("mv libyaml-cpp.a ../../../framework/")
     os.chdir("..")
     os.chdir("..")
