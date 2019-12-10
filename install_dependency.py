@@ -10,9 +10,9 @@ if __name__ == "__main__":
         pass
     print("[-] delete old files...")
     if platform.system() == "Windows":
-        os.system("del /f /q ./resources/Country.mmdb")
-        os.system("del /f /q ./resources/clashxdashboard")
-        os.system("del /f /q ./resources/yacddashboard")
+        os.system("del /f /q .\\resources\\Country.mmdb")
+        os.system("del /f /q .\\resources\\clashxdashboard")
+        os.system("del /f /q .\\resources\\yacddashboard")
         os.system("del /f /q GeoLite2-Country.*")
     else:
         os.system("rm -f ./resources/Country.mmdb")
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     if platform.system() == "Windows":
         os.system("certutil.exe -urlcache -split -f http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz")
         os.system("7z.exe x GeoLite2-Country.tar.gz")
-        os.system("move GeoLite2-Country_*/GeoLite2-Country.mmdb ./resources/Country.mmdb")
+        os.system("move GeoLite2-Country_*/GeoLite2-Country.mmdb .\\resources\\Country.mmdb")
         os.system("del /f /q GeoLite2-Country.tar.gz")
         os.system("del /f /q GeoLite2-Country_*")
     else:
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     if platform.system() == "Windows":
         if os.environ.get("CI", False):
             print("[*] Debug: %s"%os.getcwd())
-        os.system("move ibyaml-cpp.a ../../../framework/")
+        os.system("move ibyaml-cpp.a ..\\..\\..\\framework\\")
     else:
         if os.environ.get("CI", False):
             print("[*] Debug: %s"%os.getcwd())
