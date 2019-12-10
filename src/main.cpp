@@ -40,7 +40,11 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    // load translations
+    QString lang = QLocale::system().name();
     QTranslator ts;
+    ts.load("shadowclash_" + lang, ":/translations/");
+    a.installTranslator(&ts);
 
     QApplication::setApplicationName("ShadowClash");
     QApplication::setApplicationVersion(ConfigManager::version);

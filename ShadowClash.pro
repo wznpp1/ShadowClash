@@ -5,6 +5,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += gnu++11
 CONFIG += sdk_no_version_check
+CONFIG += lrelease
+CONFIG += embed_translations
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -105,21 +107,22 @@ RESOURCES += \
 
 # Translation Part (from: https://github.com/lhy0403/Qv2ray)
 
+QM_FILES_RESOURCE_PREFIX = "translations"
+
 message("Detecting Translation files.....")
 
 for(var, $$list($$files("translations/*.ts", true))) {
     LOCALE_FILENAME = $$basename(var)
     message(Found: $$LOCALE_FILENAME)
 
-    !equals(LOCALE_FILENAME, "shadowclash_en.ts") {
+    !equals(LOCALE_FILENAME, "shadowclash_en_US.ts") {
         # ONLY USED IN LRELEASE CONTEXT - en-US is not EXTRA...
         EXTRA_TRANSLATIONS += translations/$$LOCALE_FILENAME
     }
 }
 
 TRANSLATIONS += \
-    translations/shadowclash_en.ts
-
+    translations/shadowclash_en_US.ts
 message("Translations:" $$TRANSLATIONS)
 message("EXTRA Translations:" $$EXTRA_TRANSLATIONS)
 
