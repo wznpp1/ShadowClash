@@ -48,12 +48,12 @@ void AppDelegate::startProxy()
 {
     // setup ui config first
 #if defined (Q_OS_WIN)
-    QString path = QCoreApplication::applicationDirPath() + "/clashxdashboard";
+    QString path = QCoreApplication::applicationDirPath() + "/" + ConfigManager::selectDashBoard;
 #elif defined (Q_OS_MAC)
     CFURLRef url = (CFURLRef)CFAutorelease((CFURLRef)CFBundleCopyBundleURL(CFBundleGetMainBundle()));
-    QString path = QUrl::fromCFURL(url).path() + "Contents/Resources/clashxdashboard";
+    QString path = QUrl::fromCFURL(url).path() + "Contents/Resources/" + ConfigManager::selectDashBoard;
 #elif defined (Q_OS_LINUX)
-    QString path = QCoreApplication::applicationDirPath() + "/clashxdashboard";
+    QString path = QCoreApplication::applicationDirPath() + "/" + ConfigManager::selectDashBoard;
 #endif
     setUIPath(path.toLocal8Bit().data());
 

@@ -51,8 +51,6 @@ QString ConfigManager::selectDashBoard = QString("clashxdashboard");
 
 QString ConfigManager::benchMarkUrl = QString("http://www.gstatic.com/generate_204");
 
-QSettings ConfigManager::settings(QApplication::organizationName(), QApplication::applicationName());
-
 int ConfigManager::windowNumber = 1;
 
 void ConfigManager::watchConfigFile(QString configName)

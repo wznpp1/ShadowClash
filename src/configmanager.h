@@ -31,7 +31,6 @@ public:
     static bool allowConnectFromLan;
     static QString selectConfigName;
     static bool proxyPortAutoSet;
-    static QSettings settings;
     static bool enhanceMode;
     static bool buildInApiMode;
     static QString selectDashBoard;

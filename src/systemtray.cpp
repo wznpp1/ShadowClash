@@ -19,6 +19,7 @@
 #include "paths.h"
 #include "proxyconfighelpermanager.h"
 #include "remoteconfigwindow.h"
+#include "settings.h"
 #include "systemtray.h"
 
 #include <QAction>
@@ -266,6 +267,7 @@ void SystemTray::updateInfo()
     allowLanConnectionAction->setChecked(ClashConfig::allowLan);
     setPortsMenu();
     setTrayLogLevel();
+    setUiSelection();
 }
 
 void SystemTray::setTrayProxyMode()
@@ -447,12 +449,21 @@ void SystemTray::setLogLevel(QAction *action)
     }
 }
 
+void SystemTray::setUiSelection()
+{
+    if (ConfigManager::selectDashBoard == tr("clashxdashboard")) {
+        clashxAction->setChecked(true);
+    } else if (ConfigManager::selectDashBoard == tr("yacddashboard")) {
+        yacdAction->setChecked(true);
+    }
+}
+
 void SystemTray::switchUiDashboard(QAction *action)
 {
-    if (action->text() == tr("clashx")) {
-        ConfigManager::selectDashBoard = "clashxdashboard";
+    if (action->text() == tr("ClashX")) {
+        Settings::setDashboard("clashx");
     } else if (action->text() == tr("Yacd")) {
-        ConfigManager::selectDashBoard = "yacddashboard";
+        Settings::setDashboard("yacd");
     }
     showSwitchUiNotification();
 }

@@ -35,6 +35,7 @@ public:
     void requestConfigUpdate();
     void pushAboutWindow();
     void setBenchmarkUrl();
+    void setUiSelection();
     void showLog();
     void showRemoteConfigWindow();
     void showSwitchUiNotification();

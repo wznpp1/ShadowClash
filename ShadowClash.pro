@@ -91,9 +91,6 @@ FORMS += \
     ui/aboutwindow.ui \
     ui/remoteconfigwindow.ui
 
-TRANSLATIONS += \
-    translations/shadowclash_en.ts
-
 !include("src/fervor/Fervor.pri") {
     error("Unable to include Fervor autoupdater.")
 }
@@ -105,6 +102,26 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources/shadowclash.qrc
+
+# Translation Part (from: https://github.com/lhy0403/Qv2ray)
+
+message("Detecting Translation files.....")
+
+for(var, $$list($$files("translations/*.ts", true))) {
+    LOCALE_FILENAME = $$basename(var)
+    message(Found: $$LOCALE_FILENAME)
+
+    !equals(LOCALE_FILENAME, "shadowclash_en.ts") {
+        # ONLY USED IN LRELEASE CONTEXT - en-US is not EXTRA...
+        EXTRA_TRANSLATIONS += translations/$$LOCALE_FILENAME
+    }
+}
+
+TRANSLATIONS += \
+    translations/shadowclash_en.ts
+
+message("Translations:" $$TRANSLATIONS)
+message("EXTRA Translations:" $$EXTRA_TRANSLATIONS)
 
 APP_QML_FILES.files += resources/clashxdashboard
 APP_QML_FILES.files += resources/yacddashboard

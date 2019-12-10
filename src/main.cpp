@@ -16,12 +16,14 @@
 #include "mainwindow.h"
 #include "proxyconfighelpermanager.h"
 #include "runguard.h"
+#include "settings.h"
 #include "systemtray.h"
 
 #include <QApplication>
 #include <QLoggingCategory>
 #include <QMessageBox>
 #include <QObject>
+#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
@@ -38,6 +40,9 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    QTranslator ts;
+    ts.load(":/translations/shadowclash_cn.ts");
+    a.installTranslator(&ts);
     QApplication::setApplicationName("ShadowClash");
     QApplication::setApplicationVersion(ConfigManager::version);
     QApplication::setOrganizationName("coelwu");
@@ -65,14 +70,16 @@ int main(int argc, char *argv[])
     ClashResourceManager::installHelper();
     Logger::init();
 
+    // before start proxy, we load app settings
+    if (!AppVersionUtil::isFirstLaunch()) {
+        Settings::loadAll();
+    }
+
     // start proxy
     AppDelegate::updateConfig();
 
     // update Systemtray's info after proxy start
-    systemtray->setTrayProxyMode();
-    systemtray->setPortsMenu();
-    systemtray->setTrayLogLevel();
-    systemtray->setConfigList();
+    systemtray->updateInfo();
 
     // start watch config file change
     ConfigManager::watchConfigFile("config");

@@ -10,6 +10,8 @@
 
 #include "configmanager.h"
 #include "shadowclash.h"
+#include "logger.h"
+#include "paths.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -39,14 +41,16 @@ QString RemoteConfigManager::updateConfig()
     QString configString = getRemoteConfigData();
     if (configString == "error") {
         // Download Failed
+        Logger::log("Download fail", "error");
     }
 
     QString verifyRes = verifyConfig(configString);
     if (verifyRes != "success") {
+        Logger::log("Remote Config Format Error", "error");
         // Verify Failed
     }
 
-    if (QFile::exists()) {
+    if (QFile::exists(Paths::configFolderPath + "")) {
         QFile::remove();
 
     }

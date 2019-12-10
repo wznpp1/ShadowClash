@@ -9,9 +9,12 @@
 #include <QStandardItem>
 
 #include "remoteconfigwindow.h"
+#include "remoteconfigmanager.h"
 #include "ui_remoteconfigwindow.h"
+#include "paths.h"
 
 #include <QDebug>
+#include <QFile>
 
 RemoteConfigWindow::RemoteConfigWindow(QWidget *parent) :
     QDialog(parent),
@@ -56,7 +59,7 @@ void RemoteConfigWindow::actionAdd()
     int rowCount = model->rowCount();
     model->setItem(rowCount, 0, new QStandardItem("张三"));
     model->setItem(rowCount, 1, new QStandardItem("李四"));
-    model->setItem(rowCount, 2, new QStandardItem("王五"));
+    model->setItem(rowCount, 2, new QStandardItem(tr("Updating...")));
 }
 
 void RemoteConfigWindow::actionDelete()
@@ -64,7 +67,8 @@ void RemoteConfigWindow::actionDelete()
     // get row index first
     QModelIndex index = ui->tableView->currentIndex();
     // and then we delete the config file
-    // finally, we del2ete the row by index
+    QFile::remove(Paths::configFolderPath + index.siblingAtColumn(1).data().toString() + ".yaml");
+    // finally, we delete the row by index
     model->removeRow(index.row());
 }
 
@@ -80,4 +84,5 @@ void RemoteConfigWindow::showAdd()
 
 void RemoteConfigWindow::requestUpdate()
 {
+    //RemoteConfigManager::updateConfig();
 }
