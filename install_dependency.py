@@ -23,7 +23,9 @@ if __name__ == "__main__":
     if platform.system() == "Windows":
         os.system("certutil.exe -urlcache -split -f http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz")
         os.system("7z.exe x GeoLite2-Country.tar.gz")
-        os.system("move GeoLite2-Country_*/GeoLite2-Country.mmdb .\\resources\\Country.mmdb")
+        for each in os.listdir("."):
+            if (each.startswith("GeoLite2-Country")):
+                shutil.move(each + "/GeoLite2-Country.mmdb", "resources/Country.mmdb")
         os.system("del /f /q GeoLite2-Country.tar.gz")
         os.system("del /f /q GeoLite2-Country_*")
     else:
