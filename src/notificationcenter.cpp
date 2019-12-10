@@ -11,11 +11,12 @@
 #include <QString>
 
 #if defined(Q_OS_LINUX)
-#include <KNotification>
+// #include <KNotification>
 #endif
 
 void NotificationCenter::postNotifiacation(QString title, QString info, QString identifier)
 {
+/*
 #if defined(Q_OS_LINUX)
     KNotification *notification = new KNotification();
     notification->setTitle(title);
@@ -25,6 +26,7 @@ void NotificationCenter::postNotifiacation(QString title, QString info, QString 
     }
     notification->sendEvent();
 #endif
+*/
 }
 
 void NotificationCenter::postConfigErrorNotice(QString message)

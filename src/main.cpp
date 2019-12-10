@@ -41,8 +41,7 @@ int main(int argc, char *argv[])
     }
 
     QTranslator ts;
-    ts.load(":/translations/shadowclash_cn.ts");
-    a.installTranslator(&ts);
+
     QApplication::setApplicationName("ShadowClash");
     QApplication::setApplicationVersion(ConfigManager::version);
     QApplication::setOrganizationName("coelwu");
