@@ -11,19 +11,19 @@ matrix:
       addons:
         apt:
           sources:
-            - sourceline: 'ppa:beineri/opt-qt-5.13.2-bionic'
+            - sourceline: 'ppa:beineri/opt-qt-5.12.3-bionic'
           packages:
-            - qt513base
-            - qt513tools
-            - qt513declarative
-            - qt513location
-            - qt513quickcontrols2
-            - qt513webchannel
-            - qt513webengine
-            - qt513x11extras
-            - qt513translations
-            - qt513scxml
-            - qt513script
+            - qt512base
+            - qt512tools
+            - qt512declarative
+            - qt512location
+            - qt512quickcontrols2
+            - qt512webchannel
+            - qt512webengine
+            - qt512x11extras
+            - qt512translations
+            - qt512scxml
+            - qt512script
 
 before_install:
   - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
