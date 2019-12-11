@@ -26,7 +26,10 @@ matrix:
             - qt512script
 
 before_install:
-  - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
+  - if [ "$BADGE" = "linux" ]; then
+      sudo apt-get update;
+      export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake;
+    fi
   - if [ "$BADGE" = "osx" ]; then
       brew update;
     fi
