@@ -15,6 +15,11 @@ matrix:
           packages:
             - qt513base
             - qt513tools
+            - qt513webengine
+            - qt513x11extras
+            - qt513translations
+            - qt513scxml
+            - qt513script
 
 before_install:
   - if [ "$BADGE" = "linux" ]; then    sudo apt-get update; fi
@@ -24,7 +29,7 @@ before_install:
 
 install:
   - if [ "$BADGE" = "linux" ]; then    
-      sudo apt-get install libgl-dev qt513base qt513tools python3.6 qtwebengine5-dev;
+      sudo apt-get install libgl-dev python3.6;
       sudo wget https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz;
       sudo tar -xvf go1.13.1.linux-amd64.tar.gz;
       sudo mv go /usr/local;
