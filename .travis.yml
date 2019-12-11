@@ -7,23 +7,20 @@ matrix:
     - os: linux
       dist: bionic
       sudo: required
-      env: BADGE=linux
+      env: 
+        - BADGE=linux
+        - QT_CI_PACKAGES=qt.qt5.5132.gcc_64,qt.qt5.5132.qtwebengine PATH="$TRAVIS_BUILD_DIR/Qt/5.13.2/gcc_64/bin:${PATH}"
       addons:
         apt:
-          sources:
-            - sourceline: 'ppa:beineri/opt-qt-5.12.3-bionic'
           packages:
-            - qt512base
-            - qt512tools
-            - qt512declarative
-            - qt512location
-            - qt512quickcontrols2
-            - qt512webchannel
-            - qt512webengine
-            - qt512x11extras
-            - qt512translations
-            - qt512scxml
-            - qt512script
+            - libxkbcommon-x11-0
+            - libgl1-mesa-dev
+      services:
+        - xvfb
+      script:
+        - git clone https://github.com/benlau/qtci.git
+        - source qtci/path.env
+        - install-qt 5.13.2
 
 before_install:
   - if [ "$BADGE" = "linux" ]; then
@@ -35,7 +32,6 @@ before_install:
 
 install:
   - if [ "$BADGE" = "linux" ]; then    
-      source /opt/qt512/bin/qt512-env.sh;
       sudo apt-get install libgl-dev python3.6;
       sudo wget https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz;
       sudo tar -xvf go1.13.1.linux-amd64.tar.gz;
