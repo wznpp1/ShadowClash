@@ -15,6 +15,10 @@ matrix:
           packages:
             - qt513base
             - qt513tools
+            - qt513declarative
+            - qt513location
+            - qt513quickcontrols2
+            - qt513webchannel
             - qt513webengine
             - qt513x11extras
             - qt513translations
