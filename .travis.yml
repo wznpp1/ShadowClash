@@ -28,7 +28,6 @@ matrix:
 before_install:
   - if [ "$BADGE" = "linux" ]; then
       sudo apt-get update;
-      export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake;
     fi
   - if [ "$BADGE" = "osx" ]; then
       brew update;
@@ -57,7 +56,7 @@ script:
   - cd clash && python3 build_clash.py
   - cd ..
   - mkdir build && cd ./build
-  - qmake ../
+  - qmake -qt=qt5 ../
   - make -j8
 
 defore_deplot:
