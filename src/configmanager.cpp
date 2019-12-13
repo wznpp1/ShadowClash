@@ -55,11 +55,10 @@ int ConfigManager::windowNumber = 1;
 
 void ConfigManager::watchConfigFile(QString configName)
 {
-    ConfigManager cm;
+    ConfigManager *cm = new ConfigManager();
     QFileSystemWatcher *watcher = new QFileSystemWatcher();
-    QString path = Paths::configFolderPath + "/" + configName + ".yaml";
-    connect(watcher, SIGNAL(fileChanged()), &cm, SLOT(fileChanged()));
-    watcher->addPath(path);
+    QString path = Paths::configFolderPath + configName + ".yaml";
+    connect(watcher, SIGNAL(fileChanged(const QString &)), cm, SLOT(fileChanged()));
 }
 
 void ConfigManager::copySampleConfigIfNeed()

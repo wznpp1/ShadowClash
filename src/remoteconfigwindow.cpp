@@ -12,9 +12,16 @@
 #include "remoteconfigmanager.h"
 #include "ui_remoteconfigwindow.h"
 #include "paths.h"
+#include "addremoteconfigwindow.h"
+#include "logger.h"
+#include "addremoteconfigwindow.h"
 
 #include <QDebug>
 #include <QFile>
+#include <QSortFilterProxyModel>
+#include <QMessageBox>
+#include <QUrl>
+#include <QDateTime>
 
 RemoteConfigWindow::RemoteConfigWindow(QWidget *parent) :
     QDialog(parent),
@@ -28,7 +35,7 @@ RemoteConfigWindow::RemoteConfigWindow(QWidget *parent) :
     // set column number
     model->setColumnCount(3);
     // set up horizontal headers
-    model->setHeaderData(0,Qt::Horizontal,"Url");
+    model->setHeaderData(0,Qt::Horizontal,tr("Url"));
     model->setHeaderData(1,Qt::Horizontal,tr("Config Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Update Time"));
     // have to be before other settings
@@ -44,9 +51,12 @@ RemoteConfigWindow::RemoteConfigWindow(QWidget *parent) :
     // Set url column width to be larger
     ui->tableView->setColumnWidth(0,150);
 
+    arcw = new AddRemoteConfigWindow();
+
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(actionAdd()));
     connect(ui->deleteButton, SIGNAL(clicked()), this, SLOT(actionDelete()));
     connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(actionUpdate()));
+    connect(arcw, &AddRemoteConfigWindow::sendData, this, &RemoteConfigWindow::receiveData);
 }
 
 RemoteConfigWindow::~RemoteConfigWindow()
@@ -56,10 +66,7 @@ RemoteConfigWindow::~RemoteConfigWindow()
 
 void RemoteConfigWindow::actionAdd()
 {
-    int rowCount = model->rowCount();
-    model->setItem(rowCount, 0, new QStandardItem("张三"));
-    model->setItem(rowCount, 1, new QStandardItem("李四"));
-    model->setItem(rowCount, 2, new QStandardItem(tr("Updating...")));
+    showAdd();
 }
 
 void RemoteConfigWindow::actionDelete()
@@ -74,15 +81,71 @@ void RemoteConfigWindow::actionDelete()
 
 void RemoteConfigWindow::actionUpdate()
 {
-    requestUpdate();
+    QModelIndex index = ui->tableView->currentIndex();
+    QString url = index.siblingAtColumn(0).data().toString();
+    QString configName = index.siblingAtColumn(1).data().toString();
+    requestUpdate(url, configName);
 }
 
 void RemoteConfigWindow::showAdd()
 {
-
+    arcw->exec();
 }
 
-void RemoteConfigWindow::requestUpdate()
+bool RemoteConfigWindow::requestUpdate(QString url, QString configName)
 {
-    //RemoteConfigManager::updateConfig();
+    return RemoteConfigManager::updateConfig(url, configName);
+}
+
+void RemoteConfigWindow::receiveData(QString url, QString configName)
+{
+    QRegExp pattern("[a-zA-z]+://[^\\s]*");
+    if (!pattern.exactMatch(url)) {
+        QMessageBox alert;
+        alert.setWindowTitle("ShadowClash");
+        alert.setText(tr("Invalid input"));
+        alert.addButton(tr("OK"), QMessageBox::YesRole);
+        alert.exec();
+        Logger::log(tr("Invalid input"), "error");
+        return;
+    }
+
+    if (isDup(configName)) {
+        QMessageBox alert;
+        alert.setWindowTitle("ShadowClash");
+        alert.setText(tr("The remote config name is duplicated"));
+        alert.addButton(tr("OK"), QMessageBox::YesRole);
+        alert.exec();
+        Logger::log(tr("The remote config name is duplicated"), "error");
+        return;
+    }
+
+    int rowCount = model->rowCount();
+    model->setItem(rowCount, 0, new QStandardItem(url));
+    model->setItem(rowCount, 1, new QStandardItem(configName));
+    model->setItem(rowCount, 2, new QStandardItem(tr("Updating...")));
+
+    bool status = requestUpdate(url, configName);
+    if (status) {
+        QDateTime time(QDateTime::currentDateTime());
+        QString local_time = time.toString("MM-dd hh:mm");
+        model->setItem(rowCount, 2, new QStandardItem(local_time));
+    } else {
+        model->setItem(rowCount, 2, new QStandardItem(tr("Never")));
+    }
+}
+
+// check whether config name is duplicated
+bool RemoteConfigWindow::isDup(QString configName)
+{
+    QSortFilterProxyModel proxy;
+    proxy.setSourceModel(model);
+    proxy.setFilterKeyColumn(1);
+    proxy.setFilterFixedString(configName);
+    QModelIndex matchingIndex = proxy.mapToSource(proxy.index(0,0));
+    if (matchingIndex.isValid()) {
+        return true;
+    } else {
+        return false;
+    }
 }

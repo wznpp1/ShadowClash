@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QStandardItemModel>
+#include "addremoteconfigwindow.h"
 
 namespace Ui {
 class RemoteConfigWindow;
@@ -17,7 +18,9 @@ public:
     ~RemoteConfigWindow();
     QStandardItemModel *model;
     void showAdd();
-    void requestUpdate();
+    bool requestUpdate(QString url, QString configName);
+    bool isDup(QString configName);
+    AddRemoteConfigWindow *arcw;
 
 private:
     Ui::RemoteConfigWindow *ui;
@@ -26,6 +29,7 @@ private slots:
     void actionAdd();
     void actionDelete();
     void actionUpdate();
+    void receiveData(QString url, QString configName);
 };
 
 #endif // REMOTECONFIGWINDOW_H

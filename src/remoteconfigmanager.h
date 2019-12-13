@@ -7,9 +7,9 @@
 class RemoteConfigManager: public QObject
 {
 public:
-    QString getRemoteConfigData(QString url);
-    QString updateConfig();
-    QString verifyConfig(QString string);
+    static QString getRemoteConfigData(QString url);
+    static bool updateConfig(QString url, QString configName);
+    static QString verifyConfig(QString string);
 };
 
 #endif // REMOTECONFIGMANAGER_H

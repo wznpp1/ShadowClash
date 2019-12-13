@@ -105,7 +105,7 @@ void SystemTray::createActions()
     apiPortAction = new QAction("Api Port:");
     apiPortAction->setEnabled(false);
 
-    quitAction = new QAction("Quit");
+    quitAction = new QAction(tr("Quit"));
 
     connect(proxyModeGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchProxyMode(QAction*)));
     connect(setAsSystemProxyAction, &QAction::triggered, this, &SystemTray::setSystemProxy);
@@ -272,12 +272,14 @@ void SystemTray::updateInfo()
 
 void SystemTray::setTrayProxyMode()
 {
-    proxyModeMenu->setTitle(tr(qPrintable(QString("Proxy Mode (%1)").arg(ClashConfig::mode))));
     if (ClashConfig::mode == "Global") {
+        proxyModeMenu->setTitle(tr("Proxy Mode (Global)"));
         globeAction->setChecked(true);
     } else if (ClashConfig::mode == "Rule") {
+        proxyModeMenu->setTitle(tr("Proxy Mode (Rule)"));
         ruleAction->setChecked(true);
     } else if (ClashConfig::mode == "Direct") {
+        proxyModeMenu->setTitle(tr("Proxy Mode (Direct)"));
         directAction->setChecked(true);
     }
 }
@@ -329,17 +331,17 @@ void SystemTray::setTrayLogLevel()
 void SystemTray::switchProxyMode(QAction *action)
 {
     if (action->text() == tr("Global")) {
-        apirequest->updateOutBoundMode("Global");
         ClashConfig::mode = "Global";
+        proxyModeMenu->setTitle(tr("Proxy Mode (Global)"));
     } else if (action->text() == tr("Rule")) {
-        apirequest->updateOutBoundMode("Rule");
         ClashConfig::mode = "Rule";
+        proxyModeMenu->setTitle(tr("Proxy Mode (Rule)"));
     } else if (action->text() == tr("Direct")) {
-        apirequest->updateOutBoundMode("Direct");
         ClashConfig::mode = "Direct";
+        proxyModeMenu->setTitle(tr("Proxy Mode (Direct)"));
     }
+    apirequest->updateOutBoundMode(ClashConfig::mode);
     action->setChecked(true);
-    proxyModeMenu->setTitle(tr(qPrintable(QString("Proxy Mode (%1)").arg(ClashConfig::mode))));
 }
 
 void SystemTray::setSystemProxy()
@@ -433,19 +435,19 @@ void SystemTray::setLogLevel(QAction *action)
 {
     if (action->text() == tr("ERROR")) {
         apirequest->updateLogLevel("error");
-        ClashConfig::mode = "error";
+        ClashConfig::logLevel = "error";
     } else if (action->text() == tr("WARNING")) {
         apirequest->updateLogLevel("warning");
-        ClashConfig::mode = "warning";
+        ClashConfig::logLevel = "warning";
     } else if (action->text() == tr("INFO")) {
         apirequest->updateLogLevel("info");
-        ClashConfig::mode = "info";
+        ClashConfig::logLevel = "info";
     } else if (action->text() == tr("DEBUG")) {
         apirequest->updateLogLevel("debug");
-        ClashConfig::mode = "debug";
+        ClashConfig::logLevel = "debug";
     } else if (action->text() == tr("SILENT")) {
         apirequest->updateLogLevel("silent");
-        ClashConfig::mode = "silent";
+        ClashConfig::logLevel = "silent";
     }
 }
 
@@ -492,7 +494,7 @@ void SystemTray::showSwitchUiNotification()
 {
     QMessageBox alert;
     alert.setWindowTitle("ShadowClash");
-    alert.setText(tr("You have to restart this application inorder to change dashboard"));
+    alert.setText(tr("You have to restart this application in order to change dashboard"));
     alert.addButton(tr("OK"), QMessageBox::YesRole);
     alert.exec();
 }

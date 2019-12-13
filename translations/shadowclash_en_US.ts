@@ -60,6 +60,29 @@
     </message>
 </context>
 <context>
+    <name>AddRemoteConfigWindow</name>
+    <message>
+        <location filename="../ui/addremoteconfigwindow.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/addremoteconfigwindow.ui" line="43"/>
+        <source>Add a remote config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/addremoteconfigwindow.ui" line="50"/>
+        <source>Url:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/addremoteconfigwindow.ui" line="57"/>
+        <source>Config Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ClashResourceManager</name>
     <message>
         <location filename="../src/clashresourcemanager.cpp" line="89"/>
@@ -90,14 +113,14 @@
 <context>
     <name>ConfigManager</name>
     <message>
-        <location filename="../src/configmanager.cpp" line="103"/>
+        <location filename="../src/configmanager.cpp" line="102"/>
         <source>No FINAL rule were found in clash configs,This might caused by incorrect upgradation during earily version of ShadowClash or error setting of FINAL rule.Please check your config file.
 
 NO FINAL rule would cause traffic send to DIRECT which no match any rules.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/configmanager.cpp" line="104"/>
+        <location filename="../src/configmanager.cpp" line="103"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -301,8 +324,27 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="38"/>
+        <location filename="../src/main.cpp" line="45"/>
         <source>Another instance of ShadowClash is already running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RemoteConfigManager</name>
+    <message>
+        <location filename="../src/remoteconfigmanager.cpp" line="52"/>
+        <source>Download fail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/remoteconfigmanager.cpp" line="53"/>
+        <location filename="../src/remoteconfigmanager.cpp" line="67"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/remoteconfigmanager.cpp" line="66"/>
+        <source>Remote Config Format Error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -334,23 +376,51 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/remoteconfigwindow.cpp" line="25"/>
+        <location filename="../src/remoteconfigwindow.cpp" line="32"/>
         <source>Remote Configs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/remoteconfigwindow.cpp" line="32"/>
+        <location filename="../src/remoteconfigwindow.cpp" line="38"/>
+        <source>Url</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/remoteconfigwindow.cpp" line="39"/>
         <source>Config Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/remoteconfigwindow.cpp" line="33"/>
+        <location filename="../src/remoteconfigwindow.cpp" line="40"/>
         <source>Update Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/remoteconfigwindow.cpp" line="62"/>
+        <location filename="../src/remoteconfigwindow.cpp" line="106"/>
+        <location filename="../src/remoteconfigwindow.cpp" line="109"/>
+        <source>Invalid input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/remoteconfigwindow.cpp" line="107"/>
+        <location filename="../src/remoteconfigwindow.cpp" line="117"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/remoteconfigwindow.cpp" line="116"/>
+        <location filename="../src/remoteconfigwindow.cpp" line="119"/>
+        <source>The remote config name is duplicated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/remoteconfigwindow.cpp" line="126"/>
         <source>Updating...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/remoteconfigwindow.cpp" line="134"/>
+        <source>Never</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -358,19 +428,19 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
     <name>SystemTray</name>
     <message>
         <location filename="../src/systemtray.cpp" line="48"/>
-        <location filename="../src/systemtray.cpp" line="331"/>
+        <location filename="../src/systemtray.cpp" line="333"/>
         <source>Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="49"/>
-        <location filename="../src/systemtray.cpp" line="334"/>
+        <location filename="../src/systemtray.cpp" line="336"/>
         <source>Rule</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="50"/>
-        <location filename="../src/systemtray.cpp" line="337"/>
+        <location filename="../src/systemtray.cpp" line="339"/>
         <source>Direct</source>
         <translation type="unfinished"></translation>
     </message>
@@ -441,13 +511,13 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="78"/>
-        <location filename="../src/systemtray.cpp" line="463"/>
+        <location filename="../src/systemtray.cpp" line="465"/>
         <source>ClashX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="79"/>
-        <location filename="../src/systemtray.cpp" line="465"/>
+        <location filename="../src/systemtray.cpp" line="467"/>
         <source>Yacd</source>
         <translation type="unfinished"></translation>
     </message>
@@ -483,31 +553,31 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="91"/>
-        <location filename="../src/systemtray.cpp" line="434"/>
+        <location filename="../src/systemtray.cpp" line="436"/>
         <source>ERROR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="92"/>
-        <location filename="../src/systemtray.cpp" line="437"/>
+        <location filename="../src/systemtray.cpp" line="439"/>
         <source>WARNING</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="93"/>
-        <location filename="../src/systemtray.cpp" line="440"/>
+        <location filename="../src/systemtray.cpp" line="442"/>
         <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="94"/>
-        <location filename="../src/systemtray.cpp" line="443"/>
+        <location filename="../src/systemtray.cpp" line="445"/>
         <source>DEBUG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="95"/>
-        <location filename="../src/systemtray.cpp" line="446"/>
+        <location filename="../src/systemtray.cpp" line="448"/>
         <source>SILENT</source>
         <translation type="unfinished"></translation>
     </message>
@@ -519,6 +589,11 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
     <message>
         <location filename="../src/systemtray.cpp" line="97"/>
         <source>Show Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="108"/>
+        <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -562,22 +637,40 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="454"/>
-        <source>clashxdashboard</source>
+        <location filename="../src/systemtray.cpp" line="276"/>
+        <location filename="../src/systemtray.cpp" line="335"/>
+        <source>Proxy Mode (Global)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="279"/>
+        <location filename="../src/systemtray.cpp" line="338"/>
+        <source>Proxy Mode (Rule)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="282"/>
+        <location filename="../src/systemtray.cpp" line="341"/>
+        <source>Proxy Mode (Direct)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="497"/>
+        <source>You have to restart this application in order to change dashboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/systemtray.cpp" line="456"/>
+        <source>clashxdashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/systemtray.cpp" line="458"/>
         <source>yacddashboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/systemtray.cpp" line="495"/>
-        <source>You have to restart this application inorder to change dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/systemtray.cpp" line="496"/>
+        <location filename="../src/systemtray.cpp" line="498"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>

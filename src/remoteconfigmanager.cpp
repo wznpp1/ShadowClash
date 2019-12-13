@@ -17,6 +17,7 @@
 #include <QNetworkReply>
 #include <QEventLoop>
 #include <QFile>
+#include <QMessageBox>
 
 QString RemoteConfigManager::getRemoteConfigData(QString url)
 {
@@ -28,33 +29,62 @@ QString RemoteConfigManager::getRemoteConfigData(QString url)
     QEventLoop loop;
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) == 200) {
-        return reply->readAll();
+    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
+        QString data = reply->readAll();
+        reply->deleteLater();
+        return data;
     } else {
-        return "error";
+        QString data = "";
+        reply->deleteLater();
+        return data;
     }
 }
 
-QString RemoteConfigManager::updateConfig()
+bool RemoteConfigManager::updateConfig(QString url, QString configName)
 {
-    /*
-    QString configString = getRemoteConfigData();
-    if (configString == "error") {
+    QString configString = getRemoteConfigData(url);
+
+    // otherwise if false this still execute
+    if (configString.length() == 0) {
         // Download Failed
-        Logger::log("Download fail", "error");
+        QMessageBox alert;
+        alert.setWindowTitle("ShadowClash");
+        alert.setText(tr("Download fail"));
+        alert.addButton(tr("OK"), QMessageBox::YesRole);
+        alert.exec();
+        Logger::log(tr("Download fail"), "error");
+        return false;
     }
 
     QString verifyRes = verifyConfig(configString);
-    if (verifyRes != "success") {
-        Logger::log("Remote Config Format Error", "error");
+
+    if (verifyRes != "") {
         // Verify Failed
+        QMessageBox alert;
+        alert.setWindowTitle("ShadowClash");
+        alert.setText(tr("Remote Config Format Error"));
+        alert.addButton(tr("OK"), QMessageBox::YesRole);
+        alert.exec();
+        Logger::log(tr("Remote Config Format Error"), "error");
+        return false;
+
     }
 
-    if (QFile::exists(Paths::configFolderPath + "")) {
-        QFile::remove();
+    QString savePath = Paths::configFolderPath + configName + ".yaml";
 
+    try {
+        if (QFile::exists(savePath)) {
+            QFile::remove(savePath);
+        }
+        QFile file(savePath);
+        file.open(QIODevice::WriteOnly);
+        file.write(configString.toUtf8());
+        file.close();
+    } catch (...) {
+        return false;
     }
-    */
+
+    return true;
 }
 
 QString RemoteConfigManager::verifyConfig(QString string)

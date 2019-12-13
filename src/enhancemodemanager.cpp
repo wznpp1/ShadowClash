@@ -8,6 +8,7 @@
 
 #include "appversionutil.h"
 #include "clashconfig.h"
+#include "configmanager.h"
 #include "enhancemodemanager.h"
 #include "logger.h"
 #include "paths.h"
@@ -47,8 +48,8 @@ void EnhanceModeManager::install()
         QFile::copy(":/tun2socks",dir + "tun2socks");
     }
 
-    if (!QFile::exists(dir + "tun2socks.sh")) {
-        QFile::copy(":/tun2socks.sh",dir + "tun2socks.sh");
+    if (!QFile::exists(dir + "tun2socksHelper")) {
+        QFile::copy(":/tun2socksHelper",dir + "tun2socksHelper");
     }
 
 #elif defined(Q_OS_LINUX)
@@ -80,7 +81,8 @@ void EnhanceModeManager::startTun2socks()
     QStringList param;
     QRegExp pattern("^([a-zA-Z0-9-]+.)+([a-zA-Z])+$");
 
-    YAML::Node config = YAML::LoadFile(Paths::defaultConfigFilePath.toStdString());
+    QString path = Paths::configFolderPath + ConfigManager::selectConfigName + ".yaml";
+    YAML::Node config = YAML::LoadFile(path.toStdString());
     const YAML::Node& proxies = config["Proxy"];
     QFile file(Paths::configFolderPath + "ip.txt");
     file.open(QIODevice::ReadWrite|QIODevice::Truncate);
@@ -107,12 +109,9 @@ void EnhanceModeManager::startTun2socks()
     Logger::log("startTun2socks", "debug");
     param << "-tunName" <<  "utun1" << "-tunAddr" << "240.0.0.2" << "-tunGw" << "240.0.0.1" << "-proxyType" << "socks" << "-proxyServer" << "127.0.0.1:" + QString::number(ClashConfig::socketPort);
     task->startDetached(Paths::configFolderPath + "tun2socks", param);
-    QString script = QString("do shell script \"bash %1 \\\"%2\\\" \\\"%3\\\" \\\"%4\\\"\" with administrator privileges").arg(Paths::configFolderPath + "tun2socks.sh").arg(Paths::configFolderPath).arg(EnhanceModeManager::gateway).arg("start");
     param.clear();
-    param << "-l" << "AppleScript";
-    task->start("/usr/bin/osascript", param);
-    task->write(script.toUtf8());
-    task->closeWriteChannel();
+    param << Paths::configFolderPath << EnhanceModeManager::gateway << "start";
+    task->start(Paths::configFolderPath + "tun2socksHelper", param);
     task->waitForFinished();
 #elif defined(Q_OS_LINUX)
     param << "-tunName" <<  "tun1" << "-tunAddr" << "240.0.0.2" << "-tunGw" << "240.0.0.1" << "-proxyType" << "socks" << "-proxyServer" << "127.0.0.1:" + QString::number(ClashConfig::socketPort);
@@ -129,7 +128,9 @@ void EnhanceModeManager::stopTun2socks()
 {
     QProcess *task = new QProcess;
     QStringList param;
-    YAML::Node config = YAML::LoadFile(Paths::defaultConfigFilePath.toStdString());
+
+    QString path = Paths::configFolderPath + ConfigManager::selectConfigName + ".yaml";
+    YAML::Node config = YAML::LoadFile(path.toStdString());
     const YAML::Node& proxies = config["Proxy"];
     QFile file(Paths::configFolderPath + "ip.txt");
     file.open(QIODevice::ReadWrite|QIODevice::Truncate);
@@ -141,11 +142,10 @@ void EnhanceModeManager::stopTun2socks()
     file.close();
 #if defined (Q_OS_WIN)
 #elif defined(Q_OS_MAC)
-    QString script = QString("do shell script \"bash %1 \\\"%2\\\" \\\"%3\\\" \\\"%4\\\"\" with administrator privileges").arg(Paths::configFolderPath + "tun2socks.sh").arg(Paths::configFolderPath).arg(EnhanceModeManager::gateway).arg("stop");
-    param << "-l" << "AppleScript";
-    task->start("/usr/bin/osascript", param);
-    task->write(script.toUtf8());
-    task->closeWriteChannel();
+    Logger::log("stopTun2socks", "debug");
+    param.clear();
+    param << Paths::configFolderPath << EnhanceModeManager::gateway << "stop";
+    task->start(Paths::configFolderPath + "tun2socksHelper", param);
     task->waitForFinished();
 #elif defined(Q_OS_LINUX)
     param << "bash" << Paths::configFolderPath + "tun2socks.sh" << Paths::configFolderPath << EnhanceModeManager::gateway << "stop";

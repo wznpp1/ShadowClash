@@ -3,7 +3,7 @@ ICON      = resources/icons/icon.icns
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += gnu++11
+CONFIG += c++11
 CONFIG += sdk_no_version_check
 CONFIG += lrelease
 CONFIG += embed_translations
@@ -31,8 +31,9 @@ macx {
     OBJECTIVE_SOURCES += \
         src/framelesswindow.mm \
         src/notificationcenter.mm
-    LIBS += -framework Cocoa -framework Security
+    LIBS += -framework Carbon -framework Cocoa -framework Security
     RESOURCES += resources/shadowclash_mac.qrc
+    QMAKE_INFO_PLIST = resources/Info.plist
 }
 
 unix:!mac {
@@ -43,6 +44,7 @@ unix:!mac {
 
 SOURCES += \
     src/aboutwindow.cpp \
+    src/addremoteconfigwindow.cpp \
     src/apirequest.cpp \
     src/appdelegate.cpp \
     src/appversionutil.cpp \
@@ -60,9 +62,11 @@ SOURCES += \
     src/runguard.cpp \
     src/settings.cpp \
     src/systemtray.cpp \
-    src/remoteconfigwindow.cpp
+    src/remoteconfigwindow.cpp \
+    src/urlschemehandler.cpp
 
 HEADERS += \
+    src/addremoteconfigwindow.h \
     src/appdelegate.h \
     src/appversionutil.h \
     src/clashconfig.h \
@@ -83,12 +87,14 @@ HEADERS += \
     src/settings.h \
     src/systemtray.h \
     src/shadowclash.h \
-    src/remoteconfigwindow.h
+    src/remoteconfigwindow.h \
+    src/urlschemehandler.h
 
 INCLUDEPATH += $$PWD/src/plog/include
 INCLUDEPATH += $$PWD/src/yaml-cpp/include
 
 FORMS += \
+    ui/addremoteconfigwindow.ui \
     ui/mainwindow.ui \
     ui/aboutwindow.ui \
     ui/remoteconfigwindow.ui
@@ -123,6 +129,7 @@ for(var, $$list($$files("translations/*.ts", true))) {
 
 TRANSLATIONS += \
     translations/shadowclash_en_US.ts
+
 message("Translations:" $$TRANSLATIONS)
 message("EXTRA Translations:" $$EXTRA_TRANSLATIONS)
 

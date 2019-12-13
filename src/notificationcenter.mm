@@ -19,7 +19,7 @@ void NotificationCenter::postNotifiacation(QString title, QString info, QString 
     notification.informativeText = info.toNSString();
     notification.soundName = NSUserNotificationDefaultSoundName;
     if (identifier != "") {
-        notification.userInfo = ["identifier": identifier];
+        //notification.userInfo = ["identifier": identifier];
     }
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification: notification];
     [notification autorelease];

@@ -18,6 +18,7 @@
 #include "runguard.h"
 #include "settings.h"
 #include "systemtray.h"
+#include "urlschemehandler.h"
 
 #include <QApplication>
 #include <QLoggingCategory>
@@ -31,6 +32,12 @@ int main(int argc, char *argv[])
 
     RunGuard guard("ShadowClash");
 
+    // load translations
+    QString lang = QLocale::system().name();
+    QTranslator ts;
+    ts.load("shadowclash_" + lang, ":/translations/");
+    a.installTranslator(&ts);
+
     // make sure only one shadowclash
     if (!guard.isSingleInstance()) {
         QMessageBox alert;
@@ -40,11 +47,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    // load translations
-    QString lang = QLocale::system().name();
-    QTranslator ts;
-    ts.load("shadowclash_" + lang, ":/translations/");
-    a.installTranslator(&ts);
+    // Install Event Handler to handle url scheme
+    a.installEventFilter(new UrlSchemeHandler());
 
     QApplication::setApplicationName("ShadowClash");
     QApplication::setApplicationVersion(ConfigManager::version);

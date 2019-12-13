@@ -3,5 +3,6 @@
         <file>tun2socks</file>
         <file>ProxyConfig</file>
         <file>tun2socks.sh</file>
+        <file>tun2socksHelper</file>
     </qresource>
 </RCC>
