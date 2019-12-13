@@ -17,10 +17,6 @@ matrix:
             - libgl1-mesa-dev
       services:
         - xvfb
-      script:
-        - git clone https://github.com/benlau/qtci.git
-        - source qtci/path.env
-        - install-qt 5.13.2
 
 before_install:
   - if [ "$BADGE" = "linux" ]; then
@@ -33,6 +29,9 @@ before_install:
 install:
   - if [ "$BADGE" = "linux" ]; then    
       sudo apt-get install libgl-dev python3.6;
+      git clone https://github.com/benlau/qtci.git;
+      source qtci/path.env;
+      install-qt 5.13.2;
       sudo wget https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz;
       sudo tar -xvf go1.13.1.linux-amd64.tar.gz;
       sudo mv go /usr/local;
