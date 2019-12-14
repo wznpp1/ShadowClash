@@ -10,9 +10,30 @@
 #include "addremoteconfigwindow.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QUrl>
 #include <QFileOpenEvent>
 #include <QRegularExpression>
+#include <QSettings>
+
+/*
+void UrlSchemeHandler::installHandler()
+{
+// https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa767914(v=vs.85)?redirectedfrom=MSDN
+#if defined (Q_OS_WIN)
+    QSettings reg("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+    reg.setValue("clash", "");
+    delete reg;
+    QSettings reg("HKEY_CLASSES_ROOT\\clash", QSettings::NativeFormat);
+    reg.setValue("URL protocol", "");
+    delete reg;
+    QSettings reg("HKEY_CLASSES_ROOT\\shell\\open\\command", QSettings::NativeFormat);
+    QString value = "\"" + QDir::toNativeSeparators(QCoreApplication::applicationFilePath())  + "\"" + " \"%1\"";
+    reg.setValue("", value);
+    delete reg;
+#endif
+}
+*/
 
 bool UrlSchemeHandler::eventFilter(QObject* obj, QEvent* event)
 {

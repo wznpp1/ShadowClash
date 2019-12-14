@@ -25,6 +25,7 @@ win32 {
         src/notificationcenter.cpp
     RESOURCES += resources/shadowclash_windows.qrc
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+    LIBS += $$PWD/framework/libyaml-cpp.lib
 }
 
 macx {
@@ -34,12 +35,14 @@ macx {
     LIBS += -framework Carbon -framework Cocoa -framework Security
     RESOURCES += resources/shadowclash_mac.qrc
     QMAKE_INFO_PLIST = resources/Info.plist
+    LIBS += $$PWD/framework/libyaml-cpp.a
 }
 
 unix:!mac {
     SOURCES += \
         src/notificationcenter.cpp
     RESOURCES += resources/shadowclash_linux.qrc
+    LIBS += $$PWD/framework/libyaml-cpp.a
 }
 
 SOURCES += \
@@ -139,5 +142,4 @@ APP_QML_FILES.path = Contents/Resources
 
 QMAKE_BUNDLE_DATA += APP_QML_FILES
 
-LIBS += $$PWD/framework/libyaml-cpp.a
 LIBS += $$PWD/framework/shadowclash.a

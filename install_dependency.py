@@ -23,10 +23,12 @@ if __name__ == "__main__":
     if platform.system() == "Windows":
         os.system("certutil.exe -urlcache -split -f http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz")
         os.system("7z.exe x GeoLite2-Country.tar.gz")
+        os.system("7z.exe x GeoLite2-Country.tar")
         for each in os.listdir("."):
             if (each.startswith("GeoLite2-Country_")):
                 shutil.move(each + "/GeoLite2-Country.mmdb", "resources/Country.mmdb")
         os.system("del /f /q GeoLite2-Country.tar.gz")
+        os.system("del /f /q GeoLite2-Country.tar")
         os.system("del /f /q GeoLite2-Country_*")
     else:
         os.system("curl -O http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz")
@@ -46,11 +48,11 @@ if __name__ == "__main__":
     os.chdir("build")
     os.system("cmake ../")
     if platform.system() == "Windows":
-        os.system("nmake")
+        os.system("msbuild YAML_CPP.sln /p:Configuration=Release /p:Platform=\"Win32\"")
     else:
         os.system("make -j8")
     if platform.system() == "Windows":
-        os.system("move libyaml-cpp.a ..\\..\\..\\framework\\")
+        shutil.move("./Releases/yaml-cpp.lib", "../../../framework/")
     else:
         os.system("mv libyaml-cpp.a ../../../framework/")
     os.chdir("..")
