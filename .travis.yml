@@ -49,7 +49,7 @@ before_script:
 script:
   - git submodule update --init
   - python3 install_dependency.py
-  - cd clash && python3 build_clash.py
+  - cd clashr && python3 build_clashr.py
   - cd ..
   - mkdir build && cd ./build
   - qmake ../

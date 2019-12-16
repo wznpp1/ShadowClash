@@ -14,7 +14,7 @@ init:
 
 build_script:
   - python install_dependency.py
-  - cd clash && python build_clash.py
+  - cd clashr && python build_clashrw.py
   - cd .. && mkdir build && cd build
   - qmake ../
   - nmake
