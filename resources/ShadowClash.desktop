@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=ShadowClash
+Comment=ShadowClash is a rewritten version of ClashX by Qt5
+Exec=ShadowClash
+Icon=ShadowClash
+Categories=Network;

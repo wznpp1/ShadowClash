@@ -8,13 +8,19 @@ QSettings Settings::settings(QApplication::organizationName(), QApplication::app
 
 void Settings::loadAll()
 {
-    if (Settings::settings.value("dashboard") == "clashx") {
+    ConfigManager::selectConfigName = Settings::settings.value("config").toString();
+    if (Settings::settings.value("dashboard").toString() == "clashx") {
         ConfigManager::selectDashBoard = "clashxdashboard";
-    } else if (Settings::settings.value("dashboard") == "yacd") {
+    } else if (Settings::settings.value("dashboard").toString() == "yacd") {
         ConfigManager::selectDashBoard = "yacddashboard";
     }
+
 }
 
+void Settings::setConfig(QString value)
+{
+    Settings::settings.setValue("config", value);
+}
 
 void Settings::setDashboard(QString value)
 {

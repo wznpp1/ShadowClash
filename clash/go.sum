@@ -8,10 +8,14 @@ github.com/Dreamacro/clash v0.16.1-0.20191027160223-82a8c03953a5 h1:e9PNxoU0zZn0
 github.com/Dreamacro/clash v0.16.1-0.20191027160223-82a8c03953a5/go.mod h1:4ZBtABBmIGqISniBtu9fpYORrE5mKqIP8SMCTrNNVNY=
 github.com/Dreamacro/clash v0.16.1-0.20191028045839-6d375ac37ea7 h1:XgqdT6choZMqy9zzOZ4tRy4cndrrl4cmqgn7iYkyb70=
 github.com/Dreamacro/clash v0.16.1-0.20191028045839-6d375ac37ea7/go.mod h1:4ZBtABBmIGqISniBtu9fpYORrE5mKqIP8SMCTrNNVNY=
+github.com/Dreamacro/clash v0.16.1-0.20191217041625-77b5d63d296f h1:vWL9U9EUDb9t8rohx9/9qlCMB4doQXC4KIlDZavLvFA=
+github.com/Dreamacro/clash v0.16.1-0.20191217041625-77b5d63d296f/go.mod h1:3AN6ikXSGG+ZHpQQMirTGu8t3tokzyLU/NUXb5QYZ9Q=
 github.com/Dreamacro/go-shadowsocks2 v0.1.4 h1:SqSVFdtBHVx2rrMOK+qipO10rRSQQKEeAF9Igm8qB9g=
 github.com/Dreamacro/go-shadowsocks2 v0.1.4/go.mod h1:RPU9lnoesqJ/0jFzntFrYpbQI0+NoYiJVu7mWn3Y0cs=
 github.com/Dreamacro/go-shadowsocks2 v0.1.5-0.20191012162057-46254afc8b68 h1:UBDLpj1IGVkUcUBuZWE6DmZApPTZcnmcV6AfyDN/yhg=
 github.com/Dreamacro/go-shadowsocks2 v0.1.5-0.20191012162057-46254afc8b68/go.mod h1:Y8obOtHDOqxMGHjPglfCiXZBKExOA9VL6I6sJagOwYM=
+github.com/Dreamacro/go-shadowsocks2 v0.1.5 h1:BizWSjmwzAyQoslz6YhJYMiAGT99j9cnm9zlxVr+kyI=
+github.com/Dreamacro/go-shadowsocks2 v0.1.5/go.mod h1:LSXCjyHesPY3pLjhwff1mQX72ItcBT/N2xNC685cYeU=
 github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da h1:KjTM2ks9d14ZYCvmHS9iAKVt9AyzRSqNU1qabPih5BY=
 github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da/go.mod h1:eHEWzANqSiWQsof+nXEI9bUVUyV6F53Fp89EuCh2EAA=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -34,6 +38,8 @@ github.com/miekg/dns v1.1.16 h1:iMEQ/IVHxPTtx2Q07JP/k4CKRvSjiAZjZ0hnhgYEDmE=
 github.com/miekg/dns v1.1.16/go.mod h1:YNV562EiewvSmpCB6/W4c6yqjK7Z+M/aIS1JHsIVeg8=
 github.com/miekg/dns v1.1.22 h1:Jm64b3bO9kP43ddLjL2EY3Io6bmy1qGb9Xxz6TqS6rc=
 github.com/miekg/dns v1.1.22/go.mod h1:bPDLeHnStXmXAq1m/Ch/hvfNHr14JKNPMBo3VZKjuso=
+github.com/miekg/dns v1.1.24 h1:6G8Eop/HM8hpagajbn0rFQvAKZWiiCa8P6N2I07+wwI=
+github.com/miekg/dns v1.1.24/go.mod h1:bPDLeHnStXmXAq1m/Ch/hvfNHr14JKNPMBo3VZKjuso=
 github.com/oschwald/geoip2-golang v1.3.0 h1:D+Hsdos1NARPbzZ2aInUHZL+dApIzo8E0ErJVsWcku8=
 github.com/oschwald/geoip2-golang v1.3.0/go.mod h1:0LTTzix/Ao1uMvOhAV4iLU0Lz7eCrP94qZWBTDKf0iE=
 github.com/oschwald/maxminddb-golang v1.4.0 h1:5/rpmW41qrgSed4wK32rdznbkTSXHcraY2LOMJX4DMc=
@@ -56,6 +62,8 @@ golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472/go.mod h1:yigFU9vqHzYiE8U
 golang.org/x/crypto v0.0.0-20190923035154-9ee001bba392/go.mod h1:/lpIB1dKB+9EgE3H3cr1v9wB50oz8l4C4h62xy7jSTY=
 golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 h1:ObdrDkeb4kJdCP557AjRjq69pTHfNouLtWZG7j9rPN8=
 golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
+golang.org/x/crypto v0.0.0-20191206172530-e9b2fee46413 h1:ULYEB3JvPRE/IfO+9uO7vKV/xzVTO7XPAwm8xbf4w2g=
+golang.org/x/crypto v0.0.0-20191206172530-e9b2fee46413/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/net v0.0.0-20180926154720-4dfa2610cdf3/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20190620200207-3b0461eec859/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
@@ -64,6 +72,8 @@ golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297/go.mod h1:z5CRVTTTmAJ677TzLL
 golang.org/x/net v0.0.0-20190923162816-aa69164e4478/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
 golang.org/x/net v0.0.0-20191011234655-491137f69257 h1:ry8e2D+cwaV6hk7lb3aRTjjZo24shrbK0e11QEOkTIg=
 golang.org/x/net v0.0.0-20191011234655-491137f69257/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
+golang.org/x/net v0.0.0-20191207000613-e7e4b65ae663 h1:Dd5RoEW+yQi+9DMybroBctIdyiwuNT7sJFMC27/6KxI=
+golang.org/x/net v0.0.0-20191207000613-e7e4b65ae663/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20190423024810-112230192c58 h1:8gQV6CLnAEikrhgkHFbMAEhagSSnXWGV915qUMm9mrU=
 golang.org/x/sync v0.0.0-20190423024810-112230192c58/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
@@ -87,3 +97,5 @@ gopkg.in/eapache/channels.v1 v1.1.0 h1:5bGAyKKvyCTWjSj7mhefG6Lc68VyN4MH1v8/7Ooee
 gopkg.in/eapache/channels.v1 v1.1.0/go.mod h1:BHIBujSvu9yMTrTYbTCjDD43gUhtmaOtTWDe7sTv1js=
 gopkg.in/yaml.v2 v2.2.2 h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
+gopkg.in/yaml.v2 v2.2.7 h1:VUgggvou5XRW9mHwD/yXxIYSMtY0zoKQf/v226p2nyo=
+gopkg.in/yaml.v2 v2.2.7/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=

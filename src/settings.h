@@ -8,6 +8,7 @@ class Settings
 public:
     static QSettings settings;
     static void loadAll();
+    static void setConfig(QString value);
     static void setDashboard(QString value);
 };
 

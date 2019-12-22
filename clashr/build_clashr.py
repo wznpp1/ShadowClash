@@ -18,12 +18,12 @@ def build_clash(version):
         command = f"""CGO_CFLAGS=-mmacosx-version-min=10.12 \
         CGO_LDFLAGS=-mmacosx-version-min=10.10 \
         GOBUILD=CGO_ENABLED=0 \
-        go build -ldflags '-X "github.com/whojave/clashr/constant.Version={version}" \
-        -X "github.com/whojave/clash/constant.BuildTime={build_time}"' \
+        go build -ldflags '-X "github.com/TheWanderingCoel/clash/constant.Version={version}" \
+        -X "github.com/TheWanderingCoel/clash/constant.BuildTime={build_time}"' \
         -buildmode=c-archive """
     elif platform.system() == "Linux":
-        command = f"""go build -ldflags '-X "github.com/whojave/clashr/constant.Version={version}" \
-        -X "github.com/whojave/clash/constant.BuildTime={build_time}"' \
+        command = f"""go build -ldflags '-X "github.com/TheWanderingCoel/clash/constant.Version={version}" \
+        -X "github.com/TheWanderingCoel/clash/constant.BuildTime={build_time}"' \
         -buildmode=c-archive """
     else:
         command = """go build -buildmode=c-archive """
@@ -50,7 +50,7 @@ def write_to_info(version):
 
 def run():
     version = get_version()
-    print("current clash version:", version)
+    print("current clashr version:", version)
     build_clash(version)
     print("build static library complete!")
     """

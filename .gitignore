@@ -15,3 +15,6 @@ yacddashboard
 
 # Qt5
 *.user
+
+# Build Cache
+build

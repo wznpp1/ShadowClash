@@ -43,7 +43,7 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
 {
     QProcess *task = new QProcess;
     QStringList param;
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
     if (port && socksPort) {
         Logger::log("enableProxy", "debug");
         param << "-p" << QString("127.0.0.1:") + QString::number(socksPort);
@@ -54,7 +54,7 @@ void ProxyConfigHelperManager::setUpSystemProxy(int port, int socksPort)
     task->start(QString(Paths::configFolderPath) + "ProxyConfig.exe", param);
     task->waitForFinished();
 
-#elif defined Q_OS_MAC
+#elif defined(Q_OS_MAC) || defined (Q_OS_LINUX)
     if (port && socksPort) {
         Logger::log("enableProxy", "debug");
         param << QString::number(port) << QString::number(socksPort) << "enable";

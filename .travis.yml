@@ -3,9 +3,10 @@ language: cpp
 matrix:
   include:
     - os: osx
+      osx_image: xcode11
       env: BADGE=osx
     - os: linux
-      dist: bionic
+      dist: xenial
       sudo: required
       env: 
         - BADGE=linux
@@ -40,7 +41,7 @@ install:
     fi
   - if [ "$BADGE" = "osx" ]; then    
       brew upgrade go --verbose;
-      brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/89bf3a54383d884f8b8511c6237325dd5b5ae6ba/Formula/qt.rb --verbose;
+      brew reinstall https://raw.githubusercontent.com/Homebrew/homebrew-core/89bf3a54383d884f8b8511c6237325dd5b5ae6ba/Formula/qt.rb --verbose;
     fi
 
 before_script:
@@ -52,16 +53,26 @@ script:
   - cd clashr && python3 build_clashr.py
   - cd ..
   - mkdir build && cd ./build
-  - qmake ../
-  - make -j8
+  - if [ "$BADGE" = "osx" ]; then
+      qmake ../;
+      make -j$(nproc);
+    fi
+  - if [ "$BADGE" = "linux" ]; then
+      wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage";
+      chmod a+x linuxdeployqt-continuous-x86_64.AppImage;
+      qmake CONFIG+=release .. PREFIX=/usr;
+      make -j$(nproc);
+      make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/;
+      ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
+    fi
 
-defore_deplot:
+defore_deploy:
   - cd ..
   - python3 release.py
 
 deploy:
   provider: release
-  file: "ShadowClash-$BADGE.zip"
+  file: build\ShdowClash-windows.zip
   api_key: $GIT_REPO_TOKEN
   skip_cleanup: true
   overwrite: true

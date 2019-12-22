@@ -115,7 +115,9 @@
         <source>No FINAL rule were found in clash configs,This might caused by incorrect upgradation during earily version of ShadowClash or error setting of FINAL rule.Please check your config file.
 
 NO FINAL rule would cause traffic send to DIRECT which no match any rules.</source>
-        <translation type="unfinished"/>
+        <translation>Clash规则配置文件中没有找到FINAL/MATCH规则，这可能是由于之前版本ShadowCoel的错误ini到yml的转换引起的，也可能因为对FINAL/MATCH进行了错误的配置，如声明的出口不在Proxy或Proxy Group中等。请再次检查配置文件。
+
+缺失FINAL/MATCH规则将导致无命中任何规则的流量使用DIRECT出口。</translation>
     </message>
     <message>
         <location filename="../src/configmanager.cpp" line="103"/>
@@ -264,7 +266,7 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
     <message>
         <location filename="../src/notificationcenter.mm" line="30"/>
         <source>Config loading Fail!</source>
-        <translation type="unfinished"/>
+        <translation>配置文件加载失败!</translation>
     </message>
     <message>
         <location filename="../src/notificationcenter.mm" line="35"/>
@@ -289,12 +291,12 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
     <message>
         <location filename="../src/notificationcenter.mm" line="45"/>
         <source>Import config from url fail</source>
-        <translation type="unfinished"/>
+        <translation>从链接导入托管配置失败</translation>
     </message>
     <message>
         <location filename="../src/notificationcenter.mm" line="50"/>
         <source>Proxy Remark duplicated</source>
-        <translation type="unfinished"/>
+        <translation>代理备注重复</translation>
     </message>
     <message>
         <location filename="../src/notificationcenter.mm" line="55"/>
@@ -386,7 +388,7 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
     <message>
         <location filename="../src/remoteconfigwindow.cpp" line="39"/>
         <source>Config Name</source>
-        <translation>配置文件名</translation>
+        <translation>配置文件名称</translation>
     </message>
     <message>
         <location filename="../src/remoteconfigwindow.cpp" line="40"/>
@@ -397,19 +399,19 @@ NO FINAL rule would cause traffic send to DIRECT which no match any rules.</sour
         <location filename="../src/remoteconfigwindow.cpp" line="106"/>
         <location filename="../src/remoteconfigwindow.cpp" line="109"/>
         <source>Invalid input</source>
-        <translation type="unfinished"/>
+        <translation>输入不合法</translation>
     </message>
     <message>
         <location filename="../src/remoteconfigwindow.cpp" line="107"/>
         <location filename="../src/remoteconfigwindow.cpp" line="117"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>好的</translation>
     </message>
     <message>
         <location filename="../src/remoteconfigwindow.cpp" line="116"/>
         <location filename="../src/remoteconfigwindow.cpp" line="119"/>
         <source>The remote config name is duplicated</source>
-        <translation type="unfinished"/>
+        <translation>托管配置文件名称重复</translation>
     </message>
     <message>
         <location filename="../src/remoteconfigwindow.cpp" line="126"/>

@@ -13,6 +13,8 @@
 #include "systemtray.h"
 #include "ui_mainwindow.h"
 
+#include <QWebEngineProfile>
+
 #if defined(Q_OS_MAC)
 MainWindow::MainWindow(QWidget *parent)
     : CFramelessWindow(parent)
@@ -35,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setCloseBtnQuit(false);
 #endif
 
-// Prevent window being resized
+    // Prevent window being resized
     this->setFixedSize(920,580);
 
     m_pWebView = new QWebEngineView(this);
@@ -43,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_pWebView->setGeometry(0,0,920,580);
     // Disable Right Click
     m_pWebView->setContextMenuPolicy(Qt::NoContextMenu);
+    // Clear Cache
+    m_pWebView->page()->profile()->clearHttpCache();
+    // Finally show the view
     m_pWebView->load(QUrl(ConfigManager::apiUrl + "/ui"));
 
 }

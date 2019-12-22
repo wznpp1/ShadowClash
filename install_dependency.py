@@ -11,8 +11,8 @@ if __name__ == "__main__":
     print("[-] delete old files...")
     if platform.system() == "Windows":
         os.system("del /f /q .\\resources\\Country.mmdb")
-        os.system("del /f /q .\\resources\\clashxdashboard")
-        os.system("del /f /q .\\resources\\yacddashboard")
+        shutil.rmtree("./resources/clashxdashboard")
+        shutil.rmtree("./resources/yacddashboard")
         os.system("del /f /q GeoLite2-Country.*")
     else:
         os.system("rm -f ./resources/Country.mmdb")
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     else:
         os.system("make -j8")
     if platform.system() == "Windows":
-        shutil.move("./Releases/yaml-cpp.lib", "../../../framework/")
+        shutil.move("./Release/yaml-cpp.lib", "../../../framework/")
     else:
         os.system("mv libyaml-cpp.a ../../../framework/")
     os.chdir("..")

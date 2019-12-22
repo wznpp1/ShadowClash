@@ -1,7 +1,6 @@
 #ifndef REMOTECONFIGMANAGER_H
 #define REMOTECONFIGMANAGER_H
 
-#include <QString>
 #include <QObject>
 
 class RemoteConfigManager: public QObject

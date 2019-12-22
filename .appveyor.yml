@@ -14,17 +14,23 @@ init:
 
 build_script:
   - python install_dependency.py
-  - cd clashr && python build_clashrw.py
+  - cd clashr && python build_clashr.py
   - cd .. && mkdir build && cd build
   - qmake ../
   - nmake
+  - cd ..
+  - python release.py
+
+artifacts:
+- path: build\ShadowClash-windows.zip
+  name: ShadowClash
 
 deploy:
   provider: GitHub
   description: "ShadowClash Release"
   auth_token:
     secure: uAMRAuhJjhHbPRvsKDUGYBDrrDPhlj2q1zHICgjSo7K2CSmVMxHreSMJYqer4y2k
-  artifact: /.*\.zip/
+  artifact: ShadowClash
   draft: false
   prerelease: false
   on:

@@ -3,6 +3,8 @@ ICON      = resources/icons/icon.icns
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+TARGET = ShadowClash
+
 CONFIG += c++11
 CONFIG += sdk_no_version_check
 CONFIG += lrelease
@@ -43,7 +45,23 @@ unix:!mac {
         src/notificationcenter.cpp
     RESOURCES += resources/shadowclash_linux.qrc
     LIBS += $$PWD/framework/libyaml-cpp.a
+
+    isEmpty(PREFIX) {
+        PREFIX = /usr/local
+    }
+
+    target.path = $$PREFIX/bin
+
+    shortcutfiles.files = resources/ShadowClash.desktop
+    shortcutfiles.path = $$PREFIX/share/applications/
+    data.files += resources/icons/Icon_256.png
+    data.path = $$PREFIX/share/hicolor/256x256/ShadowClash.png
+
+    INSTALLS += shortcutfiles
+    INSTALLS += data
 }
+
+!isEmpty(target.path): INSTALLS += target
 
 SOURCES += \
     src/aboutwindow.cpp \
@@ -108,8 +126,6 @@ FORMS += \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
     resources/shadowclash.qrc

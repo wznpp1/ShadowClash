@@ -289,6 +289,7 @@ void SystemTray::switchConfig(QAction *action)
     ConfigManager::selectConfigName = action->text();
     ApiRequest::requestConfigUpdate();
     action->setChecked(true);
+    Settings::setConfig(ConfigManager::selectConfigName);
 }
 
 void SystemTray::setPortsMenu()
