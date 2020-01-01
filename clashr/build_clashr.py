@@ -15,7 +15,7 @@ def get_version():
 def build_clash(version):
     build_time = datetime.datetime.now().strftime("%Y-%m-%d-%H%M")
     if platform.system() == "Linux":
-        command = f"""go build -ldflags '-X "github.com/TheWanderingCoel/clash/constant.Version={version}" \
+        command = """go build -ldflags '-X "github.com/TheWanderingCoel/clash/constant.Version={version}" \
         -X "github.com/TheWanderingCoel/clash/constant.BuildTime={build_time}"' \
         -buildmode=c-archive """
     else:
