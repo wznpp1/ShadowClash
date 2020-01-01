@@ -2,9 +2,6 @@ language: cpp
 
 matrix:
   include:
-    - os: osx
-      osx_image: xcode11
-      env: BADGE=osx
     - os: linux
       dist: xenial
       sudo: required
@@ -23,9 +20,6 @@ before_install:
   - if [ "$BADGE" = "linux" ]; then
       sudo apt-get update;
     fi
-  - if [ "$BADGE" = "osx" ]; then
-      brew update;
-    fi
 
 install:
   - if [ "$BADGE" = "linux" ]; then    
@@ -39,10 +33,6 @@ install:
       export GOROOT=/usr/local/go;
       export PATH=$GOPATH/bin:$GOROOT/bin:$PATH;
     fi
-  - if [ "$BADGE" = "osx" ]; then    
-      brew upgrade go --verbose;
-      brew reinstall https://raw.githubusercontent.com/Homebrew/homebrew-core/89bf3a54383d884f8b8511c6237325dd5b5ae6ba/Formula/qt.rb --verbose;
-    fi
 
 before_script:
   - if [ "$BADGE" = "osx" ];   then    export PATH="/usr/local/Cellar/qt/5.13.1/bin:$PATH"; fi
@@ -53,10 +43,6 @@ script:
   - cd clashr && python3 build_clashr.py
   - cd ..
   - mkdir build && cd ./build
-  - if [ "$BADGE" = "osx" ]; then
-      qmake ../;
-      make -j$(nproc);
-    fi
   - if [ "$BADGE" = "linux" ]; then
       wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage";
       chmod a+x linuxdeployqt-continuous-x86_64.AppImage;
