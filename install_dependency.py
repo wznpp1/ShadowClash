@@ -31,11 +31,7 @@ if __name__ == "__main__":
         os.system("del /f /q GeoLite2-Country.tar")
         os.system("del /f /q GeoLite2-Country_*")
     else:
-        os.system("curl -O http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz")
-        os.system("tar -zxvf GeoLite2-Country.tar.gz")
-        os.system("mv GeoLite2-Country_*/GeoLite2-Country.mmdb ./resources/Country.mmdb")
-        os.system("rm GeoLite2-Country.tar.gz")
-        os.system("rm -r GeoLite2-Country_*")
+        print("GeoLite2-Country.mmdb")
     os.chdir("resources")
     print("[+] install clashx dashboard...")
     os.system("git clone -b gh-pages https://github.com/Dreamacro/clash-dashboard.git clashxdashboard")
